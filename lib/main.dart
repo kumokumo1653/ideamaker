@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ideamaker/theme.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n/l10n_provider.dart';
 
@@ -15,9 +16,7 @@ class MyApp extends ConsumerWidget {
     final l10n = ref.watch(l10nProvider);
     return MaterialApp(
       title: l10n.app_title,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: MyTheme().light(),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
       home: MyHomePage(),
