@@ -5,6 +5,8 @@ import 'package:riverpod/riverpod.dart';
 
 import 'app_localizations.dart';
 
+/// https://codewithandrea.com/articles/app-localizations-outside-widgets-riverpod/
+
 final l10nProvider = Provider<L10n>((ref) {
   ref.state = lookupL10n(ui.PlatformDispatcher.instance.locale);
   final observer = _LocaleObserver((locales) {

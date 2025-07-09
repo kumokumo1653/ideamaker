@@ -1,4 +1,4 @@
-name: ideamaker
+name: idea_maker
 description: "アイデア創出サポートアプリ"
 
 version: 0.0.0
@@ -14,6 +14,7 @@ dependencies:
   go_router: 15.2.4
   intl: 0.20.2
   hooks_riverpod: 2.6.1
+  flutter_riverpod: 2.6.1
   flutter_hooks: 0.21.2
   riverpod_annotation: 2.6.1
 
@@ -23,6 +24,8 @@ dev_dependencies:
   flutter_lints: 6.0.0
   riverpod_generator: 2.6.5
   riverpod_lint: 2.6.5
+  go_router_builder: 3.0.1
+  build_runner: 2.4.15
 
 flutter:
   uses-material-design: true

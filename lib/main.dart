@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ideamaker/theme.dart';
+import 'package:idea_maker/theme.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n/l10n_provider.dart';
+import 'router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -14,12 +16,12 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    return MaterialApp(
+    return MaterialApp.router(
       title: l10n.app_title,
       theme: MyTheme().light(),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      home: MyHomePage(),
+      routerConfig: ref.watch(routerProvider),
     );
   }
 }
