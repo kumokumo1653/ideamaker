@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/router.dart';
 
 import '../l10n/l10n_provider.dart';
 
@@ -18,7 +19,12 @@ class TopPage extends HookConsumerWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [const Text('You have pushed the button this many times:')],
+          children: [
+            FilledButton(
+              onPressed: () => const MindMapPageRoute().go(context),
+              child: const Text('Go to Mind Map'),
+            ),
+          ],
         ),
       ),
     );

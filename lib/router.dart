@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'pages/top_page.dart';
+import 'package:idea_maker/pages/pages.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
@@ -23,5 +22,15 @@ class TopPageRoute extends GoRouteData with _$TopPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TopPage();
+  }
+}
+
+@TypedGoRoute<MindMapPageRoute>(path: '/mind_map')
+class MindMapPageRoute extends GoRouteData with _$MindMapPageRoute {
+  const MindMapPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const MindMapPage();
   }
 }

@@ -12,8 +12,7 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "quickfix.create.constructorForFinalFields": "explicit"
+    "source.organizeImports": "explicit"
   },
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,

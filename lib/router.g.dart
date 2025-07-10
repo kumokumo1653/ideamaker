@@ -6,7 +6,7 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$topPageRoute];
+List<RouteBase> get $appRoutes => [$topPageRoute, $mindMapPageRoute];
 
 RouteBase get $topPageRoute =>
     GoRouteData.$route(path: '/', factory: _$TopPageRoute._fromState);
@@ -16,6 +16,33 @@ mixin _$TopPageRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $mindMapPageRoute => GoRouteData.$route(
+  path: '/mind_map',
+
+  factory: _$MindMapPageRoute._fromState,
+);
+
+mixin _$MindMapPageRoute on GoRouteData {
+  static MindMapPageRoute _fromState(GoRouterState state) =>
+      const MindMapPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/mind_map');
 
   @override
   void go(BuildContext context) => context.go(location);
