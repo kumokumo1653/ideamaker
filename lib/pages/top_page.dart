@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/l10n/l10n_provider.dart';
 import 'package:idea_maker/router.dart';
-
-import '../l10n/l10n_provider.dart';
 
 class TopPage extends HookConsumerWidget {
   const TopPage({super.key});

@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'app_localizations.dart';
+import 'package:idea_maker/l10n/app_localizations.dart';
 
 /// https://codewithandrea.com/articles/app-localizations-outside-widgets-riverpod/
 
@@ -12,8 +12,7 @@ final l10nProvider = Provider<L10n>((ref) {
   final observer = _LocaleObserver((locales) {
     ref.state = lookupL10n(ui.PlatformDispatcher.instance.locale);
   });
-  final binding = WidgetsBinding.instance;
-  binding.addObserver(observer);
+  final binding = WidgetsBinding.instance..addObserver(observer);
   ref.onDispose(() => binding.removeObserver(observer));
   return ref.state;
 });

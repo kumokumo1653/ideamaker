@@ -1,3 +1,6 @@
+// 生成されたココード利用するためLintは無視
+// ignore_for_file: prefer_single_quotes, avoid_multiple_declarations_per_line, sort_constructors_first, lines_longer_than_80_chars
+
 import "package:flutter/material.dart";
 
 /// reference: https://material-foundation.github.io/material-theme-builder/
@@ -10,10 +13,9 @@ import "package:flutter/material.dart";
 /// NeutralVariant: #9C8F80
 
 class MyTheme {
+  MyTheme();
   // デフォルトのテキストテーマを利用
   final TextTheme textTheme = ThemeData.light(useMaterial3: true).textTheme;
-
-  MyTheme();
 
   static ColorScheme lightScheme() {
     return const ColorScheme(
