@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/features/mind_map/pages/pages.dart';
 import 'package:idea_maker/pages/pages.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
