@@ -98,6 +98,24 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'アイディアメーカー'**
   String get app_title;
+
+  /// No description provided for @mind_map_overlay_add_child_button_label.
+  ///
+  /// In ja, this message translates to:
+  /// **'子のノードを追加する'**
+  String get mind_map_overlay_add_child_button_label;
+
+  /// No description provided for @mind_map_overlay_add_sibling_button_label.
+  ///
+  /// In ja, this message translates to:
+  /// **'兄弟のノードを追加する'**
+  String get mind_map_overlay_add_sibling_button_label;
+
+  /// No description provided for @mind_map_overlay_remove_button_label.
+  ///
+  /// In ja, this message translates to:
+  /// **'このノードを削除する'**
+  String get mind_map_overlay_remove_button_label;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

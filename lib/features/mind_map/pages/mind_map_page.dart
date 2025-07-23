@@ -33,25 +33,25 @@ class MindMapPage extends HookConsumerWidget {
     required TreeNode rootNode,
   }) {
     final theme = Theme.of(context);
-    final mindMapNotifier = ref.watch(mindMapControllerProvider.notifier);
+    final mindMapController = ref.watch(mindMapControllerProvider.notifier);
 
     final parentNode = tree.firstWhereOrNull(
       (node) => node.id == rootNode.parentId,
     );
-    final isLastSibling =
-        parentNode != null && parentNode.childrenId.last == rootNode.id;
 
     return Tree(
       node: MindMapNode(
         node: rootNode,
         onChangedTitle: (title) =>
-            mindMapNotifier.changeTitle(rootNode.id, title),
-        onTapAddChild: rootNode.childrenId.isEmpty
-            ? () => mindMapNotifier.addNode(rootNode.id)
+            mindMapController.changeTitle(rootNode.id, title),
+        onTapAddChild: () => mindMapController.addNode(rootNode.id),
+        onTapAddSibling: parentNode != null
+            ? () => mindMapController.addNode(parentNode.id)
             : null,
-        onTapAddSibling: isLastSibling
-            ? () => mindMapNotifier.addNode(parentNode.id)
+        onTapRemove: parentNode != null
+            ? () => mindMapController.removeNode(rootNode.id)
             : null,
+        hasActions: rootNode.childrenId.isEmpty,
       ),
       branchColor: theme.colorScheme.primary,
       leaves: rootNode.childrenId.map((childId) {

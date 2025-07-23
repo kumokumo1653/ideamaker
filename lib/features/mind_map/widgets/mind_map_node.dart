@@ -2,108 +2,93 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/features/mind_map/entities/entities.dart';
-
-enum MindMapAction {
-  addChild,
-  addSibling;
-
-  LTRB getPosition(RenderBox node) {
-    final nodeOffset = node.localToGlobal(Offset.zero);
-    switch (this) {
-      case MindMapAction.addChild:
-        return LTRB(
-          left: nodeOffset.dx + node.size.width,
-          top: nodeOffset.dy,
-        );
-      case MindMapAction.addSibling:
-        return LTRB(
-          left: nodeOffset.dx,
-          top: nodeOffset.dy + node.size.height,
-        );
-    }
-  }
-}
-
-class LTRB {
-  LTRB({this.left, this.top, this.right, this.bottom});
-  final double? left;
-  final double? top;
-  final double? right;
-  final double? bottom;
-}
+import 'package:idea_maker/l10n/l10n_provider.dart';
 
 class MindMapNode extends HookConsumerWidget {
   const MindMapNode({
     required this.node,
     required this.onChangedTitle,
-    this.onTapAddChild,
+    required this.onTapAddChild,
+    this.onTapRemove,
+    this.hasActions = false,
     this.onTapAddSibling,
     super.key,
   });
 
   final TreeNode node;
+  final bool hasActions;
   final void Function(String) onChangedTitle;
-  final VoidCallback? onTapAddChild;
+  final VoidCallback onTapAddChild;
   final VoidCallback? onTapAddSibling;
+  final VoidCallback? onTapRemove;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
-    final nodeKey = useMemoized(GlobalKey.new, []);
+    final nodeKey = useMemoized(GlobalKey.new);
+    final overlayEntry = useState<OverlayEntry?>(null);
 
-    final addChildOverlay = useState<OverlayEntry?>(null);
-    final addSiblingOverlay = useState<OverlayEntry?>(null);
+    void handleCloseOverlay() {
+      if (overlayEntry.value != null) {
+        overlayEntry.value!.remove();
+        overlayEntry.value = null;
+      }
+    }
+
+    void handleTapActions() {
+      // Show action overlay
+      final renderBox =
+          nodeKey.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox == null) return;
+      if (overlayEntry.value != null) return;
+      overlayEntry.value = OverlayEntry(
+        builder: (context) => _MindMapActionOverlay(
+          left: renderBox.localToGlobal(Offset.zero).dx + renderBox.size.width,
+          top: renderBox.localToGlobal(Offset.zero).dy,
+          onTapAddChild: () {
+            onTapAddChild();
+            handleCloseOverlay();
+          },
+          onTapAddSibling: onTapAddSibling != null
+              ? () {
+                  onTapAddSibling!();
+                  handleCloseOverlay();
+                }
+              : null,
+          onTapRemove: onTapRemove != null
+              ? () {
+                  onTapRemove!();
+                  handleCloseOverlay();
+                }
+              : null,
+          onCloseOverlay: handleCloseOverlay,
+        ),
+      );
+      Overlay.of(context).insert(overlayEntry.value!);
+    }
+
     useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        // insert overlay for add child
-        if (onTapAddChild != null && addChildOverlay.value == null) {
-          addChildOverlay.value = OverlayEntry(
-            builder: (context) => _MindMapActionOverlay(
-              nodeKey: nodeKey,
-              action: MindMapAction.addChild,
-              child: Center(
-                child: IconButton(
-                  icon: const Icon(Icons.add_circle),
-                  onPressed: onTapAddChild,
-                ),
-              ),
-            ),
-          );
-          Overlay.of(context).insert(addChildOverlay.value!);
-        }
-      });
-      return () => addChildOverlay.value?.remove();
-    }, [onTapAddChild == null]);
-
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        // insert overlay for add sibling
-        if (onTapAddSibling != null && addSiblingOverlay.value == null) {
-          addSiblingOverlay.value = OverlayEntry(
-            builder: (context) => _MindMapActionOverlay(
-              nodeKey: nodeKey,
-              action: MindMapAction.addSibling,
-              child: IconButton(
-                icon: const Icon(Icons.add_circle),
-                onPressed: onTapAddSibling,
-              ),
-            ),
-          );
-          Overlay.of(context).insert(addSiblingOverlay.value!);
-        }
-      });
-      return () => addSiblingOverlay.value?.remove();
-    }, [onTapAddSibling == null]);
-
+      return handleCloseOverlay;
+    }, []);
     return Card(
       key: nodeKey,
-      child: SizedBox(
-        width: 200,
-        child: TextField(
-          decoration: const InputDecoration(border: InputBorder.none),
-          controller: controller,
-          onChanged: onChangedTitle,
-        ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 200,
+            child: TextField(
+              decoration: const InputDecoration(border: InputBorder.none),
+              controller: controller,
+              onChanged: onChangedTitle,
+            ),
+          ),
+          if (hasActions) ...[
+            IconButton(
+              icon: const Icon(Icons.pending),
+              onPressed: handleTapActions,
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -111,32 +96,68 @@ class MindMapNode extends HookConsumerWidget {
 
 class _MindMapActionOverlay extends HookConsumerWidget {
   const _MindMapActionOverlay({
-    required this.nodeKey,
-    required this.child,
-    required this.action,
+    required this.left,
+    required this.top,
+    required this.onTapAddChild,
+    required this.onTapRemove,
+    required this.onCloseOverlay,
+    this.onTapAddSibling,
   });
 
-  final GlobalKey nodeKey;
-  final Widget child;
-  final MindMapAction action;
-
+  final double left;
+  final double top;
+  final VoidCallback onTapAddChild;
+  final VoidCallback? onTapAddSibling;
+  final VoidCallback? onTapRemove;
+  final VoidCallback onCloseOverlay;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nodeRenderObject =
-        nodeKey.currentContext?.findRenderObject() as RenderBox?;
-
-    if (nodeRenderObject == null) {
-      assert(true, 'Node key context is not available');
-      return const SizedBox.shrink();
-    }
-    final position = action.getPosition(nodeRenderObject);
-    return Positioned(
-      left: position.left,
-      top: position.top,
-      right: position.right,
-      bottom: position.bottom,
-      height: nodeRenderObject.size.height,
-      child: child,
+    final l10n = ref.watch(l10nProvider);
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: GestureDetector(
+            onTap: onCloseOverlay,
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+        Positioned(
+          left: left,
+          top: top,
+          child: Card(
+            child: IntrinsicWidth(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    title: Text(l10n.mind_map_overlay_add_child_button_label),
+                    onTap: onTapAddChild,
+                    leading: const Icon(Icons.add_circle),
+                  ),
+                  if (onTapAddSibling != null) ...[
+                    ListTile(
+                      title: Text(
+                        l10n.mind_map_overlay_add_sibling_button_label,
+                      ),
+                      onTap: onTapAddSibling,
+                      leading: const Icon(Icons.add_circle),
+                    ),
+                  ],
+                  if (onTapRemove != null) ...[
+                    ListTile(
+                      title: Text(l10n.mind_map_overlay_remove_button_label),
+                      onTap: onTapRemove,
+                      leading: const Icon(Icons.remove_circle),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
