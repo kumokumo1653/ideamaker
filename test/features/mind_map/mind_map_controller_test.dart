@@ -1,3 +1,5 @@
+// dev_dependencies
+// ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/features/mind_map/controllers/mind_map_controller.dart';
