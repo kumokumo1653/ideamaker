@@ -6,7 +6,7 @@ part of 'mind_map_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mindMapControllerHash() => r'b8bb6dcac60b66b9af8d580a8ee6d7aebf120dff';
+String _$mindMapControllerHash() => r'64a6b4cb830325bb082e9e085bd247df2b09aa01';
 
 /// See also [MindMapController].
 @ProviderFor(MindMapController)

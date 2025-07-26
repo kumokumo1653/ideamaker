@@ -99,6 +99,18 @@ abstract class L10n {
   /// **'アイディアメーカー'**
   String get app_title;
 
+  /// No description provided for @top_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。'**
+  String get top_description;
+
+  /// No description provided for @top_go_mind_map.
+  ///
+  /// In ja, this message translates to:
+  /// **'マインドマップを作成する'**
+  String get top_go_mind_map;
+
   /// No description provided for @mind_map_overlay_add_child_button_label.
   ///
   /// In ja, this message translates to:

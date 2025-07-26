@@ -12,6 +12,13 @@ class L10nJa extends L10n {
   String get app_title => 'アイディアメーカー';
 
   @override
+  String get top_description =>
+      'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。';
+
+  @override
+  String get top_go_mind_map => 'マインドマップを作成する';
+
+  @override
   String get mind_map_overlay_add_child_button_label => '子のノードを追加する';
 
   @override

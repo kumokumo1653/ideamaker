@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/gen/assets.gen.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
 import 'package:idea_maker/router.dart';
 
@@ -19,9 +20,24 @@ class TopPage extends HookConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Assets.lib.assets.icons.logo.svg(
+              width: 200,
+              height: 200,
+              colorFilter: ColorFilter.mode(
+                theme.colorScheme.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                l10n.top_description,
+                textAlign: TextAlign.center,
+              ),
+            ),
             FilledButton(
               onPressed: () => const MindMapPageRoute().go(context),
-              child: const Text('Go to Mind Map'),
+              child: Text(l10n.top_go_mind_map),
             ),
           ],
         ),
