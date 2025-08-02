@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_odm/firestore_odm.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/entities/api/api.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
+import 'package:idea_maker/core/services/firestore/model.dart';
+import 'package:idea_maker/core/services/firestore/schema.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'mind_map_repository_impl.g.dart';
@@ -18,38 +21,47 @@ class MindMapRepositoryImpl implements MindMapRepository {
   final Ref ref;
   @override
   Future<List<TreeNode>> fetchTree(String treeId) async {
+    final firestore = FirebaseFirestore.instance;
+    final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
       throw Exception('User not signed in');
     }
-    final snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.userId)
-        .collection('mind_maps')
-        .doc(treeId)
-        .get();
-    if (!snapshot.exists) {
-      throw Exception('Mind map not found');
-    }
-    final data = snapshot.data();
-    if (data == null) {
-      throw Exception('Invalid mind map data');
-    }
-    final treeData = List<Map<String, dynamic>>.from(data['tree'] as List);
-    return treeData.map(TreeNode.fromJson).toList();
+    return odm
+        .users(user.userId)
+        .mindMaps(treeId)
+        .get()
+        .then((mindMap) {
+          if (mindMap == null) {
+            throw Exception('Mind map not found');
+          }
+          return mindMap.tree;
+        })
+        .onError((error, stackTrace) {
+          throw Exception('Failed to fetch mind map: $error');
+        });
   }
 
   @override
   Future<void> saveTree(String treeId, List<TreeNode> tree) {
+    final firestore = FirebaseFirestore.instance;
+    final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
       throw Exception('User not signed in');
     }
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.userId)
-        .collection('mind_maps')
-        .doc(treeId)
-        .set({'tree': tree.map((e) => e.toJson()).toList()});
+    return odm
+        .users(user.userId)
+        .mindMaps
+        .upsert(
+          MindMap(
+            id: treeId,
+            tree: tree,
+            updatedAt: FirestoreODM.serverTimestamp,
+          ),
+        )
+        .onError((error, stackTrace) {
+          throw Exception('Failed to save mind map: $error');
+        });
   }
 }
