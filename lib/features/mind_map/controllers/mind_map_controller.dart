@@ -96,13 +96,14 @@ class MindMapController extends _$MindMapController {
     }
     final node = currentState.tree.firstWhereOrNull((TreeNode e) => e.id == id);
     if (node != null) {
-      // 子ノードを再帰的に削除
       for (final childId in node.childrenId) {
         removeNode(childId);
       }
 
-      // 親ノードのchildrenIdから削除対象ノードのIDを除去
-      final latestState = state.value!;
+      final latestState = state.value;
+      if (latestState == null) {
+        return;
+      }
       var updatedTree = latestState.tree.where((e) => e.id != id).toList();
       if (node.parentId != null) {
         final parentNode = updatedTree.firstWhereOrNull(
