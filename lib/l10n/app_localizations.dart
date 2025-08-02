@@ -99,6 +99,12 @@ abstract class L10n {
   /// **'アイディアメーカー'**
   String get app_title;
 
+  /// No description provided for @common_close_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'閉じる'**
+  String get common_close_button;
+
   /// No description provided for @top_description.
   ///
   /// In ja, this message translates to:
@@ -111,23 +117,35 @@ abstract class L10n {
   /// **'マインドマップを作成する'**
   String get top_go_mind_map;
 
-  /// No description provided for @mind_map_overlay_add_child_button_label.
+  /// No description provided for @mind_map_overlay_add_child_button.
   ///
   /// In ja, this message translates to:
   /// **'子のノードを追加する'**
-  String get mind_map_overlay_add_child_button_label;
+  String get mind_map_overlay_add_child_button;
 
-  /// No description provided for @mind_map_overlay_add_sibling_button_label.
+  /// No description provided for @mind_map_overlay_add_sibling_button.
   ///
   /// In ja, this message translates to:
   /// **'兄弟のノードを追加する'**
-  String get mind_map_overlay_add_sibling_button_label;
+  String get mind_map_overlay_add_sibling_button;
 
-  /// No description provided for @mind_map_overlay_remove_button_label.
+  /// No description provided for @mind_map_overlay_remove_button.
   ///
   /// In ja, this message translates to:
   /// **'このノードを削除する'**
-  String get mind_map_overlay_remove_button_label;
+  String get mind_map_overlay_remove_button;
+
+  /// No description provided for @generic_error_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'エラーが発生しました'**
+  String get generic_error_title;
+
+  /// No description provided for @generic_error_content.
+  ///
+  /// In ja, this message translates to:
+  /// **'エラーが発生しました。しばらくした後もう一度お試しください。'**
+  String get generic_error_content;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

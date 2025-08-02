@@ -12,6 +12,7 @@ part of 'tree_node.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$TreeNode implements DiagnosticableTreeMixin {
 
@@ -22,6 +23,8 @@ mixin _$TreeNode implements DiagnosticableTreeMixin {
 @pragma('vm:prefer-inline')
 $TreeNodeCopyWith<TreeNode> get copyWith => _$TreeNodeCopyWithImpl<TreeNode>(this as TreeNode, _$identity);
 
+  /// Serializes this TreeNode to a JSON map.
+  Map<String, dynamic> toJson();
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -35,7 +38,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is TreeNode&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&const DeepCollectionEquality().equals(other.childrenId, childrenId));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,parentId,const DeepCollectionEquality().hash(childrenId));
 
@@ -83,11 +86,11 @@ as List<String>,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _TreeNode with DiagnosticableTreeMixin implements TreeNode {
   const _TreeNode({required this.id, required this.title, required this.parentId, final  List<String> childrenId = const []}): _childrenId = childrenId;
-  
+  factory _TreeNode.fromJson(Map<String, dynamic> json) => _$TreeNodeFromJson(json);
 
 @override final  String id;
 @override final  String title;
@@ -106,7 +109,10 @@ class _TreeNode with DiagnosticableTreeMixin implements TreeNode {
 @pragma('vm:prefer-inline')
 _$TreeNodeCopyWith<_TreeNode> get copyWith => __$TreeNodeCopyWithImpl<_TreeNode>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$TreeNodeToJson(this, );
+}
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
@@ -119,7 +125,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _TreeNode&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.parentId, parentId) || other.parentId == parentId)&&const DeepCollectionEquality().equals(other._childrenId, _childrenId));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,parentId,const DeepCollectionEquality().hash(_childrenId));
 

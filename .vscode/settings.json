@@ -3,7 +3,8 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "*.dart": "$(capture).g.dart, $(capture).freezed.dart"
+    "*.dart": "$(capture).g.dart, $(capture).freezed.dart",
+    "pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata,build.yaml"
   },
   "dart.lineLength": 80,
   "[dart]": {
@@ -18,5 +19,8 @@
   "editor.guides.bracketPairs": true,
   "dart.previewFlutterUiGuides": true,
   "dart.previewFlutterUiGuidesCustomTracking": true,
-  "dart.flutterGenerateLocalizationsOnSave": "manual"
+  "dart.flutterGenerateLocalizationsOnSave": "manual",
+  "dart-barrel-file-generator.excludeFileList": [
+    "**/*_impl.dart",
+  ]
 }

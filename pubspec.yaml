@@ -7,7 +7,10 @@ environment:
   sdk: 3.8.1
 
 dependencies:
+  cloud_firestore: 5.6.12
   collection: 1.19.1
+  firebase_auth: 5.7.0
+  firebase_core: 3.15.2
   flutter:
     sdk: flutter
   flutter_hooks: 0.21.2
@@ -19,6 +22,7 @@ dependencies:
   go_router: 16.0.0
   hooks_riverpod: 2.6.1
   intl: 0.20.2
+  json_annotation: 4.9.0
   logger: 2.6.0
   riverpod_annotation: 2.6.1
   uuid: 4.5.1
@@ -31,6 +35,7 @@ dev_dependencies:
     sdk: flutter
   freezed: 3.0.6
   go_router_builder: 3.0.1
+  json_serializable: 6.9.5
   riverpod_generator: 2.6.5
   riverpod_lint: 2.6.5
   very_good_analysis: 9.0.0

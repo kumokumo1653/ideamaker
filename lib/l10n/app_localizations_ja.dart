@@ -12,6 +12,9 @@ class L10nJa extends L10n {
   String get app_title => 'アイディアメーカー';
 
   @override
+  String get common_close_button => '閉じる';
+
+  @override
   String get top_description =>
       'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。';
 
@@ -19,11 +22,17 @@ class L10nJa extends L10n {
   String get top_go_mind_map => 'マインドマップを作成する';
 
   @override
-  String get mind_map_overlay_add_child_button_label => '子のノードを追加する';
+  String get mind_map_overlay_add_child_button => '子のノードを追加する';
 
   @override
-  String get mind_map_overlay_add_sibling_button_label => '兄弟のノードを追加する';
+  String get mind_map_overlay_add_sibling_button => '兄弟のノードを追加する';
 
   @override
-  String get mind_map_overlay_remove_button_label => 'このノードを削除する';
+  String get mind_map_overlay_remove_button => 'このノードを削除する';
+
+  @override
+  String get generic_error_title => 'エラーが発生しました';
+
+  @override
+  String get generic_error_content => 'エラーが発生しました。しばらくした後もう一度お試しください。';
 }

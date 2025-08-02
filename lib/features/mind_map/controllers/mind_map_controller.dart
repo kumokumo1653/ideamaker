@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:idea_maker/features/mind_map/controllers/mind_map_state.dart';
-import 'package:idea_maker/features/mind_map/entities/tree_node.dart';
+import 'package:idea_maker/core/entities/api/tree_node.dart';
+import 'package:idea_maker/core/repositories/repositories.dart';
+import 'package:idea_maker/features/mind_map/controllers/controllers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -8,8 +9,11 @@ part 'mind_map_controller.g.dart';
 
 @riverpod
 class MindMapController extends _$MindMapController {
+  MindMapRepository get _mindMapRepository =>
+      ref.watch(mindMapRepositoryProvider);
   @override
   MindMapState build() => MindMapState(
+    treeId: const Uuid().v4(),
     tree: [
       TreeNode(
         id: const Uuid().v4(),
@@ -78,5 +82,19 @@ class MindMapController extends _$MindMapController {
     }).toList();
 
     state = state.copyWith(tree: updateTree);
+  }
+
+  Future<void> saveTree(String treeId, List<TreeNode> tree) async {
+    state = state.copyWith(
+      saveTreeResult: const AsyncValue<bool>.loading().copyWithPrevious(
+        state.saveTreeResult,
+      ),
+    );
+    final saveResult = await AsyncValue.guard(
+      () => _mindMapRepository.saveTree(treeId, tree).then((value) => true),
+    );
+    state = state.copyWith(
+      saveTreeResult: saveResult.copyWithPrevious(state.saveTreeResult),
+    );
   }
 }

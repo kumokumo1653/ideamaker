@@ -1,10 +1,24 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      "name": "ideamaker",
+     {
+      "name": "Firebase Emulator",
+      "type": "node",
       "request": "launch",
-      "type": "dart"
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "firebase",
+        "emulators:start",
+        "--import",
+        "./emulator-data"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "ideamaker(debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug"
     },
     {
       "name": "ideamaker (profile mode)",

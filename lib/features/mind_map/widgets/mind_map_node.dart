@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/features/mind_map/entities/entities.dart';
+import 'package:idea_maker/core/entities/api/api.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
 
 class MindMapNode extends HookConsumerWidget {
@@ -132,14 +132,14 @@ class _MindMapActionOverlay extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    title: Text(l10n.mind_map_overlay_add_child_button_label),
+                    title: Text(l10n.mind_map_overlay_add_child_button),
                     onTap: onTapAddChild,
                     leading: const Icon(Icons.add_circle),
                   ),
                   if (onTapAddSibling != null) ...[
                     ListTile(
                       title: Text(
-                        l10n.mind_map_overlay_add_sibling_button_label,
+                        l10n.mind_map_overlay_add_sibling_button,
                       ),
                       onTap: onTapAddSibling,
                       leading: const Icon(Icons.add_circle),
@@ -147,7 +147,7 @@ class _MindMapActionOverlay extends HookConsumerWidget {
                   ],
                   if (onTapRemove != null) ...[
                     ListTile(
-                      title: Text(l10n.mind_map_overlay_remove_button_label),
+                      title: Text(l10n.mind_map_overlay_remove_button),
                       onTap: onTapRemove,
                       leading: const Icon(Icons.remove_circle),
                     ),

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MindMapState {
 
- List<TreeNode> get tree;
+ String get treeId; List<TreeNode> get tree; AsyncValue<bool> get saveTreeResult;
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $MindMapStateCopyWith<MindMapState> get copyWith => _$MindMapStateCopyWithImpl<M
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MindMapState&&const DeepCollectionEquality().equals(other.tree, tree));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MindMapState&&(identical(other.treeId, treeId) || other.treeId == treeId)&&const DeepCollectionEquality().equals(other.tree, tree)&&(identical(other.saveTreeResult, saveTreeResult) || other.saveTreeResult == saveTreeResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(tree));
+int get hashCode => Object.hash(runtimeType,treeId,const DeepCollectionEquality().hash(tree),saveTreeResult);
 
 @override
 String toString() {
-  return 'MindMapState(tree: $tree)';
+  return 'MindMapState(treeId: $treeId, tree: $tree, saveTreeResult: $saveTreeResult)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $MindMapStateCopyWith<$Res>  {
   factory $MindMapStateCopyWith(MindMapState value, $Res Function(MindMapState) _then) = _$MindMapStateCopyWithImpl;
 @useResult
 $Res call({
- List<TreeNode> tree
+ String treeId, List<TreeNode> tree, AsyncValue<bool> saveTreeResult
 });
 
 
@@ -63,10 +63,12 @@ class _$MindMapStateCopyWithImpl<$Res>
 
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tree = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? treeId = null,Object? tree = null,Object? saveTreeResult = null,}) {
   return _then(_self.copyWith(
-tree: null == tree ? _self.tree : tree // ignore: cast_nullable_to_non_nullable
-as List<TreeNode>,
+treeId: null == treeId ? _self.treeId : treeId // ignore: cast_nullable_to_non_nullable
+as String,tree: null == tree ? _self.tree : tree // ignore: cast_nullable_to_non_nullable
+as List<TreeNode>,saveTreeResult: null == saveTreeResult ? _self.saveTreeResult : saveTreeResult // ignore: cast_nullable_to_non_nullable
+as AsyncValue<bool>,
   ));
 }
 
@@ -77,9 +79,10 @@ as List<TreeNode>,
 
 
 class _MindMapState implements MindMapState {
-  const _MindMapState({required final  List<TreeNode> tree}): _tree = tree;
+  const _MindMapState({required this.treeId, required final  List<TreeNode> tree, this.saveTreeResult = const AsyncValue<bool>.data(false)}): _tree = tree;
   
 
+@override final  String treeId;
  final  List<TreeNode> _tree;
 @override List<TreeNode> get tree {
   if (_tree is EqualUnmodifiableListView) return _tree;
@@ -87,6 +90,7 @@ class _MindMapState implements MindMapState {
   return EqualUnmodifiableListView(_tree);
 }
 
+@override@JsonKey() final  AsyncValue<bool> saveTreeResult;
 
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +102,16 @@ _$MindMapStateCopyWith<_MindMapState> get copyWith => __$MindMapStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MindMapState&&const DeepCollectionEquality().equals(other._tree, _tree));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MindMapState&&(identical(other.treeId, treeId) || other.treeId == treeId)&&const DeepCollectionEquality().equals(other._tree, _tree)&&(identical(other.saveTreeResult, saveTreeResult) || other.saveTreeResult == saveTreeResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_tree));
+int get hashCode => Object.hash(runtimeType,treeId,const DeepCollectionEquality().hash(_tree),saveTreeResult);
 
 @override
 String toString() {
-  return 'MindMapState(tree: $tree)';
+  return 'MindMapState(treeId: $treeId, tree: $tree, saveTreeResult: $saveTreeResult)';
 }
 
 
@@ -118,7 +122,7 @@ abstract mixin class _$MindMapStateCopyWith<$Res> implements $MindMapStateCopyWi
   factory _$MindMapStateCopyWith(_MindMapState value, $Res Function(_MindMapState) _then) = __$MindMapStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<TreeNode> tree
+ String treeId, List<TreeNode> tree, AsyncValue<bool> saveTreeResult
 });
 
 
@@ -135,10 +139,12 @@ class __$MindMapStateCopyWithImpl<$Res>
 
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tree = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? treeId = null,Object? tree = null,Object? saveTreeResult = null,}) {
   return _then(_MindMapState(
-tree: null == tree ? _self._tree : tree // ignore: cast_nullable_to_non_nullable
-as List<TreeNode>,
+treeId: null == treeId ? _self.treeId : treeId // ignore: cast_nullable_to_non_nullable
+as String,tree: null == tree ? _self._tree : tree // ignore: cast_nullable_to_non_nullable
+as List<TreeNode>,saveTreeResult: null == saveTreeResult ? _self.saveTreeResult : saveTreeResult // ignore: cast_nullable_to_non_nullable
+as AsyncValue<bool>,
   ));
 }
 

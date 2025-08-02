@@ -1,8 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/core/entities/api/tree_node.dart';
+import 'package:idea_maker/core/widgets/widgets.dart';
 import 'package:idea_maker/features/mind_map/controllers/mind_map_controller.dart';
-import 'package:idea_maker/features/mind_map/entities/tree_node.dart';
 import 'package:idea_maker/features/mind_map/widgets/widgets.dart';
 
 class MindMapPage extends HookConsumerWidget {
@@ -11,17 +13,30 @@ class MindMapPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mindMapState = ref.watch(mindMapControllerProvider);
-    final rootNode = mindMapState.tree.firstWhere(
-      (node) => node.parentId == null,
+    final rootNode = useMemoized(
+      () => mindMapState.tree.firstWhere(
+        (node) => node.parentId == null,
+      ),
+      [mindMapState.tree],
     );
+
     return Scaffold(
-      body: Center(
-        child: _buildNode(
-          context,
-          ref,
-          tree: mindMapState.tree,
-          rootNode: rootNode,
+      body: AsyncWidget(
+        mindMapState.saveTreeResult,
+        builder: (saveTreeResult) => Center(
+          child: _buildNode(
+            context,
+            ref,
+            tree: mindMapState.tree,
+            rootNode: rootNode,
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.edit),
+        onPressed: () => ref
+            .read(mindMapControllerProvider.notifier)
+            .saveTree(mindMapState.treeId, mindMapState.tree),
       ),
     );
   }
@@ -38,7 +53,6 @@ class MindMapPage extends HookConsumerWidget {
     final parentNode = tree.firstWhereOrNull(
       (node) => node.id == rootNode.parentId,
     );
-
     return Tree(
       node: MindMapNode(
         node: rootNode,
