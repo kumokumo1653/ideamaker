@@ -8,36 +8,40 @@ import 'package:idea_maker/features/mind_map/controllers/mind_map_controller.dar
 import 'package:idea_maker/features/mind_map/widgets/widgets.dart';
 
 class MindMapPage extends HookConsumerWidget {
-  const MindMapPage({super.key});
+  const MindMapPage({this.treeId, super.key});
+
+  final String? treeId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mindMapState = ref.watch(mindMapControllerProvider);
-    final rootNode = useMemoized(
-      () => mindMapState.tree.firstWhere(
-        (node) => node.parentId == null,
-      ),
-      [mindMapState.tree],
-    );
+    final mindMapAsyncState = ref.watch(mindMapControllerProvider(treeId));
 
-    return Scaffold(
-      body: AsyncWidget(
-        mindMapState.saveTreeResult,
-        builder: (saveTreeResult) => Center(
-          child: _buildNode(
-            context,
-            ref,
-            tree: mindMapState.tree,
-            rootNode: rootNode,
+    return AsyncWidget(
+      mindMapAsyncState,
+      builder: (mindMapState) {
+        final rootNode = useMemoized(
+          () => mindMapState.tree.firstWhere(
+            (node) => node.parentId == null,
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
-        onPressed: () => ref
-            .read(mindMapControllerProvider.notifier)
-            .saveTree(mindMapState.treeId, mindMapState.tree),
-      ),
+          [mindMapState.tree],
+        );
+        return Scaffold(
+          body: Center(
+            child: _buildNode(
+              context,
+              ref,
+              tree: mindMapState.tree,
+              rootNode: rootNode,
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.save),
+            onPressed: () => ref
+                .read(mindMapControllerProvider(treeId).notifier)
+                .saveTree(mindMapState.treeId, mindMapState.tree),
+          ),
+        );
+      },
     );
   }
 
@@ -48,7 +52,9 @@ class MindMapPage extends HookConsumerWidget {
     required TreeNode rootNode,
   }) {
     final theme = Theme.of(context);
-    final mindMapController = ref.watch(mindMapControllerProvider.notifier);
+    final mindMapController = ref.watch(
+      mindMapControllerProvider(treeId).notifier,
+    );
 
     final parentNode = tree.firstWhereOrNull(
       (node) => node.id == rootNode.parentId,

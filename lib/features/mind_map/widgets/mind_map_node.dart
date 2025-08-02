@@ -24,7 +24,7 @@ class MindMapNode extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useTextEditingController();
+    final controller = useTextEditingController(text: node.title);
     final nodeKey = useMemoized(GlobalKey.new);
     final overlayEntry = useState<OverlayEntry?>(null);
 

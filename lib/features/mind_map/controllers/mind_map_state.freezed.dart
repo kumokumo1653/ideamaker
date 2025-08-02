@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MindMapState {
 
- String get treeId; List<TreeNode> get tree; AsyncValue<bool> get saveTreeResult;
+ String get treeId; List<TreeNode> get tree; bool get saveTreeResult;
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $MindMapStateCopyWith<$Res>  {
   factory $MindMapStateCopyWith(MindMapState value, $Res Function(MindMapState) _then) = _$MindMapStateCopyWithImpl;
 @useResult
 $Res call({
- String treeId, List<TreeNode> tree, AsyncValue<bool> saveTreeResult
+ String treeId, List<TreeNode> tree, bool saveTreeResult
 });
 
 
@@ -68,7 +68,7 @@ class _$MindMapStateCopyWithImpl<$Res>
 treeId: null == treeId ? _self.treeId : treeId // ignore: cast_nullable_to_non_nullable
 as String,tree: null == tree ? _self.tree : tree // ignore: cast_nullable_to_non_nullable
 as List<TreeNode>,saveTreeResult: null == saveTreeResult ? _self.saveTreeResult : saveTreeResult // ignore: cast_nullable_to_non_nullable
-as AsyncValue<bool>,
+as bool,
   ));
 }
 
@@ -79,7 +79,7 @@ as AsyncValue<bool>,
 
 
 class _MindMapState implements MindMapState {
-  const _MindMapState({required this.treeId, required final  List<TreeNode> tree, this.saveTreeResult = const AsyncValue<bool>.data(false)}): _tree = tree;
+  const _MindMapState({required this.treeId, required final  List<TreeNode> tree, this.saveTreeResult = false}): _tree = tree;
   
 
 @override final  String treeId;
@@ -90,7 +90,7 @@ class _MindMapState implements MindMapState {
   return EqualUnmodifiableListView(_tree);
 }
 
-@override@JsonKey() final  AsyncValue<bool> saveTreeResult;
+@override@JsonKey() final  bool saveTreeResult;
 
 /// Create a copy of MindMapState
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$MindMapStateCopyWith<$Res> implements $MindMapStateCopyWi
   factory _$MindMapStateCopyWith(_MindMapState value, $Res Function(_MindMapState) _then) = __$MindMapStateCopyWithImpl;
 @override @useResult
 $Res call({
- String treeId, List<TreeNode> tree, AsyncValue<bool> saveTreeResult
+ String treeId, List<TreeNode> tree, bool saveTreeResult
 });
 
 
@@ -144,7 +144,7 @@ class __$MindMapStateCopyWithImpl<$Res>
 treeId: null == treeId ? _self.treeId : treeId // ignore: cast_nullable_to_non_nullable
 as String,tree: null == tree ? _self._tree : tree // ignore: cast_nullable_to_non_nullable
 as List<TreeNode>,saveTreeResult: null == saveTreeResult ? _self.saveTreeResult : saveTreeResult // ignore: cast_nullable_to_non_nullable
-as AsyncValue<bool>,
+as bool,
   ));
 }
 

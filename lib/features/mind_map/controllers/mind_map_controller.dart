@@ -11,90 +11,142 @@ part 'mind_map_controller.g.dart';
 class MindMapController extends _$MindMapController {
   MindMapRepository get _mindMapRepository =>
       ref.watch(mindMapRepositoryProvider);
+
   @override
-  MindMapState build() => MindMapState(
-    treeId: const Uuid().v4(),
-    tree: [
-      TreeNode(
-        id: const Uuid().v4(),
-        title: '', //TODO: placeholder for title
-        parentId: null,
-      ),
-    ],
-  );
+  FutureOr<MindMapState> build(String? treeId) async {
+    if (treeId != null) {
+      state = const AsyncValue<MindMapState>.loading();
+      final tree = await _mindMapRepository
+          .fetchTree(treeId)
+          .onError(
+            (error, stackTrace) => throw Exception('Failed to fetch mind map'),
+          );
+      // if the tree is not empty, return the tree
+      if (tree.isNotEmpty) {
+        return MindMapState(treeId: treeId, tree: tree);
+      }
+    }
+    return MindMapState(
+      treeId: const Uuid().v4(),
+      tree: [
+        TreeNode(
+          id: const Uuid().v4(),
+          title: '', // TODO(ohike): placeholder for title
+          parentId: null,
+          childrenId: [],
+        ),
+      ],
+    );
+  }
 
   void changeTitle(String id, String title) {
-    final node = state.tree.firstWhereOrNull((e) => e.id == id);
+    assert(!state.isLoading, 'Cannot change title while state is loading');
+    final currentState = state.value;
+    if (currentState == null) {
+      return;
+    }
+    final node = currentState.tree.firstWhereOrNull((TreeNode e) => e.id == id);
     if (node != null) {
       final updatedNode = node.copyWith(title: title);
-      final updatedTree = state.tree
-          .map((e) => e.id == id ? updatedNode : e)
+      final updatedTree = currentState.tree
+          .map((TreeNode e) => e.id == id ? updatedNode : e)
           .toList();
-      state = state.copyWith(tree: updatedTree);
+      state = AsyncValue.data(currentState.copyWith(tree: updatedTree));
     } else {
       throw Exception('Node with id $id not found');
     }
   }
 
   void addNode(String parentId) {
+    assert(!state.isLoading, 'Cannot change title while state is loading');
+    final currentState = state.value;
+    if (currentState == null) {
+      return;
+    }
     final node = TreeNode(
       id: const Uuid().v4(),
-      title: '', //TODO: placeholder for title
+      title: '', // TODO(ohike): placeholder for title
       parentId: parentId,
     );
     // [parentId] is not null,
     // so we find the parent node and add the new node as a child
-    final parentNode = state.tree.firstWhereOrNull((e) => e.id == parentId);
+    final parentNode = currentState.tree.firstWhereOrNull(
+      (TreeNode e) => e.id == parentId,
+    );
     if (parentNode != null) {
       final updatedChildren = [...parentNode.childrenId, node.id];
       final updatedParent = parentNode.copyWith(childrenId: updatedChildren);
       final updatedTree = [
-        ...state.tree.map((e) => e.id == parentId ? updatedParent : e),
+        ...currentState.tree.map(
+          (TreeNode e) => e.id == parentId ? updatedParent : e,
+        ),
         node,
       ];
-      state = state.copyWith(tree: updatedTree);
+      state = AsyncValue.data(currentState.copyWith(tree: updatedTree));
     } else {
       throw Exception('Parent node with id $parentId not found');
     }
   }
 
   void removeNode(String id) {
-    final node = state.tree.firstWhereOrNull((e) => e.id == id);
+    assert(!state.isLoading, 'Cannot change title while state is loading');
+    final currentState = state.value;
+    if (currentState == null) {
+      return;
+    }
+    final node = currentState.tree.firstWhereOrNull((TreeNode e) => e.id == id);
     if (node != null) {
-      for (final id in node.childrenId) {
-        removeNode(id);
+      // 子ノードを再帰的に削除
+      for (final childId in node.childrenId) {
+        removeNode(childId);
       }
-      // Remove the node from the tree
-      final updatedTree = state.tree.where((e) => e.id != id).toList();
-      state = state.copyWith(tree: updatedTree);
+
+      // 親ノードのchildrenIdから削除対象ノードのIDを除去
+      final latestState = state.value!;
+      var updatedTree = latestState.tree.where((e) => e.id != id).toList();
+      if (node.parentId != null) {
+        final parentNode = updatedTree.firstWhereOrNull(
+          (TreeNode e) => e.id == node.parentId,
+        );
+        if (parentNode != null) {
+          final updatedChildren = parentNode.childrenId
+              .where((childId) => childId != id)
+              .toList();
+          final updatedParent = parentNode.copyWith(
+            childrenId: updatedChildren,
+          );
+          updatedTree = updatedTree
+              .map(
+                (TreeNode e) => e.id == node.parentId ? updatedParent : e,
+              )
+              .toList();
+        }
+      }
+
+      state = AsyncValue.data(latestState.copyWith(tree: updatedTree));
     } else {
       throw Exception('Node with id $id not found');
     }
-    // Remove the node from its parent's children list
-    final updateTree = state.tree.map((e) {
-      if (e.childrenId.contains(id)) {
-        final updatedChildren = e.childrenId
-            .where((childId) => childId != id)
-            .toList();
-        return e.copyWith(childrenId: updatedChildren);
-      }
-      return e;
-    }).toList();
-
-    state = state.copyWith(tree: updateTree);
   }
 
   Future<void> saveTree(String treeId, List<TreeNode> tree) async {
-    state = state.copyWith(
-      saveTreeResult: const AsyncValue<bool>.loading().copyWithPrevious(
-        state.saveTreeResult,
-      ),
-    );
-    final saveResult = await AsyncValue.guard(
-      () => _mindMapRepository.saveTree(treeId, tree).then((value) => true),
-    );
-    state = state.copyWith(
-      saveTreeResult: saveResult.copyWithPrevious(state.saveTreeResult),
-    );
+    final currentState = state.value;
+    if (currentState == null) {
+      return;
+    }
+    state = const AsyncValue<MindMapState>.loading().copyWithPrevious(state);
+
+    final saveResult = await _mindMapRepository
+        .saveTree(treeId, tree)
+        .then(
+          (value) => true,
+        )
+        .onError(
+          (error, stackTrace) => throw Exception('Failed to save mind map'),
+        );
+
+    state = AsyncValue.data(
+      currentState.copyWith(saveTreeResult: saveResult),
+    ).copyWithPrevious(state);
   }
 }

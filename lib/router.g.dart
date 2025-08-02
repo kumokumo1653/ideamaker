@@ -39,10 +39,15 @@ RouteBase get $mindMapPageRoute => GoRouteData.$route(
 
 mixin _$MindMapPageRoute on GoRouteData {
   static MindMapPageRoute _fromState(GoRouterState state) =>
-      const MindMapPageRoute();
+      MindMapPageRoute(treeId: state.uri.queryParameters['tree-id']);
+
+  MindMapPageRoute get _self => this as MindMapPageRoute;
 
   @override
-  String get location => GoRouteData.$location('/mind_map');
+  String get location => GoRouteData.$location(
+    '/mind_map',
+    queryParams: {if (_self.treeId != null) 'tree-id': _self.treeId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);

@@ -28,10 +28,12 @@ class TopPageRoute extends GoRouteData with _$TopPageRoute {
 
 @TypedGoRoute<MindMapPageRoute>(path: '/mind_map')
 class MindMapPageRoute extends GoRouteData with _$MindMapPageRoute {
-  const MindMapPageRoute();
+  const MindMapPageRoute({this.treeId});
+
+  final String? treeId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const MindMapPage();
+    return MindMapPage(treeId: treeId);
   }
 }
