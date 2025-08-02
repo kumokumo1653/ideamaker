@@ -32,7 +32,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    // TODO: ログインがめんどくさいので、仮でログインしておく
+    // TODO(ohike): ログインがめんどくさいので、仮でログインしておく
     ref.watch(userStatusControllerProvider);
     return MaterialApp.router(
       title: l10n.app_title,

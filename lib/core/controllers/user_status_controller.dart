@@ -8,7 +8,7 @@ part 'user_status_controller.g.dart';
 class UserStatusController extends _$UserStatusController {
   UserRepository get _userRepository => ref.watch(userRepositoryProvider);
 
-  //TODO: とりあえずログインする
+  // TODO(ohike): とりあえずログインする
   @override
   FutureOr<UserStatus?> build() =>
       _userRepository.signIn('test@gmail.com', 'testtest');
