@@ -53,6 +53,23 @@ class L10nJa extends L10n {
   }
 
   @override
+  String get mind_map_list_delete_button => '削除';
+
+  @override
+  String get mind_map_list_delete_confirm_title => 'マインドマップを削除';
+
+  @override
+  String mind_map_list_delete_confirm_message(Object title) {
+    return '\'$title\'を削除しますか？この操作は元に戻せません。';
+  }
+
+  @override
+  String get mind_map_list_delete_confirm_cancel => 'キャンセル';
+
+  @override
+  String get mind_map_list_delete_confirm_delete => '削除';
+
+  @override
   String get generic_error_title => 'エラーが発生しました';
 
   @override

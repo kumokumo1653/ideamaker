@@ -64,6 +64,14 @@ class MindMapListPage extends HookConsumerWidget {
                     ],
                   ),
                   isThreeLine: true,
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () => _showDeleteConfirmDialog(
+                      context,
+                      ref,
+                      mindMap,
+                    ),
+                  ),
                   onTap: () => MindMapPageRoute(treeId: mindMap.id).go(context),
                 ),
               );
@@ -74,6 +82,42 @@ class MindMapListPage extends HookConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => const MindMapPageRoute().go(context),
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  /// Show delete confirmation dialog
+  void _showDeleteConfirmDialog(
+    BuildContext context,
+    WidgetRef ref,
+    MindMapSummary mindMap,
+  ) {
+    final l10n = ref.read(l10nProvider);
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.mind_map_list_delete_confirm_title),
+        content: Text(
+          l10n.mind_map_list_delete_confirm_message(mindMap.title),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.mind_map_list_delete_confirm_cancel),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              await ref
+                  .read(mindMapListControllerProvider.notifier)
+                  .deleteMindMap(mindMap.id);
+            },
+            child: Text(
+              l10n.mind_map_list_delete_confirm_delete,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
+        ],
       ),
     );
   }

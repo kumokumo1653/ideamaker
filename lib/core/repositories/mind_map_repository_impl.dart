@@ -66,6 +66,23 @@ class MindMapRepositoryImpl implements MindMapRepository {
   }
 
   @override
+  Future<void> deleteMindMap(String treeId) async {
+    final firestore = FirebaseFirestore.instance;
+    final odm = FirestoreODM(appSchema, firestore: firestore);
+    final user = ref.read(userStatusControllerProvider).valueOrNull;
+    if (user == null) {
+      throw Exception('User not signed in');
+    }
+    return odm
+        .users(user.userId)
+        .mindMaps(treeId)
+        .delete()
+        .onError((error, stackTrace) {
+          throw Exception('Failed to delete mind map: $error');
+        });
+  }
+
+  @override
   Future<List<MindMapSummary>> fetchMindMapList() async {
     final firestore = FirebaseFirestore.instance;
     final odm = FirestoreODM(appSchema, firestore: firestore);

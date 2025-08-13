@@ -15,4 +15,18 @@ class MindMapListController extends _$MindMapListController {
       throw Exception('Failed to fetch mind map list: $error');
     });
   }
+
+  /// Delete a mind map and refresh the list
+  Future<void> deleteMindMap(String treeId) async {
+    state = const AsyncValue<List<MindMapSummary>>.loading().copyWithPrevious(
+      state,
+    );
+
+    final newState = await AsyncValue.guard(() async {
+      await _mindMapRepository.deleteMindMap(treeId);
+      // Refresh the list after successful deletion
+      return _mindMapRepository.fetchMindMapList();
+    });
+    state = newState.copyWithPrevious(state);
+  }
 }

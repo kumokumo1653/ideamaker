@@ -13,6 +13,11 @@
   "mind_map_list_create_new": "新しいマインドマップを作成",
   "mind_map_list_tile_node_count": "{count}個のノード",
   "mind_map_list_tile_updated_at": "最終更新日時:{updatedAt}",
+  "mind_map_list_delete_button": "削除",
+  "mind_map_list_delete_confirm_title": "マインドマップを削除",
+  "mind_map_list_delete_confirm_message": "'{title}'を削除しますか？この操作は元に戻せません。",
+  "mind_map_list_delete_confirm_cancel": "キャンセル",
+  "mind_map_list_delete_confirm_delete": "削除",
   "generic_error_title": "エラーが発生しました",
   "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。"
 

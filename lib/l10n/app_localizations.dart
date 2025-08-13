@@ -171,6 +171,36 @@ abstract class L10n {
   /// **'最終更新日時:{updatedAt}'**
   String mind_map_list_tile_updated_at(Object updatedAt);
 
+  /// No description provided for @mind_map_list_delete_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'削除'**
+  String get mind_map_list_delete_button;
+
+  /// No description provided for @mind_map_list_delete_confirm_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'マインドマップを削除'**
+  String get mind_map_list_delete_confirm_title;
+
+  /// No description provided for @mind_map_list_delete_confirm_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'\'{title}\'を削除しますか？この操作は元に戻せません。'**
+  String mind_map_list_delete_confirm_message(Object title);
+
+  /// No description provided for @mind_map_list_delete_confirm_cancel.
+  ///
+  /// In ja, this message translates to:
+  /// **'キャンセル'**
+  String get mind_map_list_delete_confirm_cancel;
+
+  /// No description provided for @mind_map_list_delete_confirm_delete.
+  ///
+  /// In ja, this message translates to:
+  /// **'削除'**
+  String get mind_map_list_delete_confirm_delete;
+
   /// No description provided for @generic_error_title.
   ///
   /// In ja, this message translates to:
