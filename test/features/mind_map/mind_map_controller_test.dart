@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/core/entities/api/tree_node.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/features/mind_map/controllers/mind_map_controller.dart';
 
@@ -13,6 +13,11 @@ class MockMindMapRepository implements MindMapRepository {
 
   @override
   Future<void> saveTree(String treeId, List<TreeNode> tree) async {}
+
+  @override
+  Future<List<MindMapSummary>> fetchMindMapList() async {
+    return [];
+  }
 }
 
 void main() {

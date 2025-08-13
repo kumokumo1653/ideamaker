@@ -1,4 +1,4 @@
-import 'package:idea_maker/core/entities/api/tree_node.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 
 abstract interface class MindMapRepository {
   /// Fetches the mind map tree for a given [treeId].
@@ -6,4 +6,7 @@ abstract interface class MindMapRepository {
 
   /// Saves the mind map tree for a given [treeId].
   Future<void> saveTree(String treeId, List<TreeNode> tree);
+
+  /// Fetches all mind maps for the current user.
+  Future<List<MindMapSummary>> fetchMindMapList();
 }

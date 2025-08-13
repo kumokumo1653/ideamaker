@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:idea_maker/core/entities/api/tree_node.dart';
+import 'package:idea_maker/core/entities/tree_node.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/features/mind_map/controllers/controllers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

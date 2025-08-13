@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_odm/firestore_odm.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
-import 'package:idea_maker/core/entities/api/api.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/core/services/firestore/model.dart';
 import 'package:idea_maker/core/services/firestore/schema.dart';
@@ -63,5 +63,33 @@ class MindMapRepositoryImpl implements MindMapRepository {
         .onError((error, stackTrace) {
           throw Exception('Failed to save mind map: $error');
         });
+  }
+
+  @override
+  Future<List<MindMapSummary>> fetchMindMapList() async {
+    final firestore = FirebaseFirestore.instance;
+    final odm = FirestoreODM(appSchema, firestore: firestore);
+    final user = ref.read(userStatusControllerProvider).valueOrNull;
+    if (user == null) {
+      throw Exception('User not signed in');
+    }
+    final mindMaps = await odm.users(user.userId).mindMaps.get();
+    mindMaps.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+
+    return mindMaps.map((mindMap) {
+      // Extract title from the first root node
+      final rootNode = mindMap.tree.firstWhere(
+        (TreeNode node) => node.parentId == null,
+        orElse: () => mindMap.tree.first,
+      );
+      final title = rootNode.title.isEmpty ? 'Untitled' : rootNode.title;
+
+      return MindMapSummary(
+        id: mindMap.id,
+        title: title,
+        updatedAt: mindMap.updatedAt,
+        nodeCount: mindMap.tree.length,
+      );
+    }).toList();
   }
 }

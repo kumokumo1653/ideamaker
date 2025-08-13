@@ -117,6 +117,12 @@ abstract class L10n {
   /// **'マインドマップを作成する'**
   String get top_go_mind_map;
 
+  /// No description provided for @top_go_mind_map_list.
+  ///
+  /// In ja, this message translates to:
+  /// **'マインドマップ一覧を確認する'**
+  String get top_go_mind_map_list;
+
   /// No description provided for @mind_map_overlay_add_child_button.
   ///
   /// In ja, this message translates to:
@@ -134,6 +140,36 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'このノードを削除する'**
   String get mind_map_overlay_remove_button;
+
+  /// No description provided for @mind_map_list_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'マインドマップ一覧'**
+  String get mind_map_list_title;
+
+  /// No description provided for @mind_map_list_empty_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'まだマインドマップがありません'**
+  String get mind_map_list_empty_message;
+
+  /// No description provided for @mind_map_list_create_new.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいマインドマップを作成'**
+  String get mind_map_list_create_new;
+
+  /// No description provided for @mind_map_list_tile_node_count.
+  ///
+  /// In ja, this message translates to:
+  /// **'{count}個のノード'**
+  String mind_map_list_tile_node_count(Object count);
+
+  /// No description provided for @mind_map_list_tile_updated_at.
+  ///
+  /// In ja, this message translates to:
+  /// **'最終更新日時:{updatedAt}'**
+  String mind_map_list_tile_updated_at(Object updatedAt);
 
   /// No description provided for @generic_error_title.
   ///

@@ -6,10 +6,25 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$topPageRoute, $mindMapPageRoute];
+List<RouteBase> get $appRoutes => [$topPageRoute];
 
-RouteBase get $topPageRoute =>
-    GoRouteData.$route(path: '/', factory: _$TopPageRoute._fromState);
+RouteBase get $topPageRoute => GoRouteData.$route(
+  path: '/',
+
+  factory: _$TopPageRoute._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: '/mind-map',
+
+      factory: _$MindMapPageRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: '/mind-maps',
+
+      factory: _$MindMapListPageRoute._fromState,
+    ),
+  ],
+);
 
 mixin _$TopPageRoute on GoRouteData {
   static TopPageRoute _fromState(GoRouterState state) => const TopPageRoute();
@@ -31,12 +46,6 @@ mixin _$TopPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $mindMapPageRoute => GoRouteData.$route(
-  path: '/mind_map',
-
-  factory: _$MindMapPageRoute._fromState,
-);
-
 mixin _$MindMapPageRoute on GoRouteData {
   static MindMapPageRoute _fromState(GoRouterState state) =>
       MindMapPageRoute(treeId: state.uri.queryParameters['tree-id']);
@@ -45,9 +54,30 @@ mixin _$MindMapPageRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location(
-    '/mind_map',
+    '/mind-map',
     queryParams: {if (_self.treeId != null) 'tree-id': _self.treeId},
   );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$MindMapListPageRoute on GoRouteData {
+  static MindMapListPageRoute _fromState(GoRouterState state) =>
+      const MindMapListPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/mind-maps');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -67,7 +97,7 @@ mixin _$MindMapPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'be805dbc3edd40b35172744fc912da3a235aab5d';
+String _$routerHash() => r'77944908c5dda690741c32b702bab78d0aebafed';
 
 /// See also [router].
 @ProviderFor(router)

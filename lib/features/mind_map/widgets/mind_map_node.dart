@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/core/entities/api/api.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
 
 class MindMapNode extends HookConsumerWidget {

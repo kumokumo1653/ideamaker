@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:idea_maker/core/entities/api/api.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 
 part 'mind_map_state.freezed.dart';
 

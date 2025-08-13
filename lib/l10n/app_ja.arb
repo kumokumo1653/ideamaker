@@ -4,9 +4,15 @@
   "common_close_button": "閉じる",
   "top_description": "アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。",
   "top_go_mind_map": "マインドマップを作成する",
+  "top_go_mind_map_list": "マインドマップ一覧を確認する",
   "mind_map_overlay_add_child_button": "子のノードを追加する",
   "mind_map_overlay_add_sibling_button": "兄弟のノードを追加する",
   "mind_map_overlay_remove_button": "このノードを削除する",
+  "mind_map_list_title": "マインドマップ一覧",
+  "mind_map_list_empty_message": "まだマインドマップがありません",
+  "mind_map_list_create_new": "新しいマインドマップを作成",
+  "mind_map_list_tile_node_count": "{count}個のノード",
+  "mind_map_list_tile_updated_at": "最終更新日時:{updatedAt}",
   "generic_error_title": "エラーが発生しました",
   "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。"
 

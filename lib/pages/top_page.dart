@@ -59,6 +59,11 @@ class TopPage extends HookConsumerWidget {
                 onPressed: () => const MindMapPageRoute().go(context),
                 child: Text(l10n.top_go_mind_map),
               ),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: () => const MindMapListPageRoute().go(context),
+                child: Text(l10n.top_go_mind_map_list),
+              ),
             ],
           ),
         ),

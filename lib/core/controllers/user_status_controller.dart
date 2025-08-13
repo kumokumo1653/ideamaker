@@ -1,4 +1,4 @@
-import 'package:idea_maker/core/entities/api/api.dart';
+import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
