@@ -103,7 +103,7 @@ class MindMapListPage extends HookConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.mind_map_list_delete_confirm_cancel),
+            child: Text(l10n.common_cancel_button),
           ),
           TextButton(
             onPressed: () async {
@@ -113,8 +113,7 @@ class MindMapListPage extends HookConsumerWidget {
                   .deleteMindMap(mindMap.id);
             },
             child: Text(
-              l10n.mind_map_list_delete_confirm_delete,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
+              l10n.mind_map_list_delete_confirm_delete_button,
             ),
           ),
         ],

@@ -18,6 +18,11 @@ class MockMindMapRepository implements MindMapRepository {
   Future<List<MindMapSummary>> fetchMindMapList() async {
     return [];
   }
+
+  @override
+  Future<void> deleteMindMap(String treeId) {
+    return Future.value();
+  }
 }
 
 void main() {

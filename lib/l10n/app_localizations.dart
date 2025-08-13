@@ -105,6 +105,12 @@ abstract class L10n {
   /// **'閉じる'**
   String get common_close_button;
 
+  /// No description provided for @common_cancel_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'キャンセル'**
+  String get common_cancel_button;
+
   /// No description provided for @top_description.
   ///
   /// In ja, this message translates to:
@@ -189,17 +195,11 @@ abstract class L10n {
   /// **'\'{title}\'を削除しますか？この操作は元に戻せません。'**
   String mind_map_list_delete_confirm_message(Object title);
 
-  /// No description provided for @mind_map_list_delete_confirm_cancel.
-  ///
-  /// In ja, this message translates to:
-  /// **'キャンセル'**
-  String get mind_map_list_delete_confirm_cancel;
-
-  /// No description provided for @mind_map_list_delete_confirm_delete.
+  /// No description provided for @mind_map_list_delete_confirm_delete_button.
   ///
   /// In ja, this message translates to:
   /// **'削除'**
-  String get mind_map_list_delete_confirm_delete;
+  String get mind_map_list_delete_confirm_delete_button;
 
   /// No description provided for @generic_error_title.
   ///

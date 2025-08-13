@@ -53,7 +53,10 @@ class MindMapController extends _$MindMapController {
           .toList();
       state = AsyncValue.data(currentState.copyWith(tree: updatedTree));
     } else {
-      throw Exception('Node with id $id not found');
+      state = AsyncValue.error(
+        Exception('Node with id $id not found'),
+        StackTrace.current,
+      );
     }
   }
 
@@ -84,7 +87,10 @@ class MindMapController extends _$MindMapController {
       ];
       state = AsyncValue.data(currentState.copyWith(tree: updatedTree));
     } else {
-      throw Exception('Parent node with id $parentId not found');
+      state = AsyncValue.error(
+        Exception('Node with id $parentId not found'),
+        StackTrace.current,
+      );
     }
   }
 
@@ -126,7 +132,10 @@ class MindMapController extends _$MindMapController {
 
       state = AsyncValue.data(latestState.copyWith(tree: updatedTree));
     } else {
-      throw Exception('Node with id $id not found');
+      state = AsyncValue.error(
+        Exception('Node with id $id not found'),
+        StackTrace.current,
+      );
     }
   }
 
@@ -137,17 +146,20 @@ class MindMapController extends _$MindMapController {
     }
     state = const AsyncValue<MindMapState>.loading().copyWithPrevious(state);
 
-    final saveResult = await _mindMapRepository
-        .saveTree(treeId, tree)
-        .then(
-          (value) => true,
-        )
-        .onError(
-          (error, stackTrace) => throw Exception('Failed to save mind map'),
-        );
-
-    state = AsyncValue.data(
-      currentState.copyWith(saveTreeResult: saveResult),
-    ).copyWithPrevious(state);
+    try {
+      final saveResult = await _mindMapRepository
+          .saveTree(treeId, tree)
+          .then(
+            (value) => true,
+          );
+      state = AsyncValue.data(
+        currentState.copyWith(saveTreeResult: saveResult),
+      ).copyWithPrevious(state);
+    } on Exception catch (e) {
+      state = AsyncValue<MindMapState>.error(
+        Exception('Failed to save mind map: $e'),
+        StackTrace.current,
+      ).copyWithPrevious(state);
+    }
   }
 }

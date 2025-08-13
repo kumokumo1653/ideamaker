@@ -15,6 +15,9 @@ class L10nJa extends L10n {
   String get common_close_button => '閉じる';
 
   @override
+  String get common_cancel_button => 'キャンセル';
+
+  @override
   String get top_description =>
       'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。';
 
@@ -64,10 +67,7 @@ class L10nJa extends L10n {
   }
 
   @override
-  String get mind_map_list_delete_confirm_cancel => 'キャンセル';
-
-  @override
-  String get mind_map_list_delete_confirm_delete => '削除';
+  String get mind_map_list_delete_confirm_delete_button => '削除';
 
   @override
   String get generic_error_title => 'エラーが発生しました';

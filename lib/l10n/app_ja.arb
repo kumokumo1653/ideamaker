@@ -2,6 +2,7 @@
   "@@locale": "ja",
   "app_title": "アイディアメーカー",
   "common_close_button": "閉じる",
+  "common_cancel_button":"キャンセル",
   "top_description": "アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。",
   "top_go_mind_map": "マインドマップを作成する",
   "top_go_mind_map_list": "マインドマップ一覧を確認する",
@@ -16,8 +17,7 @@
   "mind_map_list_delete_button": "削除",
   "mind_map_list_delete_confirm_title": "マインドマップを削除",
   "mind_map_list_delete_confirm_message": "'{title}'を削除しますか？この操作は元に戻せません。",
-  "mind_map_list_delete_confirm_cancel": "キャンセル",
-  "mind_map_list_delete_confirm_delete": "削除",
+  "mind_map_list_delete_confirm_delete_button": "削除",
   "generic_error_title": "エラーが発生しました",
   "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。"
 
