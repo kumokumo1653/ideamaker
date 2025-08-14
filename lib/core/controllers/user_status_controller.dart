@@ -8,15 +8,37 @@ part 'user_status_controller.g.dart';
 class UserStatusController extends _$UserStatusController {
   UserRepository get _userRepository => ref.watch(userRepositoryProvider);
 
-  // TODO(ohike): とりあえずログインする
   @override
-  FutureOr<UserStatus?> build() =>
-      _userRepository.signIn('test@gmail.com', 'testtest');
+  Future<UserStatus?> build() async {
+    final stream = _userRepository.userStatusStream;
+
+    // Get the first event from the stream
+    final firstUserStatus = await stream.first;
+
+    final subscription = stream
+        .skip(1) // Skip the first event since we already handled it
+        .handleError((Object error, StackTrace stackTrace) {
+          state = AsyncValue<UserStatus?>.error(
+            error,
+            stackTrace,
+          ).copyWithPrevious(state);
+        })
+        .listen((userStatus) {
+          state = AsyncValue<UserStatus?>.data(
+            userStatus,
+          ).copyWithPrevious(state);
+        });
+    ref.onDispose(subscription.cancel);
+
+    return firstUserStatus;
+  }
 
   Future<void> signIn(String email, String password) async {
     state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
-    final userStatus = await _userRepository.signIn(email, password);
+    final newState = await AsyncValue.guard<UserStatus?>(
+      () => _userRepository.signIn(email, password),
+    );
 
-    state = AsyncValue<UserStatus?>.data(userStatus).copyWithPrevious(state);
+    state = newState.copyWithPrevious(state);
   }
 }

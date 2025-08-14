@@ -6,7 +6,7 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$topPageRoute];
+List<RouteBase> get $appRoutes => [$topPageRoute, $loadingPageRoute];
 
 RouteBase get $topPageRoute => GoRouteData.$route(
   path: '/',
@@ -93,11 +93,38 @@ mixin _$MindMapListPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $loadingPageRoute => GoRouteData.$route(
+  path: '/loading',
+
+  factory: _$LoadingPageRoute._fromState,
+);
+
+mixin _$LoadingPageRoute on GoRouteData {
+  static LoadingPageRoute _fromState(GoRouterState state) =>
+      const LoadingPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/loading');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'77944908c5dda690741c32b702bab78d0aebafed';
+String _$routerHash() => r'8a81b149e0d072ef656921ab1f956187fd375c0d';
 
 /// See also [router].
 @ProviderFor(router)

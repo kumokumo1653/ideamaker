@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/features/mind_map/pages/pages.dart';
 import 'package:idea_maker/pages/pages.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -14,6 +15,29 @@ GoRouter router(Ref ref) {
     debugLogDiagnostics: true,
     initialLocation: const TopPageRoute().location,
     routes: $appRoutes,
+    redirect: (context, state) {
+      final userStatusAsync = ref.watch(userStatusControllerProvider);
+
+      if (userStatusAsync.isLoading) {
+        return const LoadingPageRoute().location;
+      }
+
+      if (userStatusAsync.hasError) {
+        return const TopPageRoute().location;
+      }
+
+      final userStatus = userStatusAsync.value;
+
+      if (userStatus == null) {
+        // Don't redirect if already on login or loading page
+        if (state.matchedLocation == const LoadingPageRoute().location) {
+          return null;
+        }
+        return const TopPageRoute().location;
+      }
+
+      return null;
+    },
   );
 }
 
@@ -30,6 +54,16 @@ class TopPageRoute extends GoRouteData with _$TopPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TopPage();
+  }
+}
+
+@TypedGoRoute<LoadingPageRoute>(path: '/loading')
+class LoadingPageRoute extends GoRouteData with _$LoadingPageRoute {
+  const LoadingPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoadingPage();
   }
 }
 

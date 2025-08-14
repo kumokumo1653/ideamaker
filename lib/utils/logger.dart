@@ -3,13 +3,14 @@ import 'package:logger/logger.dart';
 
 Logger logger = Logger(
   printer: PrettyPrinter(
-    methodCount: 1,
+    methodCount: 0,
+    errorMethodCount: 5,
     lineLength: 100,
     dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
   ),
 );
 
-class ProviderObserverLogger implements ProviderObserver {
+class ProviderObserverLogger extends ProviderObserver {
   @override
   void didAddProvider(
     ProviderBase<dynamic> provider,
@@ -39,18 +40,5 @@ class ProviderObserverLogger implements ProviderObserver {
     ProviderContainer container,
   ) {
     logger.t('📦${provider.name ?? provider.runtimeType}');
-  }
-
-  @override
-  void providerDidFail(
-    ProviderBase<Object?> provider,
-    Object error,
-    StackTrace stackTrace,
-    ProviderContainer container,
-  ) {
-    logger.t(
-      '❌ ${provider.name ?? provider.runtimeType}, Error: $error',
-      stackTrace: stackTrace,
-    );
   }
 }

@@ -24,4 +24,16 @@ class UserRepositoryImpl implements UserRepository {
       displayName: userCredential.user!.displayName,
     );
   }
+
+  @override
+  Stream<UserStatus?> get userStatusStream =>
+      FirebaseAuth.instance.authStateChanges().map((user) {
+        if (user == null) {
+          return null;
+        }
+        return UserStatus(
+          userId: user.uid,
+          displayName: user.displayName,
+        );
+      });
 }

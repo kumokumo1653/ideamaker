@@ -7,7 +7,7 @@ part of 'mind_map_list_controller.dart';
 // **************************************************************************
 
 String _$mindMapListControllerHash() =>
-    r'8c70254ff72db0969dbd34ce28f5cd1d70fe981e';
+    r'323a355c16213f561ccb7cfc80a8204ce2c6c6b2';
 
 /// See also [MindMapListController].
 @ProviderFor(MindMapListController)

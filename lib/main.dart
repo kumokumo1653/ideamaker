@@ -8,7 +8,7 @@ import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/firebase_options.dart';
 import 'package:idea_maker/l10n/app_localizations.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
-import 'package:idea_maker/router.dart';
+import 'package:idea_maker/routers/router.dart';
 import 'package:idea_maker/theme.dart';
 import 'package:idea_maker/utils/logger.dart';
 

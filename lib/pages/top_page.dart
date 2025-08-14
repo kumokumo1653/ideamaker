@@ -4,7 +4,7 @@ import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/widgets/async_widget.dart';
 import 'package:idea_maker/gen/assets.gen.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
-import 'package:idea_maker/router.dart';
+import 'package:idea_maker/routers/router.dart';
 
 class TopPage extends HookConsumerWidget {
   const TopPage({super.key});

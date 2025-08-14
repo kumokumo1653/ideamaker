@@ -4,7 +4,7 @@ import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/widgets/widgets.dart';
 import 'package:idea_maker/features/mind_map/controllers/controllers.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
-import 'package:idea_maker/router.dart';
+import 'package:idea_maker/routers/router.dart';
 import 'package:intl/intl.dart';
 
 class MindMapListPage extends HookConsumerWidget {
