@@ -6,14 +6,6 @@ import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/core/services/firestore/model.dart';
 import 'package:idea_maker/core/services/firestore/schema.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'mind_map_repository_impl.g.dart';
-
-@riverpod
-MindMapRepository mindMapRepository(Ref ref) {
-  return MindMapRepositoryImpl(ref);
-}
 
 class MindMapRepositoryImpl implements MindMapRepository {
   MindMapRepositoryImpl(this.ref);
@@ -73,13 +65,12 @@ class MindMapRepositoryImpl implements MindMapRepository {
     if (user == null) {
       throw Exception('User not signed in');
     }
-    return odm
-        .users(user.userId)
-        .mindMaps(treeId)
-        .delete()
-        .onError((error, stackTrace) {
-          throw Exception('Failed to delete mind map: $error');
-        });
+    return odm.users(user.userId).mindMaps(treeId).delete().onError((
+      error,
+      stackTrace,
+    ) {
+      throw Exception('Failed to delete mind map: $error');
+    });
   }
 
   @override
