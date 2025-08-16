@@ -12,6 +12,9 @@ class MindMapController extends _$MindMapController {
   MindMapRepository get _mindMapRepository =>
       ref.watch(mindMapRepositoryProvider);
 
+  AssistAIRepository get _assistAIRepository =>
+      ref.watch(assistAIRepositoryProvider);
+
   @override
   FutureOr<MindMapState> build(String? treeId) async {
     if (treeId != null) {
@@ -161,5 +164,59 @@ class MindMapController extends _$MindMapController {
         StackTrace.current,
       ).copyWithPrevious(state);
     }
+  }
+
+  Future<void> assistAI(String treeId) async {
+    final currentState = state.value;
+    if (currentState == null) {
+      return;
+    }
+    state = const AsyncValue<MindMapState>.loading().copyWithPrevious(state);
+
+    final targetNode = state.value?.tree.firstWhereOrNull(
+      (node) => node.id == treeId,
+    );
+
+    if (targetNode == null) {
+      state = AsyncValue<MindMapState>.error(
+        Exception('Node with id $treeId not found'),
+        StackTrace.current,
+      ).copyWithPrevious(state);
+      return;
+    }
+
+    final newState = await AsyncValue.guard(
+      () => _assistAIRepository.generateAssociations(targetNode.title).then((
+        associations,
+      ) {
+        final associationsNodes = associations
+            .map(
+              (e) => TreeNode(
+                id: const Uuid().v4(),
+                title: e,
+                parentId: targetNode.id,
+                childrenId: [],
+              ),
+            )
+            .toList();
+
+        final newNode = TreeNode(
+          id: targetNode.id,
+          title: targetNode.title,
+          parentId: targetNode.parentId,
+          childrenId: associationsNodes.map((e) => e.id).toList(),
+        );
+
+        return state.value!.copyWith(
+          tree: [
+            ...state.value!.tree.where((node) => node.id != targetNode.id),
+            newNode,
+            ...associationsNodes,
+          ],
+        );
+      }),
+    );
+
+    state = newState.copyWithPrevious(state);
   }
 }

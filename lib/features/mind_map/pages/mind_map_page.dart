@@ -71,6 +71,9 @@ class MindMapPage extends HookConsumerWidget {
         onTapRemove: parentNode != null
             ? () => mindMapController.removeNode(rootNode.id)
             : null,
+        onTapAssistAI: rootNode.title.isNotEmpty
+            ? () => mindMapController.assistAI(rootNode.id)
+            : null,
         hasActions: rootNode.childrenId.isEmpty,
       ),
       branchColor: theme.colorScheme.primary,

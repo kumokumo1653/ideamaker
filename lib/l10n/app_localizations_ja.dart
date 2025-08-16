@@ -37,6 +37,9 @@ class L10nJa extends L10n {
   String get mind_map_overlay_remove_button => 'このノードを削除する';
 
   @override
+  String get mind_map_overlay_assist_button => 'AIのアシストを使う';
+
+  @override
   String get mind_map_list_title => 'マインドマップ一覧';
 
   @override

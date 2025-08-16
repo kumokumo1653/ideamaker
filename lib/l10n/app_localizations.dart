@@ -147,6 +147,12 @@ abstract class L10n {
   /// **'このノードを削除する'**
   String get mind_map_overlay_remove_button;
 
+  /// No description provided for @mind_map_overlay_assist_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'AIのアシストを使う'**
+  String get mind_map_overlay_assist_button;
+
   /// No description provided for @mind_map_list_title.
   ///
   /// In ja, this message translates to:

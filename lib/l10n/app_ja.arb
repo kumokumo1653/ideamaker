@@ -9,6 +9,7 @@
   "mind_map_overlay_add_child_button": "子のノードを追加する",
   "mind_map_overlay_add_sibling_button": "兄弟のノードを追加する",
   "mind_map_overlay_remove_button": "このノードを削除する",
+  "mind_map_overlay_assist_button": "AIのアシストを使う",
   "mind_map_list_title": "マインドマップ一覧",
   "mind_map_list_empty_message": "まだマインドマップがありません",
   "mind_map_list_create_new": "新しいマインドマップを作成",
@@ -20,6 +21,4 @@
   "mind_map_list_delete_confirm_delete_button": "削除",
   "generic_error_title": "エラーが発生しました",
   "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。"
-
-  
 }
