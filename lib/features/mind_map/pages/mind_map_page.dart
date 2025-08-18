@@ -26,12 +26,17 @@ class MindMapPage extends HookConsumerWidget {
           [mindMapState.tree],
         );
         return Scaffold(
-          body: Center(
-            child: _buildNode(
-              context,
-              ref,
-              tree: mindMapState.tree,
-              rootNode: rootNode,
+          body: InteractiveViewer(
+            minScale: 0.1,
+            maxScale: 3,
+            boundaryMargin: const EdgeInsets.all(double.infinity),
+            child: Center(
+              child: _buildNode(
+                context,
+                ref,
+                tree: mindMapState.tree,
+                rootNode: rootNode,
+              ),
             ),
           ),
           floatingActionButton: FloatingActionButton(
