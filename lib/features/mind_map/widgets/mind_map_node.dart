@@ -74,12 +74,17 @@ class MindMapNode extends HookConsumerWidget {
       key: nodeKey,
       child: Row(
         children: [
-          SizedBox(
-            width: 200,
-            child: TextField(
-              decoration: const InputDecoration(border: InputBorder.none),
-              controller: controller,
-              onChanged: onChangedTitle,
+          Container(
+            constraints: const BoxConstraints(minWidth: 200),
+            padding: const EdgeInsets.all(8),
+            child: IntrinsicWidth(
+              child: TextField(
+                decoration: const InputDecoration(border: InputBorder.none),
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: controller,
+                onChanged: onChangedTitle,
+              ),
             ),
           ),
           if (hasActions) ...[
