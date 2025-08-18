@@ -29,7 +29,9 @@ class MindMapPage extends HookConsumerWidget {
           body: InteractiveViewer(
             minScale: 0.1,
             maxScale: 3,
-            boundaryMargin: const EdgeInsets.all(double.infinity),
+            boundaryMargin: const EdgeInsets.all(
+              double.infinity, // infinity zoom out
+            ),
             child: Center(
               child: _buildNode(
                 context,
