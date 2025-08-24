@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/firebase_options.dart';
 import 'package:idea_maker/l10n/app_localizations.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
@@ -32,8 +31,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    // TODO(ohike): ログインがめんどくさいので、仮でログインしておく
-    ref.watch(userStatusControllerProvider);
     return MaterialApp.router(
       title: l10n.app_title,
       theme: MyTheme().light(),
