@@ -23,22 +23,31 @@ class TopPage extends HookConsumerWidget {
           backgroundColor: theme.colorScheme.inversePrimary,
           title: Text(l10n.app_title),
           actions: [
-            Text(
-              isGuest
-                  ? l10n.user_status_guest
-                  : userStatus?.displayName ?? l10n.user_status_noName,
-            ),
-            IconButton(
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {
-                ref
-                    .read(userStatusControllerProvider.notifier)
-                    .signIn(
-                      'test@gmail.com',
-                      'testtest',
-                    );
-              },
-            ),
+            if (isGuest) ...[
+              TextButton.icon(
+                onPressed: () => const LoginPageRoute().go(context),
+                icon: const Icon(Icons.login),
+                label: Text(l10n.login_title),
+              ),
+            ] else ...[
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Center(
+                  child: Text(
+                    userStatus?.displayName ?? l10n.user_status_noName,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.account_circle),
+                onPressed: () async {
+                  await ref
+                      .read(userStatusControllerProvider.notifier)
+                      .signOut();
+                },
+              ),
+            ],
           ],
         ),
         body: Center(

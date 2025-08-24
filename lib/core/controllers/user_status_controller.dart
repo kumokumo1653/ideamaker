@@ -43,4 +43,22 @@ class UserStatusController extends _$UserStatusController {
 
     state = newState.copyWithPrevious(state);
   }
+
+  Future<void> signInWithGoogle() async {
+    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
+    final newState = await AsyncValue.guard<UserStatus?>(
+      () => _userRepository.signInWithGoogle(),
+    );
+
+    state = newState.copyWithPrevious(state);
+  }
+
+  Future<void> signOut() async {
+    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
+    final newState = await AsyncValue.guard<UserStatus?>(
+      () => _userRepository.signOut(),
+    );
+
+    state = newState.copyWithPrevious(state);
+  }
 }

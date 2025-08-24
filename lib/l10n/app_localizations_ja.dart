@@ -80,4 +80,49 @@ class L10nJa extends L10n {
 
   @override
   String get generic_error_content => 'エラーが発生しました。しばらくした後もう一度お試しください。';
+
+  @override
+  String get login_title => 'ログイン';
+
+  @override
+  String get login_welcome => 'おかえりなさい';
+
+  @override
+  String get login_description => 'アカウントにログインしてマインドマップを保存・管理しましょう';
+
+  @override
+  String get login_or => 'または';
+
+  @override
+  String get login_google => 'Googleでログイン';
+
+  @override
+  String get login_guest => 'ゲストとして続行';
+
+  @override
+  String get login_email => 'メールアドレス';
+
+  @override
+  String get login_password => 'パスワード';
+
+  @override
+  String get login_email_button => 'メールアドレスでログイン';
+
+  @override
+  String get login_email_required => 'メールアドレスを入力してください';
+
+  @override
+  String get login_email_invalid => '有効なメールアドレスを入力してください';
+
+  @override
+  String get login_password_required => 'パスワードを入力してください';
+
+  @override
+  String get login_password_short => 'パスワードは6文字以上で入力してください';
+
+  @override
+  String get login_error_email => 'メールアドレスまたはパスワードが正しくありません';
+
+  @override
+  String get login_error_google => 'Googleログインに失敗しました';
 }

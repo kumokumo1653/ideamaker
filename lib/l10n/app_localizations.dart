@@ -224,6 +224,96 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'エラーが発生しました。しばらくした後もう一度お試しください。'**
   String get generic_error_content;
+
+  /// No description provided for @login_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログイン'**
+  String get login_title;
+
+  /// No description provided for @login_welcome.
+  ///
+  /// In ja, this message translates to:
+  /// **'おかえりなさい'**
+  String get login_welcome;
+
+  /// No description provided for @login_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントにログインしてマインドマップを保存・管理しましょう'**
+  String get login_description;
+
+  /// No description provided for @login_or.
+  ///
+  /// In ja, this message translates to:
+  /// **'または'**
+  String get login_or;
+
+  /// No description provided for @login_google.
+  ///
+  /// In ja, this message translates to:
+  /// **'Googleでログイン'**
+  String get login_google;
+
+  /// No description provided for @login_guest.
+  ///
+  /// In ja, this message translates to:
+  /// **'ゲストとして続行'**
+  String get login_guest;
+
+  /// No description provided for @login_email.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレス'**
+  String get login_email;
+
+  /// No description provided for @login_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワード'**
+  String get login_password;
+
+  /// No description provided for @login_email_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスでログイン'**
+  String get login_email_button;
+
+  /// No description provided for @login_email_required.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスを入力してください'**
+  String get login_email_required;
+
+  /// No description provided for @login_email_invalid.
+  ///
+  /// In ja, this message translates to:
+  /// **'有効なメールアドレスを入力してください'**
+  String get login_email_invalid;
+
+  /// No description provided for @login_password_required.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを入力してください'**
+  String get login_password_required;
+
+  /// No description provided for @login_password_short.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードは6文字以上で入力してください'**
+  String get login_password_short;
+
+  /// No description provided for @login_error_email.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスまたはパスワードが正しくありません'**
+  String get login_error_email;
+
+  /// No description provided for @login_error_google.
+  ///
+  /// In ja, this message translates to:
+  /// **'Googleログインに失敗しました'**
+  String get login_error_google;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -26,6 +26,34 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<UserStatus> signInWithGoogle() async {
+    final googleProvider = GoogleAuthProvider()
+      ..addScope(
+        'https://www.googleapis.com/auth/contacts.readonly',
+      );
+
+    // Sign in with Google
+    final userCredential = await FirebaseAuth.instance.signInWithPopup(
+      googleProvider,
+    );
+
+    if (userCredential.user == null) {
+      throw Exception('Google sign in failed');
+    }
+
+    return UserStatus(
+      userId: userCredential.user!.uid,
+      displayName: userCredential.user!.displayName,
+    );
+  }
+
+  @override
+  Future<UserStatus?> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    return null;
+  }
+
+  @override
   Stream<UserStatus?> get userStatusStream =>
       FirebaseAuth.instance.authStateChanges().map((user) {
         if (user == null) {

@@ -23,6 +23,7 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 
       factory: _$MindMapListPageRoute._fromState,
     ),
+    GoRouteData.$route(path: '/login', factory: _$LoginPageRoute._fromState),
   ],
 );
 
@@ -93,6 +94,27 @@ mixin _$MindMapListPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+mixin _$LoginPageRoute on GoRouteData {
+  static LoginPageRoute _fromState(GoRouterState state) =>
+      const LoginPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/login');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $loadingPageRoute => GoRouteData.$route(
   path: '/loading',
 
@@ -124,7 +146,7 @@ mixin _$LoadingPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'8a81b149e0d072ef656921ab1f956187fd375c0d';
+String _$routerHash() => r'3436ffe8870eb05f1367c8d29133b2dff6d148ad';
 
 /// See also [router].
 @ProviderFor(router)

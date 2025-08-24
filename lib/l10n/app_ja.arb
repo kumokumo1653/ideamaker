@@ -21,7 +21,20 @@
   "mind_map_list_delete_confirm_message": "'{title}'を削除しますか？この操作は元に戻せません。",
   "mind_map_list_delete_confirm_delete_button": "削除",
   "generic_error_title": "エラーが発生しました",
-  "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。"
-
-  
+  "generic_error_content": "エラーが発生しました。しばらくした後もう一度お試しください。",
+  "login_title": "ログイン",
+  "login_welcome": "おかえりなさい",
+  "login_description": "アカウントにログインしてマインドマップを保存・管理しましょう",
+  "login_or": "または",
+  "login_google": "Googleでログイン",
+  "login_guest": "ゲストとして続行",
+  "login_email": "メールアドレス",
+  "login_password": "パスワード",
+  "login_email_button": "メールアドレスでログイン",
+  "login_email_required": "メールアドレスを入力してください",
+  "login_email_invalid": "有効なメールアドレスを入力してください",
+  "login_password_required": "パスワードを入力してください",
+  "login_password_short": "パスワードは6文字以上で入力してください",
+  "login_error_email": "メールアドレスまたはパスワードが正しくありません",
+  "login_error_google": "Googleログインに失敗しました"
 }

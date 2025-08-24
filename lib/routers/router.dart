@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
+import 'package:idea_maker/core/pages/pages.dart';
 import 'package:idea_maker/features/mind_map/pages/pages.dart';
-import 'package:idea_maker/pages/pages.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,6 +20,7 @@ GoRouter router(Ref ref) {
       final isGuestNavigableRoutes = [
         const TopPageRoute().location,
         const MindMapPageRoute().location,
+        const LoginPageRoute().location,
       ];
 
       if (userStatusAsync.isLoading) {
@@ -49,6 +50,7 @@ GoRouter router(Ref ref) {
   routes: [
     TypedGoRoute<MindMapPageRoute>(path: '/mind-map'),
     TypedGoRoute<MindMapListPageRoute>(path: '/mind-maps'),
+    TypedGoRoute<LoginPageRoute>(path: '/login'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
@@ -88,5 +90,14 @@ class MindMapListPageRoute extends GoRouteData with _$MindMapListPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const MindMapListPage();
+  }
+}
+
+class LoginPageRoute extends GoRouteData with _$LoginPageRoute {
+  const LoginPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginPage();
   }
 }
