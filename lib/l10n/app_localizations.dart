@@ -111,6 +111,18 @@ abstract class L10n {
   /// **'キャンセル'**
   String get common_cancel_button;
 
+  /// No description provided for @user_status_guest.
+  ///
+  /// In ja, this message translates to:
+  /// **'ゲスト'**
+  String get user_status_guest;
+
+  /// No description provided for @user_status_noName.
+  ///
+  /// In ja, this message translates to:
+  /// **'名無しさん'**
+  String get user_status_noName;
+
   /// No description provided for @top_description.
   ///
   /// In ja, this message translates to:

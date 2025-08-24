@@ -15,6 +15,7 @@ class TopPage extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     final userStatus = ref.watch(userStatusControllerProvider);
+    final isGuest = ref.watch(userStatusControllerProvider.notifier).isGuest;
     return AsyncWidget(
       userStatus,
       builder: (userStatus) => Scaffold(
@@ -22,7 +23,11 @@ class TopPage extends HookConsumerWidget {
           backgroundColor: theme.colorScheme.inversePrimary,
           title: Text(l10n.app_title),
           actions: [
-            Text(userStatus?.displayName ?? 'Guest'),
+            Text(
+              isGuest
+                  ? l10n.user_status_guest
+                  : userStatus?.displayName ?? l10n.user_status_noName,
+            ),
             IconButton(
               icon: const Icon(Icons.account_circle),
               onPressed: () {
@@ -59,11 +64,13 @@ class TopPage extends HookConsumerWidget {
                 onPressed: () => const MindMapPageRoute().go(context),
                 child: Text(l10n.top_go_mind_map),
               ),
-              const SizedBox(height: 16),
-              FilledButton(
-                onPressed: () => const MindMapListPageRoute().go(context),
-                child: Text(l10n.top_go_mind_map_list),
-              ),
+              if (!isGuest) ...[
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: () => const MindMapListPageRoute().go(context),
+                  child: Text(l10n.top_go_mind_map_list),
+                ),
+              ],
             ],
           ),
         ),

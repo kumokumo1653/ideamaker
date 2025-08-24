@@ -18,6 +18,12 @@ class L10nJa extends L10n {
   String get common_cancel_button => 'キャンセル';
 
   @override
+  String get user_status_guest => 'ゲスト';
+
+  @override
+  String get user_status_noName => '名無しさん';
+
+  @override
   String get top_description =>
       'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。';
 

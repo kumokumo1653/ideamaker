@@ -17,6 +17,10 @@ GoRouter router(Ref ref) {
     routes: $appRoutes,
     redirect: (context, state) {
       final userStatusAsync = ref.watch(userStatusControllerProvider);
+      final isGuestNavigableRoutes = [
+        const TopPageRoute().location,
+        const MindMapPageRoute().location,
+      ];
 
       if (userStatusAsync.isLoading) {
         return const LoadingPageRoute().location;
@@ -29,8 +33,7 @@ GoRouter router(Ref ref) {
       final userStatus = userStatusAsync.value;
 
       if (userStatus == null) {
-        // Don't redirect if already on login or loading page
-        if (state.matchedLocation == const LoadingPageRoute().location) {
+        if (isGuestNavigableRoutes.contains(state.matchedLocation)) {
           return null;
         }
         return const TopPageRoute().location;

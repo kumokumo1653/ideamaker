@@ -8,6 +8,8 @@ part 'user_status_controller.g.dart';
 class UserStatusController extends _$UserStatusController {
   UserRepository get _userRepository => ref.watch(userRepositoryProvider);
 
+  bool get isGuest => state.hasValue && state.value == null;
+
   @override
   Future<UserStatus?> build() async {
     final stream = _userRepository.userStatusStream;
