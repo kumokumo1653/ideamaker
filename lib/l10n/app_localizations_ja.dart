@@ -125,4 +125,47 @@ class L10nJa extends L10n {
 
   @override
   String get login_error_google => 'Googleログインに失敗しました';
+
+  @override
+  String get signup_title => 'アカウント作成';
+
+  @override
+  String get signup_welcome => '新しいアカウントを作成しましょう';
+
+  @override
+  String get signup_description => '新しいアカウントを作成してマインドマップを保存・管理しましょう';
+
+  @override
+  String get signup_email_button => 'アカウントを作成';
+
+  @override
+  String get signup_error_email => 'アカウントの作成に失敗しました';
+
+  @override
+  String get switch_to_signup => '新しいアカウントを作成';
+
+  @override
+  String get switch_to_login => '既存のアカウントでログイン';
+
+  @override
+  String get email_verification_title => 'メール認証';
+
+  @override
+  String get email_verification_sent => '認証メールを送信しました';
+
+  @override
+  String get email_verification_description =>
+      'メールボックスを確認して、認証リンクをクリックしてください。メールが届かない場合は、迷惑メールフォルダも確認してください。';
+
+  @override
+  String get email_verification_resend => '認証メールを再送信';
+
+  @override
+  String get email_verification_continue => '認証後、続行';
+
+  @override
+  String get email_verification_back => '戻る';
+
+  @override
+  String get email_not_verified => 'メールアドレスが認証されていません';
 }

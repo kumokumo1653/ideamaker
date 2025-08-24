@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserStatus {
 
- String get userId; String? get displayName;
+ String get userId; String? get displayName; bool get emailVerified;
 /// Create a copy of UserStatus
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $UserStatusCopyWith<UserStatus> get copyWith => _$UserStatusCopyWithImpl<UserSta
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.displayName, displayName) || other.displayName == displayName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,displayName);
+int get hashCode => Object.hash(runtimeType,userId,displayName,emailVerified);
 
 @override
 String toString() {
-  return 'UserStatus(userId: $userId, displayName: $displayName)';
+  return 'UserStatus(userId: $userId, displayName: $displayName, emailVerified: $emailVerified)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $UserStatusCopyWith<$Res>  {
   factory $UserStatusCopyWith(UserStatus value, $Res Function(UserStatus) _then) = _$UserStatusCopyWithImpl;
 @useResult
 $Res call({
- String userId, String? displayName
+ String userId, String? displayName, bool emailVerified
 });
 
 
@@ -66,11 +66,12 @@ class _$UserStatusCopyWithImpl<$Res>
 
 /// Create a copy of UserStatus
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? displayName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? displayName = freezed,Object? emailVerified = null,}) {
   return _then(_self.copyWith(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,displayName: freezed == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -81,11 +82,12 @@ as String?,
 @JsonSerializable()
 
 class _UserStatus implements UserStatus {
-  const _UserStatus({required this.userId, required this.displayName});
+  const _UserStatus({required this.userId, required this.displayName, this.emailVerified = false});
   factory _UserStatus.fromJson(Map<String, dynamic> json) => _$UserStatusFromJson(json);
 
 @override final  String userId;
 @override final  String? displayName;
+@override@JsonKey() final  bool emailVerified;
 
 /// Create a copy of UserStatus
 /// with the given fields replaced by the non-null parameter values.
@@ -100,16 +102,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.displayName, displayName) || other.displayName == displayName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,displayName);
+int get hashCode => Object.hash(runtimeType,userId,displayName,emailVerified);
 
 @override
 String toString() {
-  return 'UserStatus(userId: $userId, displayName: $displayName)';
+  return 'UserStatus(userId: $userId, displayName: $displayName, emailVerified: $emailVerified)';
 }
 
 
@@ -120,7 +122,7 @@ abstract mixin class _$UserStatusCopyWith<$Res> implements $UserStatusCopyWith<$
   factory _$UserStatusCopyWith(_UserStatus value, $Res Function(_UserStatus) _then) = __$UserStatusCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, String? displayName
+ String userId, String? displayName, bool emailVerified
 });
 
 
@@ -137,11 +139,12 @@ class __$UserStatusCopyWithImpl<$Res>
 
 /// Create a copy of UserStatus
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? displayName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? displayName = freezed,Object? emailVerified = null,}) {
   return _then(_UserStatus(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,displayName: freezed == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

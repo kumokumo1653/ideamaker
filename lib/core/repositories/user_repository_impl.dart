@@ -22,6 +22,25 @@ class UserRepositoryImpl implements UserRepository {
     return UserStatus(
       userId: userCredential.user!.uid,
       displayName: userCredential.user!.displayName,
+      emailVerified: userCredential.user!.emailVerified,
+    );
+  }
+
+  @override
+  Future<UserStatus> signUp(String email, String password) async {
+    final userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user == null) {
+      throw Exception('Sign up failed');
+    }
+
+    // Send email verification automatically after sign up
+    await userCredential.user!.sendEmailVerification();
+
+    return UserStatus(
+      userId: userCredential.user!.uid,
+      displayName: userCredential.user!.displayName,
+      emailVerified: userCredential.user!.emailVerified,
     );
   }
 
@@ -44,6 +63,7 @@ class UserRepositoryImpl implements UserRepository {
     return UserStatus(
       userId: userCredential.user!.uid,
       displayName: userCredential.user!.displayName,
+      emailVerified: userCredential.user!.emailVerified,
     );
   }
 
@@ -51,6 +71,14 @@ class UserRepositoryImpl implements UserRepository {
   Future<UserStatus?> signOut() async {
     await FirebaseAuth.instance.signOut();
     return null;
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
   }
 
   @override
@@ -62,6 +90,7 @@ class UserRepositoryImpl implements UserRepository {
         return UserStatus(
           userId: user.uid,
           displayName: user.displayName,
+          emailVerified: user.emailVerified,
         );
       });
 }

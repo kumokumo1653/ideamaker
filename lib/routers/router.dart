@@ -33,7 +33,7 @@ GoRouter router(Ref ref) {
 
       final userStatus = userStatusAsync.value;
 
-      if (userStatus == null) {
+      if (userStatus == null || !userStatus.emailVerified) {
         if (isGuestNavigableRoutes.contains(state.matchedLocation)) {
           return null;
         }
@@ -51,6 +51,7 @@ GoRouter router(Ref ref) {
     TypedGoRoute<MindMapPageRoute>(path: '/mind-map'),
     TypedGoRoute<MindMapListPageRoute>(path: '/mind-maps'),
     TypedGoRoute<LoginPageRoute>(path: '/login'),
+    TypedGoRoute<EmailVerificationPageRoute>(path: '/email-verification'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
@@ -99,5 +100,15 @@ class LoginPageRoute extends GoRouteData with _$LoginPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginPage();
+  }
+}
+
+class EmailVerificationPageRoute extends GoRouteData
+    with _$EmailVerificationPageRoute {
+  const EmailVerificationPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EmailVerificationPage();
   }
 }

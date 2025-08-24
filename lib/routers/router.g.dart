@@ -24,6 +24,11 @@ RouteBase get $topPageRoute => GoRouteData.$route(
       factory: _$MindMapListPageRoute._fromState,
     ),
     GoRouteData.$route(path: '/login', factory: _$LoginPageRoute._fromState),
+    GoRouteData.$route(
+      path: '/email-verification',
+
+      factory: _$EmailVerificationPageRoute._fromState,
+    ),
   ],
 );
 
@@ -115,6 +120,27 @@ mixin _$LoginPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+mixin _$EmailVerificationPageRoute on GoRouteData {
+  static EmailVerificationPageRoute _fromState(GoRouterState state) =>
+      const EmailVerificationPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/email-verification');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $loadingPageRoute => GoRouteData.$route(
   path: '/loading',
 
@@ -146,7 +172,7 @@ mixin _$LoadingPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'3436ffe8870eb05f1367c8d29133b2dff6d148ad';
+String _$routerHash() => r'b4e66e23fdda441cb328a905596379a9d4bdc667';
 
 /// See also [router].
 @ProviderFor(router)

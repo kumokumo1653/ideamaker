@@ -30,15 +30,35 @@ class TopPage extends HookConsumerWidget {
                 label: Text(l10n.login_title),
               ),
             ] else ...[
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: Center(
-                  child: Text(
-                    userStatus?.displayName ?? l10n.user_status_noName,
-                    style: theme.textTheme.bodyMedium,
+              // Show email verification warning if not verified
+              if (userStatus?.emailVerified == false) ...[
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: TextButton.icon(
+                    onPressed: () =>
+                        const EmailVerificationPageRoute().go(context),
+                    icon: Icon(
+                      Icons.warning,
+                      color: theme.colorScheme.error,
+                      size: 16,
+                    ),
+                    label: Text(
+                      l10n.email_not_verified,
+                      style: TextStyle(color: theme.colorScheme.error),
+                    ),
                   ),
                 ),
-              ),
+              ] else ...[
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Center(
+                    child: Text(
+                      userStatus?.displayName ?? l10n.user_status_noName,
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ),
+                ),
+              ],
               IconButton(
                 icon: const Icon(Icons.account_circle),
                 onPressed: () async {

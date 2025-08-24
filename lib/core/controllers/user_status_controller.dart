@@ -44,6 +44,15 @@ class UserStatusController extends _$UserStatusController {
     state = newState.copyWithPrevious(state);
   }
 
+  Future<void> signUp(String email, String password) async {
+    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
+    final newState = await AsyncValue.guard<UserStatus?>(
+      () => _userRepository.signUp(email, password),
+    );
+
+    state = newState.copyWithPrevious(state);
+  }
+
   Future<void> signInWithGoogle() async {
     state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
     final newState = await AsyncValue.guard<UserStatus?>(
@@ -60,5 +69,9 @@ class UserStatusController extends _$UserStatusController {
     );
 
     state = newState.copyWithPrevious(state);
+  }
+
+  Future<void> sendEmailVerification() async {
+    await _userRepository.sendEmailVerification();
   }
 }

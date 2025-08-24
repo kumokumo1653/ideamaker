@@ -314,6 +314,90 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'Googleログインに失敗しました'**
   String get login_error_google;
+
+  /// No description provided for @signup_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウント作成'**
+  String get signup_title;
+
+  /// No description provided for @signup_welcome.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいアカウントを作成しましょう'**
+  String get signup_welcome;
+
+  /// No description provided for @signup_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいアカウントを作成してマインドマップを保存・管理しましょう'**
+  String get signup_description;
+
+  /// No description provided for @signup_email_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントを作成'**
+  String get signup_email_button;
+
+  /// No description provided for @signup_error_email.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントの作成に失敗しました'**
+  String get signup_error_email;
+
+  /// No description provided for @switch_to_signup.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいアカウントを作成'**
+  String get switch_to_signup;
+
+  /// No description provided for @switch_to_login.
+  ///
+  /// In ja, this message translates to:
+  /// **'既存のアカウントでログイン'**
+  String get switch_to_login;
+
+  /// No description provided for @email_verification_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'メール認証'**
+  String get email_verification_title;
+
+  /// No description provided for @email_verification_sent.
+  ///
+  /// In ja, this message translates to:
+  /// **'認証メールを送信しました'**
+  String get email_verification_sent;
+
+  /// No description provided for @email_verification_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールボックスを確認して、認証リンクをクリックしてください。メールが届かない場合は、迷惑メールフォルダも確認してください。'**
+  String get email_verification_description;
+
+  /// No description provided for @email_verification_resend.
+  ///
+  /// In ja, this message translates to:
+  /// **'認証メールを再送信'**
+  String get email_verification_resend;
+
+  /// No description provided for @email_verification_continue.
+  ///
+  /// In ja, this message translates to:
+  /// **'認証後、続行'**
+  String get email_verification_continue;
+
+  /// No description provided for @email_verification_back.
+  ///
+  /// In ja, this message translates to:
+  /// **'戻る'**
+  String get email_verification_back;
+
+  /// No description provided for @email_not_verified.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスが認証されていません'**
+  String get email_not_verified;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

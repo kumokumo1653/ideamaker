@@ -7,7 +7,7 @@ part of 'user_status_controller.dart';
 // **************************************************************************
 
 String _$userStatusControllerHash() =>
-    r'85dda6d435b9e06c8853fc5bae2575ea9b043986';
+    r'8a68741cd343a03e8b8919c75895c0b9b68ab6e6';
 
 /// See also [UserStatusController].
 @ProviderFor(UserStatusController)
