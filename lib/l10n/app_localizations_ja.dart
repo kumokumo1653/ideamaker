@@ -94,31 +94,19 @@ class L10nJa extends L10n {
   String get login_or => 'または';
 
   @override
-  String get login_google => 'Googleでログイン';
+  String get login_google_button => 'Googleでログイン';
 
   @override
-  String get login_guest => 'ゲストとして続行';
+  String get login_guest_button => 'ゲストとして続行';
 
   @override
-  String get login_email => 'メールアドレス';
+  String get login_text_field_email => 'メールアドレス';
 
   @override
-  String get login_password => 'パスワード';
+  String get login_text_field_password => 'パスワード';
 
   @override
   String get login_email_button => 'メールアドレスでログイン';
-
-  @override
-  String get login_email_required => 'メールアドレスを入力してください';
-
-  @override
-  String get login_email_invalid => '有効なメールアドレスを入力してください';
-
-  @override
-  String get login_password_required => 'パスワードを入力してください';
-
-  @override
-  String get login_password_short => 'パスワードは6文字以上で入力してください';
 
   @override
   String get login_error_email => 'メールアドレスまたはパスワードが正しくありません';
@@ -127,22 +115,22 @@ class L10nJa extends L10n {
   String get login_error_google => 'Googleログインに失敗しました';
 
   @override
-  String get signup_title => 'アカウント作成';
+  String get signUp_title => 'アカウント作成';
 
   @override
-  String get signup_welcome => '新しいアカウントを作成しましょう';
+  String get signUp_welcome => '新しいアカウントを作成しましょう';
 
   @override
-  String get signup_description => '新しいアカウントを作成してマインドマップを保存・管理しましょう';
+  String get signUp_description => '新しいアカウントを作成してマインドマップを保存・管理しましょう';
 
   @override
-  String get signup_email_button => 'アカウントを作成';
+  String get signUp_email_button => 'アカウントを作成';
 
   @override
-  String get signup_error_email => 'アカウントの作成に失敗しました';
+  String get signUp_error_email => 'アカウントの作成に失敗しました';
 
   @override
-  String get switch_to_signup => '新しいアカウントを作成';
+  String get switch_to_signUp => '新しいアカウントを作成';
 
   @override
   String get switch_to_login => '既存のアカウントでログイン';
@@ -151,17 +139,16 @@ class L10nJa extends L10n {
   String get email_verification_title => 'メール認証';
 
   @override
-  String get email_verification_sent => '認証メールを送信しました';
+  String email_verification_send(Object email) {
+    return '$emailに認証メールを送信します';
+  }
 
   @override
   String get email_verification_description =>
       'メールボックスを確認して、認証リンクをクリックしてください。メールが届かない場合は、迷惑メールフォルダも確認してください。';
 
   @override
-  String get email_verification_resend => '認証メールを再送信';
-
-  @override
-  String get email_verification_continue => '認証後、続行';
+  String get email_verification_send_button => '認証メールを送信する';
 
   @override
   String get email_verification_back => '戻る';

@@ -8,6 +8,7 @@ abstract class UserStatus with _$UserStatus {
   const factory UserStatus({
     required String userId,
     required String? displayName,
+    required String? email,
     @Default(false) bool emailVerified,
   }) = _UserStatus;
 

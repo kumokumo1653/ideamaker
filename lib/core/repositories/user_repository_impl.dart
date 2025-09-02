@@ -16,13 +16,15 @@ class UserRepositoryImpl implements UserRepository {
   Future<UserStatus> signIn(String email, String password) async {
     final userCredential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
-    if (userCredential.user == null) {
-      throw Exception('Sign in failed');
+    final user = userCredential.user;
+    if (user == null) {
+      throw Exception('Sign up failed');
     }
     return UserStatus(
-      userId: userCredential.user!.uid,
-      displayName: userCredential.user!.displayName,
-      emailVerified: userCredential.user!.emailVerified,
+      userId: user.uid,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      email: user.email,
     );
   }
 
@@ -30,17 +32,17 @@ class UserRepositoryImpl implements UserRepository {
   Future<UserStatus> signUp(String email, String password) async {
     final userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
-    if (userCredential.user == null) {
+
+    final user = userCredential.user;
+    if (user == null) {
       throw Exception('Sign up failed');
     }
 
-    // Send email verification automatically after sign up
-    await userCredential.user!.sendEmailVerification();
-
     return UserStatus(
-      userId: userCredential.user!.uid,
-      displayName: userCredential.user!.displayName,
-      emailVerified: userCredential.user!.emailVerified,
+      userId: user.uid,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      email: user.email,
     );
   }
 
@@ -56,14 +58,16 @@ class UserRepositoryImpl implements UserRepository {
       googleProvider,
     );
 
-    if (userCredential.user == null) {
+    final user = userCredential.user;
+    if (user == null) {
       throw Exception('Google sign in failed');
     }
 
     return UserStatus(
-      userId: userCredential.user!.uid,
-      displayName: userCredential.user!.displayName,
-      emailVerified: userCredential.user!.emailVerified,
+      userId: user.uid,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      email: user.email,
     );
   }
 
@@ -82,15 +86,16 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Stream<UserStatus?> get userStatusStream =>
-      FirebaseAuth.instance.authStateChanges().map((user) {
-        if (user == null) {
-          return null;
-        }
-        return UserStatus(
-          userId: user.uid,
-          displayName: user.displayName,
-          emailVerified: user.emailVerified,
-        );
-      });
+  Future<UserStatus?> get currentUser async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return null;
+    }
+    return UserStatus(
+      userId: user.uid,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      email: user.email,
+    );
+  }
 }

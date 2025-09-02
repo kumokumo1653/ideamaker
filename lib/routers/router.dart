@@ -21,6 +21,7 @@ GoRouter router(Ref ref) {
         const TopPageRoute().location,
         const MindMapPageRoute().location,
         const LoginPageRoute().location,
+        const EmailVerificationPageRoute().location,
       ];
 
       if (userStatusAsync.isLoading) {

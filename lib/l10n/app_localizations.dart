@@ -249,59 +249,35 @@ abstract class L10n {
   /// **'または'**
   String get login_or;
 
-  /// No description provided for @login_google.
+  /// No description provided for @login_google_button.
   ///
   /// In ja, this message translates to:
   /// **'Googleでログイン'**
-  String get login_google;
+  String get login_google_button;
 
-  /// No description provided for @login_guest.
+  /// No description provided for @login_guest_button.
   ///
   /// In ja, this message translates to:
   /// **'ゲストとして続行'**
-  String get login_guest;
+  String get login_guest_button;
 
-  /// No description provided for @login_email.
+  /// No description provided for @login_text_field_email.
   ///
   /// In ja, this message translates to:
   /// **'メールアドレス'**
-  String get login_email;
+  String get login_text_field_email;
 
-  /// No description provided for @login_password.
+  /// No description provided for @login_text_field_password.
   ///
   /// In ja, this message translates to:
   /// **'パスワード'**
-  String get login_password;
+  String get login_text_field_password;
 
   /// No description provided for @login_email_button.
   ///
   /// In ja, this message translates to:
   /// **'メールアドレスでログイン'**
   String get login_email_button;
-
-  /// No description provided for @login_email_required.
-  ///
-  /// In ja, this message translates to:
-  /// **'メールアドレスを入力してください'**
-  String get login_email_required;
-
-  /// No description provided for @login_email_invalid.
-  ///
-  /// In ja, this message translates to:
-  /// **'有効なメールアドレスを入力してください'**
-  String get login_email_invalid;
-
-  /// No description provided for @login_password_required.
-  ///
-  /// In ja, this message translates to:
-  /// **'パスワードを入力してください'**
-  String get login_password_required;
-
-  /// No description provided for @login_password_short.
-  ///
-  /// In ja, this message translates to:
-  /// **'パスワードは6文字以上で入力してください'**
-  String get login_password_short;
 
   /// No description provided for @login_error_email.
   ///
@@ -315,41 +291,41 @@ abstract class L10n {
   /// **'Googleログインに失敗しました'**
   String get login_error_google;
 
-  /// No description provided for @signup_title.
+  /// No description provided for @signUp_title.
   ///
   /// In ja, this message translates to:
   /// **'アカウント作成'**
-  String get signup_title;
+  String get signUp_title;
 
-  /// No description provided for @signup_welcome.
+  /// No description provided for @signUp_welcome.
   ///
   /// In ja, this message translates to:
   /// **'新しいアカウントを作成しましょう'**
-  String get signup_welcome;
+  String get signUp_welcome;
 
-  /// No description provided for @signup_description.
+  /// No description provided for @signUp_description.
   ///
   /// In ja, this message translates to:
   /// **'新しいアカウントを作成してマインドマップを保存・管理しましょう'**
-  String get signup_description;
+  String get signUp_description;
 
-  /// No description provided for @signup_email_button.
+  /// No description provided for @signUp_email_button.
   ///
   /// In ja, this message translates to:
   /// **'アカウントを作成'**
-  String get signup_email_button;
+  String get signUp_email_button;
 
-  /// No description provided for @signup_error_email.
+  /// No description provided for @signUp_error_email.
   ///
   /// In ja, this message translates to:
   /// **'アカウントの作成に失敗しました'**
-  String get signup_error_email;
+  String get signUp_error_email;
 
-  /// No description provided for @switch_to_signup.
+  /// No description provided for @switch_to_signUp.
   ///
   /// In ja, this message translates to:
   /// **'新しいアカウントを作成'**
-  String get switch_to_signup;
+  String get switch_to_signUp;
 
   /// No description provided for @switch_to_login.
   ///
@@ -363,11 +339,11 @@ abstract class L10n {
   /// **'メール認証'**
   String get email_verification_title;
 
-  /// No description provided for @email_verification_sent.
+  /// No description provided for @email_verification_send.
   ///
   /// In ja, this message translates to:
-  /// **'認証メールを送信しました'**
-  String get email_verification_sent;
+  /// **'{email}に認証メールを送信します'**
+  String email_verification_send(Object email);
 
   /// No description provided for @email_verification_description.
   ///
@@ -375,17 +351,11 @@ abstract class L10n {
   /// **'メールボックスを確認して、認証リンクをクリックしてください。メールが届かない場合は、迷惑メールフォルダも確認してください。'**
   String get email_verification_description;
 
-  /// No description provided for @email_verification_resend.
+  /// No description provided for @email_verification_send_button.
   ///
   /// In ja, this message translates to:
-  /// **'認証メールを再送信'**
-  String get email_verification_resend;
-
-  /// No description provided for @email_verification_continue.
-  ///
-  /// In ja, this message translates to:
-  /// **'認証後、続行'**
-  String get email_verification_continue;
+  /// **'認証メールを送信する'**
+  String get email_verification_send_button;
 
   /// No description provided for @email_verification_back.
   ///

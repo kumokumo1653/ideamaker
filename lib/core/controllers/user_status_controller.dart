@@ -12,27 +12,11 @@ class UserStatusController extends _$UserStatusController {
 
   @override
   Future<UserStatus?> build() async {
-    final stream = _userRepository.userStatusStream;
-
-    // Get the first event from the stream
-    final firstUserStatus = await stream.first;
-
-    final subscription = stream
-        .skip(1) // Skip the first event since we already handled it
-        .handleError((Object error, StackTrace stackTrace) {
-          state = AsyncValue<UserStatus?>.error(
-            error,
-            stackTrace,
-          ).copyWithPrevious(state);
-        })
-        .listen((userStatus) {
-          state = AsyncValue<UserStatus?>.data(
-            userStatus,
-          ).copyWithPrevious(state);
-        });
-    ref.onDispose(subscription.cancel);
-
-    return firstUserStatus;
+    try {
+      return _userRepository.currentUser;
+    } on Exception catch (e) {
+      throw Exception('Failed to fetch user status: $e');
+    }
   }
 
   Future<void> signIn(String email, String password) async {
@@ -72,6 +56,10 @@ class UserStatusController extends _$UserStatusController {
   }
 
   Future<void> sendEmailVerification() async {
-    await _userRepository.sendEmailVerification();
+    try {
+      await _userRepository.sendEmailVerification();
+    } on Exception catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 }
