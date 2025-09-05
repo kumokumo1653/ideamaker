@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/core/controllers/user_status_controller.dart';
+import 'package:idea_maker/core/controllers/controllers.dart';
 import 'package:idea_maker/core/widgets/widgets.dart';
 import 'package:idea_maker/l10n/app_localizations.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
@@ -44,15 +44,12 @@ class LoginPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    final userStatusController = ref.watch(
-      userStatusControllerProvider.notifier,
-    );
-    final userStatusAsync = ref.watch(userStatusControllerProvider);
+    final loginController = ref.watch(loginControllerProvider.notifier);
+    final loginResultAsync = ref.watch(loginControllerProvider);
 
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final formKey = useMemoized(GlobalKey<FormState>.new);
-    final isLoading = userStatusAsync.isLoading;
+    final isLoading = loginResultAsync.isLoading;
     final viewMode = useState(ViewMode.login);
 
     // Navigate to appropriate page when authentication state changes
@@ -68,7 +65,7 @@ class LoginPage extends HookConsumerWidget {
         title: Text(viewMode.value.title(l10n)),
       ),
       body: AsyncWidget(
-        userStatusAsync,
+        loginResultAsync,
         builder: (userStatus) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(24),
@@ -95,7 +92,6 @@ class LoginPage extends HookConsumerWidget {
 
                 // Email/Password Form
                 Form(
-                  key: formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -132,12 +128,12 @@ class LoginPage extends HookConsumerWidget {
                             if (isLoading) return;
                             switch (viewMode.value) {
                               case ViewMode.login:
-                                await userStatusController.signIn(
+                                await loginController.signIn(
                                   emailController.text.trim(),
                                   passwordController.text,
                                 );
                               case ViewMode.signup:
-                                await userStatusController.signUp(
+                                await loginController.signUp(
                                   emailController.text.trim(),
                                   passwordController.text,
                                 );
@@ -180,7 +176,7 @@ class LoginPage extends HookConsumerWidget {
                   child: OutlinedButton.icon(
                     onPressed: () async {
                       if (isLoading) return;
-                      await userStatusController.signInWithGoogle();
+                      await loginController.signInWithGoogle();
                     },
                     icon: const Icon(Icons.login, size: 20),
                     label: Text(l10n.login_google_button),

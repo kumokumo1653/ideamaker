@@ -18,10 +18,67 @@ class L10nJa extends L10n {
   String get common_cancel_button => 'キャンセル';
 
   @override
+  String get common_go_top_button => 'トップに戻る';
+
+  @override
   String get user_status_guest => 'ゲスト';
 
   @override
   String get user_status_noName => '名無しさん';
+
+  @override
+  String get app_exception_title => 'エラーが発生しました';
+
+  @override
+  String get app_exception_message => 'エラーが発生しました。しばらくした後もう一度お試しください。';
+
+  @override
+  String get auth_Incorrect_credential_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_Incorrect_credential_exception_message =>
+      'メールアドレスまたはパスワードが正しくありません';
+
+  @override
+  String get auth_too_many_request_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_too_many_request_exception_message =>
+      'リクエストが多すぎます。しばらくした後もう一度お試しください。';
+
+  @override
+  String get auth_expired_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_expired_exception_message => 'ログイン期限がきれました。もう一度ログインしてください。';
+
+  @override
+  String get auth_expired_exception_action => 'ログアウト';
+
+  @override
+  String get auth_email_already_in_use_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_email_already_in_use_exception_message =>
+      'このメールアドレスは既に利用されています。';
+
+  @override
+  String get auth_weak_password_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_weak_password_exception_message => 'パスワードを強力なものに変更してください。';
+
+  @override
+  String get not_sign_in_exception_title => 'ユーザーが見つかりません';
+
+  @override
+  String get not_sign_in_exception_message => 'ログインできていないため操作に失敗しました。';
+
+  @override
+  String get unexpected_exception_title => '予期せぬエラーが発生しました';
+
+  @override
+  String get unexpected_exception_message => '何度か試しても状況変わらない場合は問い合わせてください';
 
   @override
   String get top_description =>
@@ -76,12 +133,6 @@ class L10nJa extends L10n {
   String get mind_map_list_delete_confirm_delete_button => '削除';
 
   @override
-  String get generic_error_title => 'エラーが発生しました';
-
-  @override
-  String get generic_error_content => 'エラーが発生しました。しばらくした後もう一度お試しください。';
-
-  @override
   String get login_title => 'ログイン';
 
   @override
@@ -107,12 +158,6 @@ class L10nJa extends L10n {
 
   @override
   String get login_email_button => 'メールアドレスでログイン';
-
-  @override
-  String get login_error_email => 'メールアドレスまたはパスワードが正しくありません';
-
-  @override
-  String get login_error_google => 'Googleログインに失敗しました';
 
   @override
   String get signUp_title => 'アカウント作成';

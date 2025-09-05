@@ -29,7 +29,7 @@ GoRouter router(Ref ref) {
       }
 
       if (userStatusAsync.hasError) {
-        return const TopPageRoute().location;
+        return const LoginPageRoute().location;
       }
 
       final userStatus = userStatusAsync.value;

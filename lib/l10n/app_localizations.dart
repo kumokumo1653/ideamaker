@@ -111,6 +111,12 @@ abstract class L10n {
   /// **'キャンセル'**
   String get common_cancel_button;
 
+  /// No description provided for @common_go_top_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'トップに戻る'**
+  String get common_go_top_button;
+
   /// No description provided for @user_status_guest.
   ///
   /// In ja, this message translates to:
@@ -122,6 +128,108 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'名無しさん'**
   String get user_status_noName;
+
+  /// No description provided for @app_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'エラーが発生しました'**
+  String get app_exception_title;
+
+  /// No description provided for @app_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'エラーが発生しました。しばらくした後もう一度お試しください。'**
+  String get app_exception_message;
+
+  /// No description provided for @auth_Incorrect_credential_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインエラー'**
+  String get auth_Incorrect_credential_exception_title;
+
+  /// No description provided for @auth_Incorrect_credential_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'メールアドレスまたはパスワードが正しくありません'**
+  String get auth_Incorrect_credential_exception_message;
+
+  /// No description provided for @auth_too_many_request_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインエラー'**
+  String get auth_too_many_request_exception_title;
+
+  /// No description provided for @auth_too_many_request_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'リクエストが多すぎます。しばらくした後もう一度お試しください。'**
+  String get auth_too_many_request_exception_message;
+
+  /// No description provided for @auth_expired_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインエラー'**
+  String get auth_expired_exception_title;
+
+  /// No description provided for @auth_expired_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログイン期限がきれました。もう一度ログインしてください。'**
+  String get auth_expired_exception_message;
+
+  /// No description provided for @auth_expired_exception_action.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログアウト'**
+  String get auth_expired_exception_action;
+
+  /// No description provided for @auth_email_already_in_use_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインエラー'**
+  String get auth_email_already_in_use_exception_title;
+
+  /// No description provided for @auth_email_already_in_use_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'このメールアドレスは既に利用されています。'**
+  String get auth_email_already_in_use_exception_message;
+
+  /// No description provided for @auth_weak_password_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインエラー'**
+  String get auth_weak_password_exception_title;
+
+  /// No description provided for @auth_weak_password_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを強力なものに変更してください。'**
+  String get auth_weak_password_exception_message;
+
+  /// No description provided for @not_sign_in_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'ユーザーが見つかりません'**
+  String get not_sign_in_exception_title;
+
+  /// No description provided for @not_sign_in_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインできていないため操作に失敗しました。'**
+  String get not_sign_in_exception_message;
+
+  /// No description provided for @unexpected_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'予期せぬエラーが発生しました'**
+  String get unexpected_exception_title;
+
+  /// No description provided for @unexpected_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'何度か試しても状況変わらない場合は問い合わせてください'**
+  String get unexpected_exception_message;
 
   /// No description provided for @top_description.
   ///
@@ -213,18 +321,6 @@ abstract class L10n {
   /// **'削除'**
   String get mind_map_list_delete_confirm_delete_button;
 
-  /// No description provided for @generic_error_title.
-  ///
-  /// In ja, this message translates to:
-  /// **'エラーが発生しました'**
-  String get generic_error_title;
-
-  /// No description provided for @generic_error_content.
-  ///
-  /// In ja, this message translates to:
-  /// **'エラーが発生しました。しばらくした後もう一度お試しください。'**
-  String get generic_error_content;
-
   /// No description provided for @login_title.
   ///
   /// In ja, this message translates to:
@@ -278,18 +374,6 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'メールアドレスでログイン'**
   String get login_email_button;
-
-  /// No description provided for @login_error_email.
-  ///
-  /// In ja, this message translates to:
-  /// **'メールアドレスまたはパスワードが正しくありません'**
-  String get login_error_email;
-
-  /// No description provided for @login_error_google.
-  ///
-  /// In ja, this message translates to:
-  /// **'Googleログインに失敗しました'**
-  String get login_error_google;
 
   /// No description provided for @signUp_title.
   ///

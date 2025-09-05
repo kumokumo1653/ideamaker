@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/entities/entities.dart';
+import 'package:idea_maker/core/exceptions/client_exception.dart';
 import 'package:idea_maker/core/repositories/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -18,7 +19,7 @@ class UserRepositoryImpl implements UserRepository {
         .signInWithEmailAndPassword(email: email, password: password);
     final user = userCredential.user;
     if (user == null) {
-      throw Exception('Sign up failed');
+      throw NotSignInException();
     }
     return UserStatus(
       userId: user.uid,
@@ -35,7 +36,7 @@ class UserRepositoryImpl implements UserRepository {
 
     final user = userCredential.user;
     if (user == null) {
-      throw Exception('Sign up failed');
+      throw NotSignInException();
     }
 
     return UserStatus(
@@ -60,7 +61,7 @@ class UserRepositoryImpl implements UserRepository {
 
     final user = userCredential.user;
     if (user == null) {
-      throw Exception('Google sign in failed');
+      throw NotSignInException();
     }
 
     return UserStatus(

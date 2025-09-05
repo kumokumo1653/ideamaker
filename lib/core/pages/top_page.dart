@@ -64,7 +64,7 @@ class TopPage extends HookConsumerWidget {
                 onPressed: () async {
                   await ref
                       .read(userStatusControllerProvider.notifier)
-                      .signOut();
+                      .logout();
                 },
               ),
             ],

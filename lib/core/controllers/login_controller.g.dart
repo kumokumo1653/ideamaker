@@ -1,27 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_status_controller.dart';
+part of 'login_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userStatusControllerHash() =>
-    r'145873a11a1db58a7ad16e8085a2a6a9c4865b97';
+String _$loginControllerHash() => r'dbe4f56934b13b9a5e5b0bc40c6f8127a52f2180';
 
-/// See also [UserStatusController].
-@ProviderFor(UserStatusController)
-final userStatusControllerProvider =
-    AsyncNotifierProvider<UserStatusController, UserStatus?>.internal(
-      UserStatusController.new,
-      name: r'userStatusControllerProvider',
+/// login state controller
+/// true: logged in successfully
+/// false: logged in not attempted
+///
+/// Copied from [LoginController].
+@ProviderFor(LoginController)
+final loginControllerProvider =
+    AutoDisposeAsyncNotifierProvider<LoginController, bool>.internal(
+      LoginController.new,
+      name: r'loginControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$userStatusControllerHash,
+          : _$loginControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$UserStatusController = AsyncNotifier<UserStatus?>;
+typedef _$LoginController = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

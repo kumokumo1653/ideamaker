@@ -1,4 +1,5 @@
 import 'package:idea_maker/core/entities/entities.dart';
+import 'package:idea_maker/core/exceptions/exceptions.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,54 +13,29 @@ class UserStatusController extends _$UserStatusController {
 
   @override
   Future<UserStatus?> build() async {
-    try {
-      return _userRepository.currentUser;
-    } on Exception catch (e) {
-      throw Exception('Failed to fetch user status: $e');
-    }
-  }
-
-  Future<void> signIn(String email, String password) async {
-    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
-    final newState = await AsyncValue.guard<UserStatus?>(
-      () => _userRepository.signIn(email, password),
+    return _userRepository.currentUser.catchErrorAsAppException(
+      (_) => AppException(),
     );
-
-    state = newState.copyWithPrevious(state);
   }
 
-  Future<void> signUp(String email, String password) async {
-    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
-    final newState = await AsyncValue.guard<UserStatus?>(
-      () => _userRepository.signUp(email, password),
-    );
-
-    state = newState.copyWithPrevious(state);
+  void login(UserStatus userStatus) {
+    state = AsyncValue<UserStatus?>.data(userStatus).copyWithPrevious(state);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<void> logout() async {
     state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
     final newState = await AsyncValue.guard<UserStatus?>(
-      () => _userRepository.signInWithGoogle(),
-    );
-
-    state = newState.copyWithPrevious(state);
-  }
-
-  Future<void> signOut() async {
-    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
-    final newState = await AsyncValue.guard<UserStatus?>(
-      () => _userRepository.signOut(),
+      () => _userRepository.signOut().catchErrorAsAppException(
+        (_) => AppException(),
+      ),
     );
 
     state = newState.copyWithPrevious(state);
   }
 
   Future<void> sendEmailVerification() async {
-    try {
-      await _userRepository.sendEmailVerification();
-    } on Exception catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
-    }
+    await _userRepository.sendEmailVerification().catchErrorAsAppException(
+      (_) => AppException(),
+    );
   }
 }
