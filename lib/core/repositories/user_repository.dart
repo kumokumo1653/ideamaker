@@ -12,4 +12,8 @@ abstract interface class UserRepository {
   Future<UserStatus?> signOut();
 
   Future<void> sendEmailVerification();
+
+  Future<void> changePassword(String newPassword);
+
+  Future<void> deleteAccount();
 }

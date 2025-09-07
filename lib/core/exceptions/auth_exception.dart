@@ -27,6 +27,13 @@ class AuthException extends AppException {
         throw Exception();
     }
   }
+  static AuthException getAuthException(Object error) {
+    if (error is FirebaseAuthException) {
+      return AuthException.fromFirebaseAuthException(error);
+    } else {
+      throw Exception('Unknown error type');
+    }
+  }
 }
 
 class AuthIncorrectCredentialException extends AuthException {
@@ -95,4 +102,25 @@ class AuthWeakPasswordException extends AuthException {
   String title(L10n l10n) => l10n.auth_weak_password_exception_title;
   @override
   String message(L10n l10n) => l10n.auth_weak_password_exception_message;
+}
+
+class AuthRequiresRecentLoginException extends AuthException {
+  AuthRequiresRecentLoginException() : super._();
+
+  @override
+  String title(L10n l10n) => l10n.requires_recent_login_exception_title;
+  @override
+  String message(L10n l10n) => l10n.requires_recent_login_exception_message;
+
+  @override
+  List<Action> get actions => [
+    Action(
+      label: (L10n l10n) => l10n.requires_recent_login_exception_action,
+      action: (context, ref) async {
+        if (context.mounted) {
+          context.go(const LoginPageRoute().location);
+        }
+      },
+    ),
+  ];
 }

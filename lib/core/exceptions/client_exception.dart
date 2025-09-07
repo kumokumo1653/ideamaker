@@ -20,3 +20,11 @@ class NotSignInException extends AppException {
     ),
   ];
 }
+
+class PasswordMismatchException extends AppException {
+  PasswordMismatchException() : super();
+  @override
+  String title(L10n l10n) => l10n.password_mismatch_exception_title;
+  @override
+  String message(L10n l10n) => l10n.password_mismatch_exception_message;
+}

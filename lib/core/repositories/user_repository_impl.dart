@@ -87,6 +87,24 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<void> changePassword(String newPassword) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw NotSignInException();
+    }
+    await user.updatePassword(newPassword);
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw NotSignInException();
+    }
+    await user.delete();
+  }
+
+  @override
   Future<UserStatus?> get currentUser async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {

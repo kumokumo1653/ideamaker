@@ -1,30 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_controller.dart';
+part of 'change_password_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginControllerHash() => r'9ce7f0ca3e48a03c643ce596eb2f6ffbaedf468d';
+String _$changePasswordControllerHash() =>
+    r'f4457a1891150f3ac8c695e9846403e383d6542a';
 
-/// login state controller
-/// true: logged in successfully
-/// false: logged in not attempted
-///
-/// Copied from [LoginController].
-@ProviderFor(LoginController)
-final loginControllerProvider =
-    AutoDisposeAsyncNotifierProvider<LoginController, bool>.internal(
-      LoginController.new,
-      name: r'loginControllerProvider',
+/// See also [ChangePasswordController].
+@ProviderFor(ChangePasswordController)
+final changePasswordControllerProvider =
+    AutoDisposeAsyncNotifierProvider<ChangePasswordController, bool>.internal(
+      ChangePasswordController.new,
+      name: r'changePasswordControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$loginControllerHash,
+          : _$changePasswordControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$LoginController = AutoDisposeAsyncNotifier<bool>;
+typedef _$ChangePasswordController = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

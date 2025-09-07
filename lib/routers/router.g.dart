@@ -29,6 +29,12 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 
       factory: _$EmailVerificationPageRoute._fromState,
     ),
+    GoRouteData.$route(path: '/my-page', factory: _$MyPageRoute._fromState),
+    GoRouteData.$route(
+      path: '/change-password',
+
+      factory: _$ChangePasswordPageRoute._fromState,
+    ),
   ],
 );
 
@@ -126,6 +132,47 @@ mixin _$EmailVerificationPageRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/email-verification');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$MyPageRoute on GoRouteData {
+  static MyPageRoute _fromState(GoRouterState state) => const MyPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/my-page');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$ChangePasswordPageRoute on GoRouteData {
+  static ChangePasswordPageRoute _fromState(GoRouterState state) =>
+      const ChangePasswordPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/change-password');
 
   @override
   void go(BuildContext context) => context.go(location);

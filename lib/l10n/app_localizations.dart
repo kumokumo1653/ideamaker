@@ -219,6 +219,36 @@ abstract class L10n {
   /// **'ログインできていないため操作に失敗しました。'**
   String get not_sign_in_exception_message;
 
+  /// No description provided for @password_mismatch_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードが一致しません'**
+  String get password_mismatch_exception_title;
+
+  /// No description provided for @password_mismatch_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワードと確認用パスワードが一致しません。'**
+  String get password_mismatch_exception_message;
+
+  /// No description provided for @requires_recent_login_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'再認証が必要です'**
+  String get requires_recent_login_exception_title;
+
+  /// No description provided for @requires_recent_login_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'前回のログインから期間が空いているため再認証が必要です。'**
+  String get requires_recent_login_exception_message;
+
+  /// No description provided for @requires_recent_login_exception_action.
+  ///
+  /// In ja, this message translates to:
+  /// **'再認証する'**
+  String get requires_recent_login_exception_action;
+
   /// No description provided for @unexpected_exception_title.
   ///
   /// In ja, this message translates to:
@@ -452,6 +482,126 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'メールアドレスが認証されていません'**
   String get email_not_verified;
+
+  /// No description provided for @my_page_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'マイページ'**
+  String get my_page_title;
+
+  /// No description provided for @my_page_account_settings.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウント設定'**
+  String get my_page_account_settings;
+
+  /// No description provided for @my_page_change_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを変更する'**
+  String get my_page_change_password;
+
+  /// No description provided for @my_page_delete_account.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントを削除する'**
+  String get my_page_delete_account;
+
+  /// No description provided for @my_page_change_password_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワード変更'**
+  String get my_page_change_password_title;
+
+  /// No description provided for @my_page_current_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'現在のパスワード'**
+  String get my_page_current_password;
+
+  /// No description provided for @my_page_new_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワード'**
+  String get my_page_new_password;
+
+  /// No description provided for @my_page_confirm_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワード確認'**
+  String get my_page_confirm_password;
+
+  /// No description provided for @my_page_change_password_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを変更'**
+  String get my_page_change_password_button;
+
+  /// No description provided for @my_page_change_password_success.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードが変更されました'**
+  String get my_page_change_password_success;
+
+  /// No description provided for @my_page_change_password_error.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードの変更に失敗しました'**
+  String get my_page_change_password_error;
+
+  /// No description provided for @my_page_password_mismatch.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードが一致しません'**
+  String get my_page_password_mismatch;
+
+  /// No description provided for @my_page_delete_account_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウント削除'**
+  String get my_page_delete_account_title;
+
+  /// No description provided for @my_page_delete_account_warning.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントを削除すると、すべてのデータが失われます。この操作は元に戻せません。'**
+  String get my_page_delete_account_warning;
+
+  /// No description provided for @my_page_delete_account_confirm.
+  ///
+  /// In ja, this message translates to:
+  /// **'本当にアカウントを削除しますか？'**
+  String get my_page_delete_account_confirm;
+
+  /// No description provided for @my_page_delete_account_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントを削除'**
+  String get my_page_delete_account_button;
+
+  /// No description provided for @my_page_delete_account_success.
+  ///
+  /// In ja, this message translates to:
+  /// **'アカウントが削除されました'**
+  String get my_page_delete_account_success;
+
+  /// No description provided for @my_page_logout.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログアウト'**
+  String get my_page_logout;
+
+  /// No description provided for @my_page_logout_confirm.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログアウトしますか？'**
+  String get my_page_logout_confirm;
+
+  /// No description provided for @my_page_logout_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログアウト'**
+  String get my_page_logout_button;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

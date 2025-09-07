@@ -75,6 +75,22 @@ class L10nJa extends L10n {
   String get not_sign_in_exception_message => 'ログインできていないため操作に失敗しました。';
 
   @override
+  String get password_mismatch_exception_title => 'パスワードが一致しません';
+
+  @override
+  String get password_mismatch_exception_message => '新しいパスワードと確認用パスワードが一致しません。';
+
+  @override
+  String get requires_recent_login_exception_title => '再認証が必要です';
+
+  @override
+  String get requires_recent_login_exception_message =>
+      '前回のログインから期間が空いているため再認証が必要です。';
+
+  @override
+  String get requires_recent_login_exception_action => '再認証する';
+
+  @override
   String get unexpected_exception_title => '予期せぬエラーが発生しました';
 
   @override
@@ -200,4 +216,65 @@ class L10nJa extends L10n {
 
   @override
   String get email_not_verified => 'メールアドレスが認証されていません';
+
+  @override
+  String get my_page_title => 'マイページ';
+
+  @override
+  String get my_page_account_settings => 'アカウント設定';
+
+  @override
+  String get my_page_change_password => 'パスワードを変更する';
+
+  @override
+  String get my_page_delete_account => 'アカウントを削除する';
+
+  @override
+  String get my_page_change_password_title => 'パスワード変更';
+
+  @override
+  String get my_page_current_password => '現在のパスワード';
+
+  @override
+  String get my_page_new_password => '新しいパスワード';
+
+  @override
+  String get my_page_confirm_password => 'パスワード確認';
+
+  @override
+  String get my_page_change_password_button => 'パスワードを変更';
+
+  @override
+  String get my_page_change_password_success => 'パスワードが変更されました';
+
+  @override
+  String get my_page_change_password_error => 'パスワードの変更に失敗しました';
+
+  @override
+  String get my_page_password_mismatch => 'パスワードが一致しません';
+
+  @override
+  String get my_page_delete_account_title => 'アカウント削除';
+
+  @override
+  String get my_page_delete_account_warning =>
+      'アカウントを削除すると、すべてのデータが失われます。この操作は元に戻せません。';
+
+  @override
+  String get my_page_delete_account_confirm => '本当にアカウントを削除しますか？';
+
+  @override
+  String get my_page_delete_account_button => 'アカウントを削除';
+
+  @override
+  String get my_page_delete_account_success => 'アカウントが削除されました';
+
+  @override
+  String get my_page_logout => 'ログアウト';
+
+  @override
+  String get my_page_logout_confirm => 'ログアウトしますか？';
+
+  @override
+  String get my_page_logout_button => 'ログアウト';
 }

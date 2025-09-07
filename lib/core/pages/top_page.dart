@@ -61,11 +61,7 @@ class TopPage extends HookConsumerWidget {
               ],
               IconButton(
                 icon: const Icon(Icons.account_circle),
-                onPressed: () async {
-                  await ref
-                      .read(userStatusControllerProvider.notifier)
-                      .logout();
-                },
+                onPressed: () => const MyPageRoute().go(context),
               ),
             ],
           ],

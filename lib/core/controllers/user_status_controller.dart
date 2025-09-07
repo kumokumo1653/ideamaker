@@ -38,4 +38,17 @@ class UserStatusController extends _$UserStatusController {
       (_) => AppException(),
     );
   }
+
+  Future<void> deleteAccount() async {
+    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
+    final newState = await AsyncValue.guard<UserStatus?>(
+      () => _userRepository
+          .deleteAccount()
+          .then((_) => null)
+          .catchErrorAsAppException(
+            (_) => AppException(),
+          ),
+    );
+    state = newState.copyWithPrevious(state);
+  }
 }

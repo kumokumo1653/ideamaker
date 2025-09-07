@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/exceptions/exceptions.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
@@ -26,7 +25,7 @@ class LoginController extends _$LoginController {
             ref.read(userStatusControllerProvider.notifier).login(userStatus);
             return true;
           })
-          .catchErrorAsAppException(getAuthException),
+          .catchErrorAsAppException(AuthException.getAuthException),
     );
 
     state = newState.copyWithPrevious(state);
@@ -41,7 +40,7 @@ class LoginController extends _$LoginController {
             ref.read(userStatusControllerProvider.notifier).login(userStatus);
             return true;
           })
-          .catchErrorAsAppException(getAuthException),
+          .catchErrorAsAppException(AuthException.getAuthException),
     );
 
     state = newState.copyWithPrevious(state);
@@ -56,17 +55,9 @@ class LoginController extends _$LoginController {
             ref.read(userStatusControllerProvider.notifier).login(userStatus);
             return true;
           })
-          .catchErrorAsAppException(getAuthException),
+          .catchErrorAsAppException(AuthException.getAuthException),
     );
 
     state = newState.copyWithPrevious(state);
-  }
-
-  AuthException getAuthException(Object error) {
-    if (error is FirebaseAuthException) {
-      return AuthException.fromFirebaseAuthException(error);
-    } else {
-      throw Exception('Unknown error type');
-    }
   }
 }
