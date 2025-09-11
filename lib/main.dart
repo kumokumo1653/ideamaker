@@ -9,10 +9,11 @@ import 'package:idea_maker/l10n/app_localizations.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
 import 'package:idea_maker/routers/router.dart';
 import 'package:idea_maker/theme.dart';
-import 'package:idea_maker/utils/logger.dart';
+import 'package:idea_maker/utils/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Env.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -7,6 +7,7 @@ import 'package:idea_maker/core/exceptions/client_exception.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/core/services/firestore/model.dart';
 import 'package:idea_maker/core/services/firestore/schema.dart';
+import 'package:idea_maker/utils/utils.dart' as utils;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'mind_map_repository_impl.g.dart';
@@ -29,6 +30,7 @@ class MindMapRepositoryImpl implements MindMapRepository {
       throw NotSignInException();
     }
     return odm
+        .env(getEnv(utils.Env.flavor).id)
         .users(user.userId)
         .mindMaps(treeId)
         .get()
@@ -52,6 +54,7 @@ class MindMapRepositoryImpl implements MindMapRepository {
       throw NotSignInException();
     }
     return odm
+        .env(getEnv(utils.Env.flavor).id)
         .users(user.userId)
         .mindMaps
         .upsert(
@@ -74,12 +77,17 @@ class MindMapRepositoryImpl implements MindMapRepository {
     if (user == null) {
       throw NotSignInException();
     }
-    return odm.users(user.userId).mindMaps(treeId).delete().onError((
-      error,
-      stackTrace,
-    ) {
-      throw Exception('Failed to delete mind map: $error');
-    });
+    return odm
+        .env(getEnv(utils.Env.flavor).id)
+        .users(user.userId)
+        .mindMaps(treeId)
+        .delete()
+        .onError((
+          error,
+          stackTrace,
+        ) {
+          throw Exception('Failed to delete mind map: $error');
+        });
   }
 
   @override
@@ -90,7 +98,11 @@ class MindMapRepositoryImpl implements MindMapRepository {
     if (user == null) {
       throw NotSignInException();
     }
-    final mindMaps = await odm.users(user.userId).mindMaps.get();
+    final mindMaps = await odm
+        .env(getEnv(utils.Env.flavor).id)
+        .users(user.userId)
+        .mindMaps
+        .get();
     mindMaps.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
 
     return mindMaps.map((mindMap) {

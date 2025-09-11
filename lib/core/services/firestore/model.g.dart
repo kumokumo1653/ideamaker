@@ -6,6 +6,12 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_Env _$EnvFromJson(Map<String, dynamic> json) => _Env(id: json['id'] as String);
+
+Map<String, dynamic> _$EnvToJson(_Env instance) => <String, dynamic>{
+  'id': instance.id,
+};
+
 _User _$UserFromJson(Map<String, dynamic> json) => _User(
   id: json['id'] as String,
   mindMaps: (json['mind_maps'] as List<dynamic>)

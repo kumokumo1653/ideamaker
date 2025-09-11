@@ -5,6 +5,7 @@ import 'package:idea_maker/core/services/firestore/model.dart';
 part 'schema.odm.dart';
 
 @Schema()
-@Collection<User>('users')
-@Collection<MindMap>('users/*/mind_maps')
+@Collection<Env>('env')
+@Collection<User>('env/*/users')
+@Collection<MindMap>('env/*/users/*/mind_maps')
 const AppSchema appSchema = _$AppSchema;
