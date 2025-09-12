@@ -44,5 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# dotenv files
-*.env
+# firebase hosting
+.firebase/
