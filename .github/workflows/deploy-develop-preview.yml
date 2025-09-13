@@ -21,7 +21,7 @@ jobs:
         uses: subosito/flutter-action@v2 # https://github.com/subosito/flutter-action
         with:
           channel: "stable"
-          flutter-version: $FLUTTER_VERSION
+          flutter-version: "$FLUTTER_VERSION"
       - run: flutter --version
       - name: Get Flutter dependencies
         run: flutter pub get
