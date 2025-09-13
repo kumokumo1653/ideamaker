@@ -34,3 +34,5 @@ jobs:
           expires: 30d
           projectId: idea-maker-4cc1c
           channelId: develop
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
