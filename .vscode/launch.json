@@ -18,7 +18,8 @@
       "name": "ideamaker(debug)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "debug"
+      "flutterMode": "debug",
+      "args": ["--dart-define=FLAVOR=dev"]
     },
     {
       "name": "ideamaker (profile mode)",
