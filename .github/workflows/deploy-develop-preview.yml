@@ -14,7 +14,7 @@ jobs:
 
       - name: Read Flutter version from .tool-versions
         run: |
-          flutter_version=$(grep '^flutter' .tool-versions | cut -d' ' -f2)
+          flutter_version=$(grep '^flutter' .tool-versions | cut -f 2 -d ' ')
           echo "FLUTTER_VERSION=$flutter_version" >> $GITHUB_ENV
 
       - name: Set up Flutter
@@ -25,7 +25,8 @@ jobs:
       - run: flutter --version
       - name: Get Flutter dependencies
         run: flutter pub get
-      - run: flutter build web --dart-define=FLAVOR=dev
+      - name: Build Flutter web
+        run: flutter build web --dart-define=FLAVOR=dev
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
