@@ -1,10 +1,9 @@
 name: deploy-develop-preview
 
-on: workflow_dispatch
-# on:
-#   push:
-#     branches:
-#       - develop
+on:
+  push:
+    branches:
+      - feature/ci_cd
 
 jobs:
   build_and_deploy:
