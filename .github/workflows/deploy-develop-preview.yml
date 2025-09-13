@@ -34,3 +34,9 @@ jobs:
           expires: 30d
           projectId: idea-maker-4cc1c
           channelId: develop
+      - name: deploy firestore
+        uses: w9jds/firebase-action@v2.2.0
+        with:
+          args: deploy --only firestore
+        env:
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
