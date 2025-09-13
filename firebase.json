@@ -30,7 +30,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "source": "./build/web",
+    "source": "./",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "frameworksBackend": {
       "region": "asia-east1"
