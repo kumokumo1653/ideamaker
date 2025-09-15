@@ -1,0 +1,50 @@
+name: deploy-hosting
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read Flutter version from .tool-versions
+        run: |
+          flutter_version=$(grep '^flutter' .tool-versions | cut -f 2 -d ' ')
+          echo "FLUTTER_VERSION=$flutter_version" >> $GITHUB_ENV
+
+      - name: Set build configuration based on branch
+        run: |
+          if [[ "${{ github.ref_name }}" == "develop" ]]; then
+            echo "DART_DEFINE=--dart-define=FLAVOR=dev" >> $GITHUB_ENV
+            echo "CHANNEL_ID=develop" >> $GITHUB_ENV
+          elif [[ "${{ github.ref_name }}" == "main" ]]; then
+            echo "DART_DEFINE=" >> $GITHUB_ENV
+            echo "CHANNEL_ID=live" >> $GITHUB_ENV
+          else
+            echo "DART_DEFINE=--dart-define=FLAVOR=dev" >> $GITHUB_ENV
+            echo "CHANNEL_ID=${{github.ref_name}}" >> $GITHUB_ENV
+          fi
+      - run: printf '%s\n' "$FLUTTER_VERSION"
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2 # https://github.com/subosito/flutter-action
+        with:
+          channel: "stable"
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - run: flutter --version
+      - name: Get Flutter dependencies
+        run: flutter pub get
+      - name: Build Flutter web
+        run: flutter build web ${{ env.DART_DEFINE }}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: idea-maker-4cc1c
+          channelId: "${{ env.CHANNEL_ID }}"

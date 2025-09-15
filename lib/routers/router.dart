@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
+import 'package:idea_maker/core/pages/pages.dart';
 import 'package:idea_maker/features/mind_map/pages/pages.dart';
-import 'package:idea_maker/pages/pages.dart';
+import 'package:idea_maker/features/mypage/pages/pages.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,20 +18,25 @@ GoRouter router(Ref ref) {
     routes: $appRoutes,
     redirect: (context, state) {
       final userStatusAsync = ref.watch(userStatusControllerProvider);
+      final isGuestNavigableRoutes = [
+        const TopPageRoute().location,
+        const MindMapPageRoute().location,
+        const LoginPageRoute().location,
+        const EmailVerificationPageRoute().location,
+      ];
 
       if (userStatusAsync.isLoading) {
         return const LoadingPageRoute().location;
       }
 
       if (userStatusAsync.hasError) {
-        return const TopPageRoute().location;
+        return const LoginPageRoute().location;
       }
 
       final userStatus = userStatusAsync.value;
 
-      if (userStatus == null) {
-        // Don't redirect if already on login or loading page
-        if (state.matchedLocation == const LoadingPageRoute().location) {
+      if (userStatus == null || !userStatus.emailVerified) {
+        if (isGuestNavigableRoutes.contains(state.matchedLocation)) {
           return null;
         }
         return const TopPageRoute().location;
@@ -46,6 +52,10 @@ GoRouter router(Ref ref) {
   routes: [
     TypedGoRoute<MindMapPageRoute>(path: '/mind-map'),
     TypedGoRoute<MindMapListPageRoute>(path: '/mind-maps'),
+    TypedGoRoute<LoginPageRoute>(path: '/login'),
+    TypedGoRoute<EmailVerificationPageRoute>(path: '/email-verification'),
+    TypedGoRoute<MyPageRoute>(path: '/my-page'),
+    TypedGoRoute<ChangePasswordPageRoute>(path: '/change-password'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
@@ -85,5 +95,43 @@ class MindMapListPageRoute extends GoRouteData with _$MindMapListPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const MindMapListPage();
+  }
+}
+
+class LoginPageRoute extends GoRouteData with _$LoginPageRoute {
+  const LoginPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginPage();
+  }
+}
+
+class EmailVerificationPageRoute extends GoRouteData
+    with _$EmailVerificationPageRoute {
+  const EmailVerificationPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EmailVerificationPage();
+  }
+}
+
+class MyPageRoute extends GoRouteData with _$MyPageRoute {
+  const MyPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const MyPage();
+  }
+}
+
+class ChangePasswordPageRoute extends GoRouteData
+    with _$ChangePasswordPageRoute {
+  const ChangePasswordPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ChangePasswordPage();
   }
 }

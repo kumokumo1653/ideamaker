@@ -12,6 +12,8 @@ part of 'schema.dart';
 /// By combining collection classes (e.g., as tuple types),
 /// we can use extension methods with record types to reduce boilerplate
 /// Example: (_$UsersCollection, _$PostsCollection)
+final class _$EnvCollection {}
+
 final class _$UsersCollection {}
 
 final class _$Mind_mapsCollection {}
@@ -23,6 +25,36 @@ class AppSchema extends FirestoreSchema {
 
 /// Generated schema instance
 const AppSchema _$AppSchema = AppSchema();
+
+/// Generated FilterSelector for `Env`
+extension AppSchemaEnvFilterSelectorExtension on FilterSelector<Env> {
+  /// Filter by document ID (id field)
+  @pragma('vm:prefer-inline')
+  DocumentIdFieldFilter get id =>
+      DocumentIdFieldFilter(name: 'id', parent: this);
+}
+
+/// Generated OrderByFieldSelector for `Env`
+extension AppSchemaEnvOrderByFieldSelectorExtension
+    on OrderByFieldSelector<Env> {
+  /// Order by document ID (id field)
+  OrderByField<String> get id =>
+      OrderByField(name: 'id', parent: this, type: FieldPathType.documentId);
+}
+
+/// Generated AggregateFieldSelector for Env
+extension AppSchemaEnvAggregateFieldSelectorExtension
+    on AggregateFieldSelector<Env> {}
+
+extension AppSchemaEnvPatchBuilder on PatchBuilder<Env> {
+  /// Update id field `String`
+  @pragma('vm:prefer-inline')
+  PatchBuilder<String> get id => PatchBuilder(
+    name: 'id',
+    parent: this,
+    converter: const PrimitiveConverter(),
+  );
+}
 
 /// Generated FilterSelector for `User`
 extension AppSchemaUserFilterSelectorExtension on FilterSelector<User> {
@@ -218,44 +250,68 @@ extension AppSchemaTreeNodePatchBuilder on PatchBuilder<TreeNode> {
 
 /// Class to add collections to `FirestoreODM<AppSchema>`
 extension AppSchemaODM on FirestoreODM<AppSchema> {
-  /// Access users collection
+  /// Access env collection
   @pragma('vm:prefer-inline')
-  FirestoreCollection<AppSchema, User, (_$UsersCollection,)> get users =>
-      FirestoreCollection<AppSchema, User, (_$UsersCollection,)>(
-        query: firestore.collection('users'),
-        converter: const _$UserJsonConverter(),
+  FirestoreCollection<AppSchema, Env, (_$EnvCollection,)> get env =>
+      FirestoreCollection<AppSchema, Env, (_$EnvCollection,)>(
+        query: firestore.collection('env'),
+        converter: const _$EnvJsonConverter(),
         documentIdField: 'id',
       );
 }
 
 /// Extension to add collections to `TransactionContext<AppSchema>`
 extension $AppSchemaTransactionContext on TransactionContext<AppSchema> {
-  /// Access users collection
+  /// Access env collection
   @pragma('vm:prefer-inline')
-  TransactionCollection<AppSchema, User, (_$UsersCollection,)> get users =>
-      TransactionCollection<AppSchema, User, (_$UsersCollection,)>(
-        query: ref.collection('users'),
+  TransactionCollection<AppSchema, Env, (_$EnvCollection,)> get env =>
+      TransactionCollection<AppSchema, Env, (_$EnvCollection,)>(
+        query: ref.collection('env'),
         context: this,
+        converter: const _$EnvJsonConverter(),
+        documentIdField: 'id',
+      );
+}
+
+/// Transaction document class for env collection
+extension $AppSchemaEnvTransactionDocument
+    on TransactionDocument<AppSchema, Env, (_$EnvCollection,)> {
+  /// Access users subcollection
+  @pragma('vm:prefer-inline')
+  TransactionCollection<AppSchema, User, (_$EnvCollection, _$UsersCollection)>
+  get users =>
+      TransactionCollection<
+        AppSchema,
+        User,
+        (_$EnvCollection, _$UsersCollection)
+      >(
+        query: ref.collection('users'),
+        context: context,
         converter: const _$UserJsonConverter(),
         documentIdField: 'id',
       );
 }
 
-/// Transaction document class for users collection
-extension $AppSchemaUsersTransactionDocument
-    on TransactionDocument<AppSchema, User, (_$UsersCollection,)> {
+/// Transaction document class for env/*/users collection
+extension $AppSchemaEnvUsersTransactionDocument
+    on
+        TransactionDocument<
+          AppSchema,
+          User,
+          (_$EnvCollection, _$UsersCollection)
+        > {
   /// Access mind_maps subcollection
   @pragma('vm:prefer-inline')
   TransactionCollection<
     AppSchema,
     MindMap,
-    (_$UsersCollection, _$Mind_mapsCollection)
+    (_$EnvCollection, _$UsersCollection, _$Mind_mapsCollection)
   >
   get mindMaps =>
       TransactionCollection<
         AppSchema,
         MindMap,
-        (_$UsersCollection, _$Mind_mapsCollection)
+        (_$EnvCollection, _$UsersCollection, _$Mind_mapsCollection)
       >(
         query: ref.collection('mind_maps'),
         context: context,
@@ -264,20 +320,42 @@ extension $AppSchemaUsersTransactionDocument
       );
 }
 
-/// Document class for users collection
-extension $AppSchemaUsersDocument
-    on FirestoreDocument<AppSchema, User, (_$UsersCollection,)> {
+/// Document class for env collection
+extension $AppSchemaEnvDocument
+    on FirestoreDocument<AppSchema, Env, (_$EnvCollection,)> {
+  /// Access users subcollection
+  FirestoreCollection<AppSchema, User, (_$EnvCollection, _$UsersCollection)>
+  get users =>
+      FirestoreCollection<
+        AppSchema,
+        User,
+        (_$EnvCollection, _$UsersCollection)
+      >(
+        query: ref.collection('users'),
+        converter: const _$UserJsonConverter(),
+        documentIdField: 'id',
+      );
+}
+
+/// Document class for env/*/users collection
+extension $AppSchemaEnvUsersDocument
+    on
+        FirestoreDocument<
+          AppSchema,
+          User,
+          (_$EnvCollection, _$UsersCollection)
+        > {
   /// Access mind_maps subcollection
   FirestoreCollection<
     AppSchema,
     MindMap,
-    (_$UsersCollection, _$Mind_mapsCollection)
+    (_$EnvCollection, _$UsersCollection, _$Mind_mapsCollection)
   >
   get mindMaps =>
       FirestoreCollection<
         AppSchema,
         MindMap,
-        (_$UsersCollection, _$Mind_mapsCollection)
+        (_$EnvCollection, _$UsersCollection, _$Mind_mapsCollection)
       >(
         query: ref.collection('mind_maps'),
         converter: const _$MindMapJsonConverter(),
@@ -287,25 +365,39 @@ extension $AppSchemaUsersDocument
 
 /// Extension to add collections to BatchContext<AppSchema>
 extension AppSchemaBatchContextExtensions on BatchContext<AppSchema> {
-  /// Access users collection
-  BatchCollection<AppSchema, User, (_$UsersCollection,)> get users =>
+  /// Access env collection
+  BatchCollection<AppSchema, Env, (_$EnvCollection,)> get env =>
       BatchCollection(
-        collection: firestoreInstance.collection('users'),
-        converter: const _$UserJsonConverter(),
+        collection: firestoreInstance.collection('env'),
+        converter: const _$EnvJsonConverter(),
         documentIdField: 'id',
         context: this,
       );
 }
 
-/// Batch document class for users collection
-extension $AppSchemaUsersBatchDocument
-    on BatchDocument<AppSchema, User, (_$UsersCollection,)> {
+/// Batch document class for env collection
+extension $AppSchemaEnvBatchDocument
+    on BatchDocument<AppSchema, Env, (_$EnvCollection,)> {
+  /// Access users subcollection
+  @pragma('vm:prefer-inline')
+  BatchCollection<AppSchema, User, (_$EnvCollection, _$UsersCollection)>
+  get users => getBatchCollection(
+    parent: this,
+    name: 'users',
+    converter: const _$UserJsonConverter(),
+    documentIdField: 'id',
+  );
+}
+
+/// Batch document class for env/*/users collection
+extension $AppSchemaEnvUsersBatchDocument
+    on BatchDocument<AppSchema, User, (_$EnvCollection, _$UsersCollection)> {
   /// Access mind_maps subcollection
   @pragma('vm:prefer-inline')
   BatchCollection<
     AppSchema,
     MindMap,
-    (_$UsersCollection, _$Mind_mapsCollection)
+    (_$EnvCollection, _$UsersCollection, _$Mind_mapsCollection)
   >
   get mindMaps => getBatchCollection(
     parent: this,
@@ -337,6 +429,18 @@ class _$TreeNodeJsonConverter
 
   @override
   Map<String, dynamic> toJson(TreeNode value) => value.toJson();
+}
+
+//Generated converter for `Env`
+class _$EnvJsonConverter
+    implements FirestoreConverter<Env, Map<String, dynamic>> {
+  const _$EnvJsonConverter();
+
+  @override
+  Env fromJson(Map<String, dynamic> data) => Env.fromJson(data);
+
+  @override
+  Map<String, dynamic> toJson(Env value) => value.toJson();
 }
 
 //Generated converter for `User`

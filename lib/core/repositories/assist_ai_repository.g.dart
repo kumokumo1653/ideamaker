@@ -7,7 +7,7 @@ part of 'assist_ai_repository.dart';
 // **************************************************************************
 
 String _$assistAIRepositoryHash() =>
-    r'0de9b49ce1181fb3e706f89826dcb192c9c15581';
+    r'7ff0669a053925966a904aae75d7746953e7507a';
 
 /// See also [assistAIRepository].
 @ProviderFor(assistAIRepository)

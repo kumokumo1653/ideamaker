@@ -6,7 +6,7 @@ part of 'mind_map_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mindMapControllerHash() => r'18796c61c61819a1d4664fe7df7a447e8f34d3aa';
+String _$mindMapControllerHash() => r'37a0c31b050bfd9d38ae1b9120773b741db9affc';
 
 /// Copied from Dart SDK
 class _SystemHash {

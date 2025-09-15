@@ -18,6 +18,85 @@ class L10nJa extends L10n {
   String get common_cancel_button => 'キャンセル';
 
   @override
+  String get common_go_top_button => 'トップに戻る';
+
+  @override
+  String get user_status_guest => 'ゲスト';
+
+  @override
+  String get user_status_noName => '名無しさん';
+
+  @override
+  String get app_exception_title => 'エラーが発生しました';
+
+  @override
+  String get app_exception_message => 'エラーが発生しました。しばらくした後もう一度お試しください。';
+
+  @override
+  String get auth_Incorrect_credential_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_Incorrect_credential_exception_message =>
+      'メールアドレスまたはパスワードが正しくありません';
+
+  @override
+  String get auth_too_many_request_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_too_many_request_exception_message =>
+      'リクエストが多すぎます。しばらくした後もう一度お試しください。';
+
+  @override
+  String get auth_expired_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_expired_exception_message => 'ログイン期限がきれました。もう一度ログインしてください。';
+
+  @override
+  String get auth_expired_exception_action => 'ログアウト';
+
+  @override
+  String get auth_email_already_in_use_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_email_already_in_use_exception_message =>
+      'このメールアドレスは既に利用されています。';
+
+  @override
+  String get auth_weak_password_exception_title => 'ログインエラー';
+
+  @override
+  String get auth_weak_password_exception_message => 'パスワードを強力なものに変更してください。';
+
+  @override
+  String get not_sign_in_exception_title => 'ユーザーが見つかりません';
+
+  @override
+  String get not_sign_in_exception_message => 'ログインできていないため操作に失敗しました。';
+
+  @override
+  String get password_mismatch_exception_title => 'パスワードが一致しません';
+
+  @override
+  String get password_mismatch_exception_message => '新しいパスワードと確認用パスワードが一致しません。';
+
+  @override
+  String get requires_recent_login_exception_title => '再認証が必要です';
+
+  @override
+  String get requires_recent_login_exception_message =>
+      '前回のログインから期間が空いているため再認証が必要です。';
+
+  @override
+  String get requires_recent_login_exception_action => '再認証する';
+
+  @override
+  String get unexpected_exception_title => '予期せぬエラーが発生しました';
+
+  @override
+  String get unexpected_exception_message => '何度か試しても状況変わらない場合は問い合わせてください';
+
+  @override
   String get top_description =>
       'アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。';
 
@@ -73,8 +152,132 @@ class L10nJa extends L10n {
   String get mind_map_list_delete_confirm_delete_button => '削除';
 
   @override
-  String get generic_error_title => 'エラーが発生しました';
+  String get login_title => 'ログイン';
 
   @override
-  String get generic_error_content => 'エラーが発生しました。しばらくした後もう一度お試しください。';
+  String get login_welcome => 'おかえりなさい';
+
+  @override
+  String get login_description => 'アカウントにログインしてマインドマップを保存・管理しましょう';
+
+  @override
+  String get login_or => 'または';
+
+  @override
+  String get login_google_button => 'Googleでログイン';
+
+  @override
+  String get login_guest_button => 'ゲストとして続行';
+
+  @override
+  String get login_text_field_email => 'メールアドレス';
+
+  @override
+  String get login_text_field_password => 'パスワード';
+
+  @override
+  String get login_email_button => 'メールアドレスでログイン';
+
+  @override
+  String get signUp_title => 'アカウント作成';
+
+  @override
+  String get signUp_welcome => '新しいアカウントを作成しましょう';
+
+  @override
+  String get signUp_description => '新しいアカウントを作成してマインドマップを保存・管理しましょう';
+
+  @override
+  String get signUp_email_button => 'アカウントを作成';
+
+  @override
+  String get signUp_error_email => 'アカウントの作成に失敗しました';
+
+  @override
+  String get switch_to_signUp => '新しいアカウントを作成';
+
+  @override
+  String get switch_to_login => '既存のアカウントでログイン';
+
+  @override
+  String get email_verification_title => 'メール認証';
+
+  @override
+  String email_verification_send(Object email) {
+    return '$emailに認証メールを送信します';
+  }
+
+  @override
+  String get email_verification_description =>
+      'メールボックスを確認して、認証リンクをクリックしてください。メールが届かない場合は、迷惑メールフォルダも確認してください。';
+
+  @override
+  String get email_verification_send_button => '認証メールを送信する';
+
+  @override
+  String get email_verification_back => '戻る';
+
+  @override
+  String get email_not_verified => 'メールアドレスが認証されていません';
+
+  @override
+  String get my_page_title => 'マイページ';
+
+  @override
+  String get my_page_account_settings => 'アカウント設定';
+
+  @override
+  String get my_page_change_password => 'パスワードを変更する';
+
+  @override
+  String get my_page_delete_account => 'アカウントを削除する';
+
+  @override
+  String get my_page_change_password_title => 'パスワード変更';
+
+  @override
+  String get my_page_current_password => '現在のパスワード';
+
+  @override
+  String get my_page_new_password => '新しいパスワード';
+
+  @override
+  String get my_page_confirm_password => 'パスワード確認';
+
+  @override
+  String get my_page_change_password_button => 'パスワードを変更';
+
+  @override
+  String get my_page_change_password_success => 'パスワードが変更されました';
+
+  @override
+  String get my_page_change_password_error => 'パスワードの変更に失敗しました';
+
+  @override
+  String get my_page_password_mismatch => 'パスワードが一致しません';
+
+  @override
+  String get my_page_delete_account_title => 'アカウント削除';
+
+  @override
+  String get my_page_delete_account_warning =>
+      'アカウントを削除すると、すべてのデータが失われます。この操作は元に戻せません。';
+
+  @override
+  String get my_page_delete_account_confirm => '本当にアカウントを削除しますか？';
+
+  @override
+  String get my_page_delete_account_button => 'アカウントを削除';
+
+  @override
+  String get my_page_delete_account_success => 'アカウントが削除されました';
+
+  @override
+  String get my_page_logout => 'ログアウト';
+
+  @override
+  String get my_page_logout_confirm => 'ログアウトしますか？';
+
+  @override
+  String get my_page_logout_button => 'ログアウト';
 }

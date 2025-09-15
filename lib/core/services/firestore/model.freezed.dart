@@ -14,6 +14,139 @@ part of 'model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
+mixin _$Env {
+
+@DocumentIdField() String get id;
+/// Create a copy of Env
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EnvCopyWith<Env> get copyWith => _$EnvCopyWithImpl<Env>(this as Env, _$identity);
+
+  /// Serializes this Env to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Env&&(identical(other.id, id) || other.id == id));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'Env(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EnvCopyWith<$Res>  {
+  factory $EnvCopyWith(Env value, $Res Function(Env) _then) = _$EnvCopyWithImpl;
+@useResult
+$Res call({
+@DocumentIdField() String id
+});
+
+
+
+
+}
+/// @nodoc
+class _$EnvCopyWithImpl<$Res>
+    implements $EnvCopyWith<$Res> {
+  _$EnvCopyWithImpl(this._self, this._then);
+
+  final Env _self;
+  final $Res Function(Env) _then;
+
+/// Create a copy of Env
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _Env implements Env {
+  const _Env({@DocumentIdField() required this.id});
+  factory _Env.fromJson(Map<String, dynamic> json) => _$EnvFromJson(json);
+
+@override@DocumentIdField() final  String id;
+
+/// Create a copy of Env
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$EnvCopyWith<_Env> get copyWith => __$EnvCopyWithImpl<_Env>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EnvToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Env&&(identical(other.id, id) || other.id == id));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'Env(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$EnvCopyWith<$Res> implements $EnvCopyWith<$Res> {
+  factory _$EnvCopyWith(_Env value, $Res Function(_Env) _then) = __$EnvCopyWithImpl;
+@override @useResult
+$Res call({
+@DocumentIdField() String id
+});
+
+
+
+
+}
+/// @nodoc
+class __$EnvCopyWithImpl<$Res>
+    implements _$EnvCopyWith<$Res> {
+  __$EnvCopyWithImpl(this._self, this._then);
+
+  final _Env _self;
+  final $Res Function(_Env) _then;
+
+/// Create a copy of Env
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(_Env(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$User {
 
 @DocumentIdField() String get id; List<MindMap> get mindMaps;

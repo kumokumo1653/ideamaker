@@ -23,6 +23,18 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 
       factory: _$MindMapListPageRoute._fromState,
     ),
+    GoRouteData.$route(path: '/login', factory: _$LoginPageRoute._fromState),
+    GoRouteData.$route(
+      path: '/email-verification',
+
+      factory: _$EmailVerificationPageRoute._fromState,
+    ),
+    GoRouteData.$route(path: '/my-page', factory: _$MyPageRoute._fromState),
+    GoRouteData.$route(
+      path: '/change-password',
+
+      factory: _$ChangePasswordPageRoute._fromState,
+    ),
   ],
 );
 
@@ -93,6 +105,89 @@ mixin _$MindMapListPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+mixin _$LoginPageRoute on GoRouteData {
+  static LoginPageRoute _fromState(GoRouterState state) =>
+      const LoginPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/login');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$EmailVerificationPageRoute on GoRouteData {
+  static EmailVerificationPageRoute _fromState(GoRouterState state) =>
+      const EmailVerificationPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/email-verification');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$MyPageRoute on GoRouteData {
+  static MyPageRoute _fromState(GoRouterState state) => const MyPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/my-page');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$ChangePasswordPageRoute on GoRouteData {
+  static ChangePasswordPageRoute _fromState(GoRouterState state) =>
+      const ChangePasswordPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/change-password');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $loadingPageRoute => GoRouteData.$route(
   path: '/loading',
 
@@ -124,7 +219,7 @@ mixin _$LoadingPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'8a81b149e0d072ef656921ab1f956187fd375c0d';
+String _$routerHash() => r'a6e154a0093bd76465c6f70a6feb60eeb9d2f185';
 
 /// See also [router].
 @ProviderFor(router)

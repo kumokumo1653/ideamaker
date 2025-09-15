@@ -3,9 +3,19 @@ import 'package:firestore_odm/firestore_odm.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/entities/entities.dart';
+import 'package:idea_maker/core/exceptions/client_exception.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
 import 'package:idea_maker/core/services/firestore/model.dart';
 import 'package:idea_maker/core/services/firestore/schema.dart';
+import 'package:idea_maker/utils/utils.dart' as utils;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'mind_map_repository_impl.g.dart';
+
+@riverpod
+MindMapRepository mindMapRepository(Ref ref) {
+  return MindMapRepositoryImpl(ref);
+}
 
 class MindMapRepositoryImpl implements MindMapRepository {
   MindMapRepositoryImpl(this.ref);
@@ -17,9 +27,10 @@ class MindMapRepositoryImpl implements MindMapRepository {
     final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
-      throw Exception('User not signed in');
+      throw NotSignInException();
     }
     return odm
+        .env(getEnv(utils.Env.flavor).id)
         .users(user.userId)
         .mindMaps(treeId)
         .get()
@@ -40,9 +51,10 @@ class MindMapRepositoryImpl implements MindMapRepository {
     final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
-      throw Exception('User not signed in');
+      throw NotSignInException();
     }
     return odm
+        .env(getEnv(utils.Env.flavor).id)
         .users(user.userId)
         .mindMaps
         .upsert(
@@ -63,14 +75,19 @@ class MindMapRepositoryImpl implements MindMapRepository {
     final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
-      throw Exception('User not signed in');
+      throw NotSignInException();
     }
-    return odm.users(user.userId).mindMaps(treeId).delete().onError((
-      error,
-      stackTrace,
-    ) {
-      throw Exception('Failed to delete mind map: $error');
-    });
+    return odm
+        .env(getEnv(utils.Env.flavor).id)
+        .users(user.userId)
+        .mindMaps(treeId)
+        .delete()
+        .onError((
+          error,
+          stackTrace,
+        ) {
+          throw Exception('Failed to delete mind map: $error');
+        });
   }
 
   @override
@@ -79,9 +96,13 @@ class MindMapRepositoryImpl implements MindMapRepository {
     final odm = FirestoreODM(appSchema, firestore: firestore);
     final user = ref.read(userStatusControllerProvider).valueOrNull;
     if (user == null) {
-      throw Exception('User not signed in');
+      throw NotSignInException();
     }
-    final mindMaps = await odm.users(user.userId).mindMaps.get();
+    final mindMaps = await odm
+        .env(getEnv(utils.Env.flavor).id)
+        .users(user.userId)
+        .mindMaps
+        .get();
     mindMaps.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
 
     return mindMaps.map((mindMap) {
