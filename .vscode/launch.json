@@ -19,7 +19,8 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": ["--dart-define=FLAVOR=dev"]
+      "args": ["--dart-define=FLAVOR=dev"],
+      "preLaunchTask": "copy-index-dev"
     },
     {
       "name": "ideamaker (profile mode)",
@@ -31,7 +32,8 @@
       "name": "ideamaker (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
-    }
+      "flutterMode": "release",
+      "preLaunchTask": "copy-index-prd"
+    },
   ]
 }

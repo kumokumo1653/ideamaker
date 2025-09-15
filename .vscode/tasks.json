@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "copy-index-dev",
+      "type": "shell",
+      "command": "cp web/index_dev.html web/index.html"
+    },
+    {
+      "label": "copy-index-prd",
+      "type": "shell",
+      "command": "cp web/index_prd.html web/index.html"
+    }
+  ]
+}
