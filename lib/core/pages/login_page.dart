@@ -169,22 +169,6 @@ class LoginPage extends HookConsumerWidget {
                   ),
                 ),
 
-                // Google Sign In Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: OutlinedButton.icon(
-                    onPressed: () async {
-                      if (isLoading) return;
-                      await loginController.signInWithGoogle();
-                    },
-                    icon: const Icon(Icons.login, size: 20),
-                    label: Text(l10n.login_google_button),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
                 // Guest Continue Button
                 SizedBox(
                   width: double.infinity,
