@@ -13,9 +13,10 @@ import "package:flutter/material.dart";
 /// NeutralVariant: #9C8F80
 
 class MyTheme {
-  MyTheme();
+  MyTheme({required this.fontFamily});
   // デフォルトのテキストテーマを利用
   final TextTheme textTheme = ThemeData.light(useMaterial3: true).textTheme;
+  final String fontFamily;
 
   static ColorScheme lightScheme() {
     return const ColorScheme(
@@ -349,11 +350,13 @@ class MyTheme {
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
     useMaterial3: true,
+    fontFamily: fontFamily,
     brightness: colorScheme.brightness,
     colorScheme: colorScheme,
     textTheme: textTheme.apply(
       bodyColor: colorScheme.onSurface,
       displayColor: colorScheme.onSurface,
+      fontFamily: fontFamily,
     ),
     scaffoldBackgroundColor: colorScheme.surface,
     canvasColor: colorScheme.surface,

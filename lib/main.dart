@@ -34,7 +34,7 @@ class MyApp extends ConsumerWidget {
     final l10n = ref.watch(l10nProvider);
     return MaterialApp.router(
       title: l10n.app_title,
-      theme: MyTheme().light(),
+      theme: MyTheme(fontFamily: 'Zen_Kaku_Gothic_New').light(),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
       routerConfig: ref.watch(routerProvider),
