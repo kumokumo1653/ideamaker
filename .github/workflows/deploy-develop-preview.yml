@@ -1,6 +1,7 @@
-name: deploy-develop-preview
+name: deploy-hosting
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - develop
@@ -26,6 +27,9 @@ jobs:
           elif [[ "${{ github.ref_name }}" == "main" ]]; then
             echo "DART_DEFINE=" >> $GITHUB_ENV
             echo "CHANNEL_ID=live" >> $GITHUB_ENV
+          else
+            echo "DART_DEFINE=--dart-define=FLAVOR=dev" >> $GITHUB_ENV
+            echo "CHANNEL_ID=${{github.ref_name}}" >> $GITHUB_ENV
           fi
       - run: printf '%s\n' "$FLUTTER_VERSION"
       - name: Set up Flutter
