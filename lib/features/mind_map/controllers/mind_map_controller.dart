@@ -160,7 +160,7 @@ class MindMapController extends _$MindMapController {
       ).copyWithPrevious(state);
     } on Exception catch (e) {
       state = AsyncValue<MindMapState>.error(
-        Exception('Failed to save mind map: $e'),
+        e,
         StackTrace.current,
       ).copyWithPrevious(state);
     }

@@ -249,6 +249,18 @@ abstract class L10n {
   /// **'再認証する'**
   String get requires_recent_login_exception_action;
 
+  /// No description provided for @output_invalid_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'出力エラー'**
+  String get output_invalid_exception_title;
+
+  /// No description provided for @output_invalid_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'生成AIの出力を読み込めませんでした。再度お試しください。'**
+  String get output_invalid_exception_message;
+
   /// No description provided for @unexpected_exception_title.
   ///
   /// In ja, this message translates to:

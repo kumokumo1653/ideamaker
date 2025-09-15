@@ -20,8 +20,8 @@ Future<void> main() async {
   );
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaEnterpriseProvider(
-      'aaaaa',
-    ), // TODO(ohike): (実際のサイトキー)
+      '6LfLEcorAAAAABAdZcuAQcBipMjWXLQiaIbAoMOb',
+    ),
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );

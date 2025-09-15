@@ -91,6 +91,13 @@ class L10nJa extends L10n {
   String get requires_recent_login_exception_action => '再認証する';
 
   @override
+  String get output_invalid_exception_title => '出力エラー';
+
+  @override
+  String get output_invalid_exception_message =>
+      '生成AIの出力を読み込めませんでした。再度お試しください。';
+
+  @override
   String get unexpected_exception_title => '予期せぬエラーが発生しました';
 
   @override

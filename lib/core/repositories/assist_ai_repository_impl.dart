@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_ai/firebase_ai.dart';
+import 'package:idea_maker/core/exceptions/assist_ai_exception.dart';
 import 'package:idea_maker/core/repositories/assist_ai_repository.dart';
 import 'package:idea_maker/utils/logger.dart';
 
@@ -27,10 +28,11 @@ class AssistAiRepositoryImpl implements AssistAIRepository {
       generationConfig: config,
     );
     if (response.text == null) {
-      throw Exception('Failed to generate associations');
+      throw OutputInvalidException();
     }
     logger.i(response.text);
-    final associations = jsonDecode(response.text!) as List<String>;
+    final associations = (jsonDecode(response.text!) as List<dynamic>)
+        .cast<String>();
     return associations;
   }
 }
