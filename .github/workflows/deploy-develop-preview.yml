@@ -43,13 +43,11 @@ jobs:
       - name: switch index.html
         run: |
           if [[ "${{ github.ref_name }}" == "develop" ]]; then
-            cp ./web/index-dev.html ./web/index.html
+            cp ./web/index_dev.html ./web/index.html
           elif [[ "${{ github.ref_name }}" == "main" ]]; then
-            cp ./web/index-prd.html ./web/index.html
+            cp ./web/index_prd.html ./web/index.html
           else
-            pwd
-            ls web
-            cp ./web/index-dev.html ./web/index.html
+            cp ./web/index_dev.html ./web/index.html
           fi
       - name: Build Flutter web
         run: flutter build web ${{ env.DART_DEFINE }}
