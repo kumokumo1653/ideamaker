@@ -47,6 +47,8 @@ jobs:
           elif [[ "${{ github.ref_name }}" == "main" ]]; then
             cp ./web/index-prd.html ./web/index.html
           else
+            pwd
+            ls web
             cp ./web/index-dev.html ./web/index.html
           fi
       - name: Build Flutter web
