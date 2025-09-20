@@ -42,6 +42,9 @@ class MyPage extends HookConsumerWidget {
         await ref
             .read(deleteAccountControllerProvider.notifier)
             .deleteAccount();
+        if (context.mounted) {
+          const TopPageRoute().go(context);
+        }
       }
     }
 

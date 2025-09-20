@@ -9,7 +9,9 @@
     "Kaku",
     "LTWH",
     "ohike",
-    "riverpod"
+    "riverpod",
+    "Usecase",
+    "usecases"
   ],
   "ignoreWords": [],
   "import": []

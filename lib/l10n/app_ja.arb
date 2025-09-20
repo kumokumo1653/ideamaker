@@ -65,6 +65,7 @@
   "email_verification_send_button": "認証メールを送信する",
   "email_verification_back": "戻る",
   "email_not_verified": "メールアドレスが認証されていません",
+  "email_change_account_button": "別のアカウントでログインする",
   "my_page_title": "マイページ",
   "my_page_account_settings": "アカウント設定",
   "my_page_change_password": "パスワードを変更する",

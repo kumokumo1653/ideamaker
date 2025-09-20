@@ -218,6 +218,9 @@ class L10nJa extends L10n {
   String get email_not_verified => 'メールアドレスが認証されていません';
 
   @override
+  String get email_change_account_button => '別のアカウントでログインする';
+
+  @override
   String get my_page_title => 'マイページ';
 
   @override

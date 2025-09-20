@@ -83,6 +83,19 @@ class EmailVerificationPage extends HookConsumerWidget {
                     child: Text(l10n.email_verification_send_button),
                   ),
                 ),
+                const SizedBox(height: 48),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      if (context.mounted) {
+                        context.go(const LoginPageRoute().location);
+                      }
+                    },
+                    child: Text(l10n.email_change_account_button),
+                  ),
+                ),
               ],
             ),
           );

@@ -15,7 +15,7 @@ class TopPage extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     final userStatus = ref.watch(userStatusControllerProvider);
-    final isGuest = ref.watch(userStatusControllerProvider.notifier).isGuest;
+    final isMember = ref.watch(userStatusControllerProvider.notifier).isMember;
     return AsyncWidget(
       userStatus,
       builder: (userStatus) => Scaffold(
@@ -23,13 +23,7 @@ class TopPage extends HookConsumerWidget {
           backgroundColor: theme.colorScheme.inversePrimary,
           title: Text(l10n.app_title),
           actions: [
-            if (isGuest) ...[
-              TextButton.icon(
-                onPressed: () => const LoginPageRoute().go(context),
-                icon: const Icon(Icons.login),
-                label: Text(l10n.login_title),
-              ),
-            ] else ...[
+            if (isMember) ...[
               // Show email verification warning if not verified
               if (userStatus?.emailVerified == false) ...[
                 Padding(
@@ -63,6 +57,12 @@ class TopPage extends HookConsumerWidget {
                 icon: const Icon(Icons.account_circle),
                 onPressed: () => const MyPageRoute().go(context),
               ),
+            ] else ...[
+              TextButton.icon(
+                onPressed: () => const LoginPageRoute().go(context),
+                icon: const Icon(Icons.login),
+                label: Text(l10n.login_title),
+              ),
             ],
           ],
         ),
@@ -89,7 +89,7 @@ class TopPage extends HookConsumerWidget {
                 onPressed: () => const MindMapPageRoute().go(context),
                 child: Text(l10n.top_go_mind_map),
               ),
-              if (!isGuest) ...[
+              if (isMember) ...[
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: () => const MindMapListPageRoute().go(context),

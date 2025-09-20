@@ -9,10 +9,12 @@ part 'user_repository_impl.g.dart';
 
 @riverpod
 UserRepository userRepository(Ref ref) {
-  return UserRepositoryImpl();
+  return UserRepositoryImpl(ref);
 }
 
 class UserRepositoryImpl implements UserRepository {
+  UserRepositoryImpl(this.ref);
+  final Ref ref;
   @override
   Future<UserStatus> signIn(String email, String password) async {
     final userCredential = await FirebaseAuth.instance

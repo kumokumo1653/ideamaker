@@ -12,4 +12,7 @@ abstract interface class MindMapRepository {
 
   /// Fetches all mind maps for the current user.
   Future<List<MindMapSummary>> fetchMindMapList();
+
+  /// Deletes all mind maps for the current user.
+  Future<void> deleteAllMindMaps();
 }

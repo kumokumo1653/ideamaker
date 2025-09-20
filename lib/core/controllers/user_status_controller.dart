@@ -1,6 +1,7 @@
 import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/exceptions/exceptions.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
+import 'package:idea_maker/core/usecases/delete_account_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_status_controller.g.dart';
@@ -8,8 +9,10 @@ part 'user_status_controller.g.dart';
 @Riverpod(keepAlive: true)
 class UserStatusController extends _$UserStatusController {
   UserRepository get _userRepository => ref.watch(userRepositoryProvider);
-
-  bool get isGuest => state.hasValue && state.value == null;
+  DeleteAccountUsecase get _deleteAccountUsecase =>
+      ref.watch(deleteAccountUsecaseProvider);
+  bool get isMember =>
+      state.hasValue && state.value != null && state.value!.emailVerified;
 
   @override
   Future<UserStatus?> build() async {
@@ -37,18 +40,5 @@ class UserStatusController extends _$UserStatusController {
     await _userRepository.sendEmailVerification().catchErrorAsAppException(
       (_) => AppException(),
     );
-  }
-
-  Future<void> deleteAccount() async {
-    state = const AsyncValue<UserStatus?>.loading().copyWithPrevious(state);
-    final newState = await AsyncValue.guard<UserStatus?>(
-      () => _userRepository
-          .deleteAccount()
-          .then((_) => null)
-          .catchErrorAsAppException(
-            (_) => AppException(),
-          ),
-    );
-    state = newState.copyWithPrevious(state);
   }
 }

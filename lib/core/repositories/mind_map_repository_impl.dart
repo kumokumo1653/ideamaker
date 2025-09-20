@@ -121,4 +121,25 @@ class MindMapRepositoryImpl implements MindMapRepository {
       );
     }).toList();
   }
+
+  @override
+  Future<void> deleteAllMindMaps() {
+    final firestore = FirebaseFirestore.instance;
+    final odm = FirestoreODM(appSchema, firestore: firestore);
+    final user = ref.read(userStatusControllerProvider).valueOrNull;
+    if (user == null) {
+      throw NotSignInException();
+    }
+    return odm
+        .env(getEnv(utils.Env.flavor).id)
+        .users(user.userId)
+        .mindMaps
+        .delete()
+        .onError((
+          error,
+          stackTrace,
+        ) {
+          throw Exception('Failed to delete all mind maps: $error');
+        });
+  }
 }

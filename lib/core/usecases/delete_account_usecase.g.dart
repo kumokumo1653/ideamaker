@@ -1,27 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_status_controller.dart';
+part of 'delete_account_usecase.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userStatusControllerHash() =>
-    r'dd59dea58007f4845e1bd777b4f0388001640b4e';
+String _$deleteAccountUsecaseHash() =>
+    r'fd3e7a1c765e28ce8af8043ea8b1499c3d7a44bd';
 
-/// See also [UserStatusController].
-@ProviderFor(UserStatusController)
-final userStatusControllerProvider =
-    AsyncNotifierProvider<UserStatusController, UserStatus?>.internal(
-      UserStatusController.new,
-      name: r'userStatusControllerProvider',
+/// See also [deleteAccountUsecase].
+@ProviderFor(deleteAccountUsecase)
+final deleteAccountUsecaseProvider =
+    AutoDisposeProvider<DeleteAccountUsecase>.internal(
+      deleteAccountUsecase,
+      name: r'deleteAccountUsecaseProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$userStatusControllerHash,
+          : _$deleteAccountUsecaseHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$UserStatusController = AsyncNotifier<UserStatus?>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DeleteAccountUsecaseRef = AutoDisposeProviderRef<DeleteAccountUsecase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

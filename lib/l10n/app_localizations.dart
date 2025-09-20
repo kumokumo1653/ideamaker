@@ -483,6 +483,12 @@ abstract class L10n {
   /// **'メールアドレスが認証されていません'**
   String get email_not_verified;
 
+  /// No description provided for @email_change_account_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'別のアカウントでログインする'**
+  String get email_change_account_button;
+
   /// No description provided for @my_page_title.
   ///
   /// In ja, this message translates to:
