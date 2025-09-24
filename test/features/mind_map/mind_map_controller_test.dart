@@ -23,6 +23,11 @@ class MockMindMapRepository implements MindMapRepository {
   Future<void> deleteMindMap(String treeId) {
     return Future.value();
   }
+
+  @override
+  Future<void> deleteAllMindMaps() {
+    return Future.value();
+  }
 }
 
 void main() {
@@ -72,14 +77,15 @@ void main() {
 
     test('存在しないノードIDでchangeTitleを呼ぶと例外が発生する', () async {
       await container.read(mindMapControllerProvider(null).future);
-      final controller = container.read(
-        mindMapControllerProvider(null).notifier,
-      );
+      container
+          .read(
+            mindMapControllerProvider(null).notifier,
+          )
+          .changeTitle('存在しないID', 'タイトル');
 
-      expect(
-        () => controller.changeTitle('存在しないID', 'タイトル'),
-        throwsA(isA<Exception>()),
-      );
+      final updatedAsyncState = container.read(mindMapControllerProvider(null));
+      final updatedState = updatedAsyncState.error!;
+      expect(updatedState, isA<Exception>());
     });
 
     test('addNodeメソッドで子ノードを追加できる', () async {
@@ -112,14 +118,15 @@ void main() {
 
     test('存在しない親IDでaddNodeを呼ぶと例外が発生する', () async {
       await container.read(mindMapControllerProvider(null).future);
-      final controller = container.read(
-        mindMapControllerProvider(null).notifier,
-      );
+      container
+          .read(
+            mindMapControllerProvider(null).notifier,
+          )
+          .addNode('存在しない親ID');
 
-      expect(
-        () => controller.addNode('存在しない親ID'),
-        throwsA(isA<Exception>()),
-      );
+      final updatedAsyncState = container.read(mindMapControllerProvider(null));
+      final updatedState = updatedAsyncState.error!;
+      expect(updatedState, isA<Exception>());
     });
 
     test('removeNodeメソッドでノードを削除できる', () async {
@@ -160,14 +167,15 @@ void main() {
 
     test('存在しないノードIDでremoveNodeを呼ぶと例外が発生する', () async {
       await container.read(mindMapControllerProvider(null).future);
-      final controller = container.read(
-        mindMapControllerProvider(null).notifier,
-      );
+      container
+          .read(
+            mindMapControllerProvider(null).notifier,
+          )
+          .removeNode('存在しないID');
+      final updatedAsyncState = container.read(mindMapControllerProvider(null));
+      final updatedState = updatedAsyncState.error!;
 
-      expect(
-        () => controller.removeNode('存在しないID'),
-        throwsA(isA<Exception>()),
-      );
+      expect(updatedState, isA<Exception>());
     });
 
     test('複数の子ノードがある場合, 任意の子ノードを削除できる', () async {
