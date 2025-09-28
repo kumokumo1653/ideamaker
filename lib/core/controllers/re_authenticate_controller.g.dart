@@ -7,7 +7,7 @@ part of 're_authenticate_controller.dart';
 // **************************************************************************
 
 String _$reAuthenticateControllerHash() =>
-    r'b33ae8aa8d6a8d9ad89efe2ecfc244e4bfafc2ec';
+    r'7978e364b4d6031711a85d7ca10824fcc7a2d39e';
 
 /// See also [ReAuthenticateController].
 @ProviderFor(ReAuthenticateController)

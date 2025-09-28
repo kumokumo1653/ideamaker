@@ -6,7 +6,11 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$topPageRoute, $loadingPageRoute];
+List<RouteBase> get $appRoutes => [
+  $topPageRoute,
+  $loadingPageRoute,
+  $forgotPasswordPageRoute,
+];
 
 RouteBase get $topPageRoute => GoRouteData.$route(
   path: '/',
@@ -241,11 +245,38 @@ mixin _$LoadingPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $forgotPasswordPageRoute => GoRouteData.$route(
+  path: '/forgot-password',
+
+  factory: _$ForgotPasswordPageRoute._fromState,
+);
+
+mixin _$ForgotPasswordPageRoute on GoRouteData {
+  static ForgotPasswordPageRoute _fromState(GoRouterState state) =>
+      const ForgotPasswordPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/forgot-password');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'a6e154a0093bd76465c6f70a6feb60eeb9d2f185';
+String _$routerHash() => r'072d2d5ba11dd9ef63f35bd876b1f7166de8a9c4';
 
 /// See also [router].
 @ProviderFor(router)

@@ -22,6 +22,7 @@ GoRouter router(Ref ref) {
         const TopPageRoute().location,
         const MindMapPageRoute().location,
         const LoginPageRoute().location,
+        const ForgotPasswordPageRoute().location,
         const EmailVerificationPageRoute().location,
       ];
 
@@ -57,6 +58,7 @@ GoRouter router(Ref ref) {
     TypedGoRoute<MyPageRoute>(path: '/my-page'),
     TypedGoRoute<ChangePasswordPageRoute>(path: '/change-password'),
     TypedGoRoute<ReAuthenticatePageRoute>(path: '/re-authenticate'),
+    TypedGoRoute<ForgotPasswordPageRoute>(path: '/forgot-password'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
@@ -105,6 +107,16 @@ class LoginPageRoute extends GoRouteData with _$LoginPageRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginPage();
+  }
+}
+
+class ForgotPasswordPageRoute extends GoRouteData
+    with _$ForgotPasswordPageRoute {
+  const ForgotPasswordPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ForgotPasswordPage();
   }
 }
 

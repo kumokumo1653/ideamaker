@@ -18,4 +18,6 @@ abstract interface class UserRepository {
   Future<void> deleteAccount();
 
   Future<UserStatus> reAuthenticateWithPassword(String password);
+
+  Future<void> sendPasswordResetEmail(String email);
 }

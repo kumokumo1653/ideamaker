@@ -117,7 +117,23 @@ class LoginPage extends HookConsumerWidget {
                           prefixIcon: const Icon(Icons.lock_outline),
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
+
+                      // Forgot Password Link (only show in login mode)
+                      if (viewMode.value == ViewMode.login)
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              context.go(
+                                const ForgotPasswordPageRoute().location,
+                              );
+                            },
+                            child: Text(l10n.login_forgot_password),
+                          ),
+                        ),
+
+                      const SizedBox(height: 8),
 
                       // Email Sign In/Sign Up Button
                       SizedBox(

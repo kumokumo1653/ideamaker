@@ -60,4 +60,10 @@ class LoginController extends _$LoginController {
 
     state = newState.copyWithPrevious(state);
   }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _userRepository
+        .sendPasswordResetEmail(email)
+        .catchErrorAsAppException(AuthException.getAuthException);
+  }
 }

@@ -10,11 +10,14 @@ class AuthException extends AppException {
   factory AuthException.fromFirebaseAuthException(FirebaseAuthException e) {
     switch (e.code) {
       case 'invalid-email':
+      case 'missing-email':
       case 'user-disabled':
       case 'user-not-found':
       case 'wrong-password':
       case 'invalid-credential':
       case 'user-mismatch':
+      case 'auth/invalid_email':
+      case 'auth/user-not-found':
         return AuthIncorrectCredentialException();
       case 'too-many-requests':
         return AuthTooManyRequestException();
@@ -26,6 +29,10 @@ class AuthException extends AppException {
         return AuthWeakPasswordException();
       case 'requires-recent-login':
         return AuthRequiresRecentLoginException();
+      case 'auth/missing-continue-uri':
+      case 'auth/invalid-continue-uri':
+      case 'auth/unauthorized-continue-uri':
+        return AuthInvalidContinueUriException();
 
       default:
         throw Exception();
@@ -134,4 +141,13 @@ class AuthRequiresRecentLoginException extends AuthException {
       },
     ),
   ];
+}
+
+class AuthInvalidContinueUriException extends AuthException {
+  AuthInvalidContinueUriException() : super._();
+
+  @override
+  String title(L10n l10n) => l10n.auth_invalid_continue_uri_exception_title;
+  @override
+  String message(L10n l10n) => l10n.auth_invalid_continue_uri_exception_message;
 }

@@ -91,6 +91,13 @@ class L10nJa extends L10n {
   String get requires_recent_login_exception_action => '再認証する';
 
   @override
+  String get auth_invalid_continue_uri_exception_title => 'URLエラー';
+
+  @override
+  String get auth_invalid_continue_uri_exception_message =>
+      '不正なURLが指定されました。もう一度メールをご確認ください。';
+
+  @override
   String get unexpected_exception_title => '予期せぬエラーが発生しました';
 
   @override
@@ -174,6 +181,18 @@ class L10nJa extends L10n {
 
   @override
   String get login_email_button => 'メールアドレスでログイン';
+
+  @override
+  String get login_forgot_password => 'パスワードを忘れた方はこちら';
+
+  @override
+  String get forgot_password_title => 'パスワードリセット';
+
+  @override
+  String get forgot_password_description => '登録されたメールアドレスにパスワードリセット用のリンクを送信します';
+
+  @override
+  String get forgot_password_send_button => 'リセットメールを送信';
 
   @override
   String get signUp_title => 'アカウント作成';

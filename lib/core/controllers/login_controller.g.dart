@@ -6,7 +6,7 @@ part of 'login_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginControllerHash() => r'9ce7f0ca3e48a03c643ce596eb2f6ffbaedf468d';
+String _$loginControllerHash() => r'cd9696f80e062aaa6d50621b68449de567eb15be';
 
 /// login state controller
 /// true: logged in successfully

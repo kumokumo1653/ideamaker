@@ -148,4 +148,9 @@ class UserRepositoryImpl implements UserRepository {
       email: user.email,
     );
   }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 }

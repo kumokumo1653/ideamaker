@@ -249,6 +249,18 @@ abstract class L10n {
   /// **'再認証する'**
   String get requires_recent_login_exception_action;
 
+  /// No description provided for @auth_invalid_continue_uri_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'URLエラー'**
+  String get auth_invalid_continue_uri_exception_title;
+
+  /// No description provided for @auth_invalid_continue_uri_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'不正なURLが指定されました。もう一度メールをご確認ください。'**
+  String get auth_invalid_continue_uri_exception_message;
+
   /// No description provided for @unexpected_exception_title.
   ///
   /// In ja, this message translates to:
@@ -404,6 +416,30 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'メールアドレスでログイン'**
   String get login_email_button;
+
+  /// No description provided for @login_forgot_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを忘れた方はこちら'**
+  String get login_forgot_password;
+
+  /// No description provided for @forgot_password_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードリセット'**
+  String get forgot_password_title;
+
+  /// No description provided for @forgot_password_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'登録されたメールアドレスにパスワードリセット用のリンクを送信します'**
+  String get forgot_password_description;
+
+  /// No description provided for @forgot_password_send_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'リセットメールを送信'**
+  String get forgot_password_send_button;
 
   /// No description provided for @signUp_title.
   ///
