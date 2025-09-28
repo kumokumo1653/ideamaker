@@ -56,6 +56,7 @@ GoRouter router(Ref ref) {
     TypedGoRoute<EmailVerificationPageRoute>(path: '/email-verification'),
     TypedGoRoute<MyPageRoute>(path: '/my-page'),
     TypedGoRoute<ChangePasswordPageRoute>(path: '/change-password'),
+    TypedGoRoute<ReAuthenticatePageRoute>(path: '/re-authenticate'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
@@ -133,5 +134,15 @@ class ChangePasswordPageRoute extends GoRouteData
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ChangePasswordPage();
+  }
+}
+
+class ReAuthenticatePageRoute extends GoRouteData
+    with _$ReAuthenticatePageRoute {
+  const ReAuthenticatePageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ReAuthenticatePage();
   }
 }

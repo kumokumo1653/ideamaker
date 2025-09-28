@@ -14,6 +14,7 @@ class AuthException extends AppException {
       case 'user-not-found':
       case 'wrong-password':
       case 'invalid-credential':
+      case 'user-mismatch':
         return AuthIncorrectCredentialException();
       case 'too-many-requests':
         return AuthTooManyRequestException();
@@ -23,6 +24,9 @@ class AuthException extends AppException {
         return AuthEmailAlreadyInUseException();
       case 'weak-password':
         return AuthWeakPasswordException();
+      case 'requires-recent-login':
+        return AuthRequiresRecentLoginException();
+
       default:
         throw Exception();
     }
@@ -118,7 +122,14 @@ class AuthRequiresRecentLoginException extends AuthException {
       label: (L10n l10n) => l10n.requires_recent_login_exception_action,
       action: (context, ref) async {
         if (context.mounted) {
-          context.go(const LoginPageRoute().location);
+          final reAuth =
+              await context.push(const ReAuthenticatePageRoute().location)
+                  as bool?;
+          if (reAuth ?? false) {
+            if (context.mounted) {
+              context.pop();
+            }
+          }
         }
       },
     ),

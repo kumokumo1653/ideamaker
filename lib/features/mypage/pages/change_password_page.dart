@@ -13,9 +13,11 @@ class ChangePasswordPage extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
     final theme = Theme.of(context);
 
+    final currentPasswordController = useTextEditingController();
     final newPasswordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
 
+    final currentPasswordVisible = useState(false);
     final newPasswordVisible = useState(false);
     final confirmPasswordVisible = useState(false);
 
@@ -25,6 +27,7 @@ class ChangePasswordPage extends HookConsumerWidget {
       await ref
           .read(changePasswordControllerProvider.notifier)
           .changePassword(
+            currentPassword: currentPasswordController.text,
             newPassword: newPasswordController.text,
             confirmPassword: confirmPasswordController.text,
           );
@@ -41,6 +44,23 @@ class ChangePasswordPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
+              TextFormField(
+                controller: currentPasswordController,
+                obscureText: !currentPasswordVisible.value,
+                decoration: InputDecoration(
+                  labelText: l10n.my_page_current_password,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      currentPasswordVisible.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () => currentPasswordVisible.value =
+                        !currentPasswordVisible.value,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: newPasswordController,
                 obscureText: !newPasswordVisible.value,

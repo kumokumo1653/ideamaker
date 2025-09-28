@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/widgets/async_widget.dart';
@@ -42,9 +43,6 @@ class MyPage extends HookConsumerWidget {
         await ref
             .read(deleteAccountControllerProvider.notifier)
             .deleteAccount();
-        if (context.mounted) {
-          const TopPageRoute().go(context);
-        }
       }
     }
 
@@ -75,6 +73,12 @@ class MyPage extends HookConsumerWidget {
       }
     }
 
+    ref.listen(deleteAccountControllerProvider, (_, result) {
+      final isDeleted = result.valueOrNull ?? false;
+      if (isDeleted) {
+        context.go(const TopPageRoute().location);
+      }
+    });
     return AsyncWidget2(
       userStatus,
       deleteAccountState,

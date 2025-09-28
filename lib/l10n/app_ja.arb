@@ -85,5 +85,10 @@
   "my_page_delete_account_success": "アカウントが削除されました",
   "my_page_logout": "ログアウト",
   "my_page_logout_confirm": "ログアウトしますか？",
-  "my_page_logout_button": "ログアウト"
+  "my_page_logout_button": "ログアウト",
+  "re_authenticate_title": "再認証",
+  "re_authenticate_description": "続行するには現在のパスワードを入力してください",
+  "re_authenticate_password_label": "現在のパスワード",
+  "re_authenticate_button": "認証する",
+  "re_authenticate_cancel": "キャンセル"
 }

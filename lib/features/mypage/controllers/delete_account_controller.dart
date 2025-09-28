@@ -22,8 +22,8 @@ class DeleteAccountController extends _$DeleteAccountController {
           await _deleteAccountUsecase();
           await _userStatusController.logout();
           return true;
-        } on Exception catch (_) {
-          throw AppException();
+        } on Exception catch (error) {
+          throw AuthException.getAuthException(error);
         }
       },
     );

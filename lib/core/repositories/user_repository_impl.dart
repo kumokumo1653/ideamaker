@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/exceptions/client_exception.dart';
+import 'package:idea_maker/core/exceptions/exceptions.dart';
 import 'package:idea_maker/core/repositories/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -111,6 +112,34 @@ class UserRepositoryImpl implements UserRepository {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       return null;
+    }
+    return UserStatus(
+      userId: user.uid,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      email: user.email,
+    );
+  }
+
+  @override
+  Future<UserStatus> reAuthenticateWithPassword(String password) async {
+    final email = FirebaseAuth.instance.currentUser?.email;
+    if (email == null) {
+      throw NotSignInException();
+    }
+    final credential = EmailAuthProvider.credential(
+      email: email,
+      password: password,
+    );
+
+    final userCredential = await FirebaseAuth.instance.currentUser
+        ?.reauthenticateWithCredential(
+          credential,
+        );
+
+    final user = userCredential?.user;
+    if (user == null) {
+      throw NotSignInException();
     }
     return UserStatus(
       userId: user.uid,

@@ -11,15 +11,26 @@ class ChangePasswordController extends _$ChangePasswordController {
   FutureOr<bool> build() => false;
 
   Future<void> changePassword({
+    required String currentPassword,
     required String newPassword,
     required String confirmPassword,
   }) async {
     state = const AsyncValue<bool>.loading().copyWithPrevious(state);
+
     if (newPassword != confirmPassword) {
       state = AsyncValue<bool>.error(
         PasswordMismatchException(),
         StackTrace.current,
       ).copyWithPrevious(state);
+    }
+    try {
+      await _userRepository.reAuthenticateWithPassword(currentPassword);
+    } on AppException catch (e) {
+      state = AsyncValue<bool>.error(
+        e,
+        StackTrace.current,
+      ).copyWithPrevious(state);
+      return;
     }
     final newState = await AsyncValue.guard<bool>(
       () => _userRepository

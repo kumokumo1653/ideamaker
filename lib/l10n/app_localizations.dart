@@ -608,6 +608,36 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'ログアウト'**
   String get my_page_logout_button;
+
+  /// No description provided for @re_authenticate_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'再認証'**
+  String get re_authenticate_title;
+
+  /// No description provided for @re_authenticate_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'続行するには現在のパスワードを入力してください'**
+  String get re_authenticate_description;
+
+  /// No description provided for @re_authenticate_password_label.
+  ///
+  /// In ja, this message translates to:
+  /// **'現在のパスワード'**
+  String get re_authenticate_password_label;
+
+  /// No description provided for @re_authenticate_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'認証する'**
+  String get re_authenticate_button;
+
+  /// No description provided for @re_authenticate_cancel.
+  ///
+  /// In ja, this message translates to:
+  /// **'キャンセル'**
+  String get re_authenticate_cancel;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -1,7 +1,6 @@
 import 'package:idea_maker/core/entities/entities.dart';
 import 'package:idea_maker/core/exceptions/exceptions.dart';
 import 'package:idea_maker/core/repositories/repositories.dart';
-import 'package:idea_maker/core/usecases/delete_account_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_status_controller.g.dart';
@@ -9,8 +8,6 @@ part 'user_status_controller.g.dart';
 @Riverpod(keepAlive: true)
 class UserStatusController extends _$UserStatusController {
   UserRepository get _userRepository => ref.watch(userRepositoryProvider);
-  DeleteAccountUsecase get _deleteAccountUsecase =>
-      ref.watch(deleteAccountUsecaseProvider);
   bool get isMember =>
       state.hasValue && state.value != null && state.value!.emailVerified;
 

@@ -280,4 +280,19 @@ class L10nJa extends L10n {
 
   @override
   String get my_page_logout_button => 'ログアウト';
+
+  @override
+  String get re_authenticate_title => '再認証';
+
+  @override
+  String get re_authenticate_description => '続行するには現在のパスワードを入力してください';
+
+  @override
+  String get re_authenticate_password_label => '現在のパスワード';
+
+  @override
+  String get re_authenticate_button => '認証する';
+
+  @override
+  String get re_authenticate_cancel => 'キャンセル';
 }

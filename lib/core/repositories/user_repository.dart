@@ -16,4 +16,6 @@ abstract interface class UserRepository {
   Future<void> changePassword(String newPassword);
 
   Future<void> deleteAccount();
+
+  Future<UserStatus> reAuthenticateWithPassword(String password);
 }

@@ -35,6 +35,11 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 
       factory: _$ChangePasswordPageRoute._fromState,
     ),
+    GoRouteData.$route(
+      path: '/re-authenticate',
+
+      factory: _$ReAuthenticatePageRoute._fromState,
+    ),
   ],
 );
 
@@ -173,6 +178,27 @@ mixin _$ChangePasswordPageRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/change-password');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$ReAuthenticatePageRoute on GoRouteData {
+  static ReAuthenticatePageRoute _fromState(GoRouterState state) =>
+      const ReAuthenticatePageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/re-authenticate');
 
   @override
   void go(BuildContext context) => context.go(location);
