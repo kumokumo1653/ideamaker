@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:idea_maker/core/controllers/user_status_controller.dart';
 import 'package:idea_maker/core/pages/pages.dart';
 import 'package:idea_maker/features/mind_map/pages/pages.dart';
 import 'package:idea_maker/features/mypage/pages/pages.dart';
+import 'package:idea_maker/routers/redirect_controller.dart';
+import 'package:idea_maker/routers/stream_listenable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,36 +16,12 @@ GoRouter router(Ref ref) {
   return GoRouter(
     debugLogDiagnostics: true,
     initialLocation: const TopPageRoute().location,
+    refreshListenable: StreamListenable(
+      ref.read(redirectControllerProvider.notifier).stream,
+    ),
     routes: $appRoutes,
-    redirect: (context, state) {
-      final userStatusAsync = ref.watch(userStatusControllerProvider);
-      final isGuestNavigableRoutes = [
-        const TopPageRoute().location,
-        const MindMapPageRoute().location,
-        const LoginPageRoute().location,
-        const ForgotPasswordPageRoute().location,
-        const EmailVerificationPageRoute().location,
-      ];
-
-      if (userStatusAsync.isLoading) {
-        return const LoadingPageRoute().location;
-      }
-
-      if (userStatusAsync.hasError) {
-        return const LoginPageRoute().location;
-      }
-
-      final userStatus = userStatusAsync.value;
-
-      if (userStatus == null || !userStatus.emailVerified) {
-        if (isGuestNavigableRoutes.contains(state.matchedLocation)) {
-          return null;
-        }
-        return const TopPageRoute().location;
-      }
-
-      return null;
-    },
+    redirect: (context, state) =>
+        ref.read(redirectControllerProvider.notifier).redirect(state),
   );
 }
 

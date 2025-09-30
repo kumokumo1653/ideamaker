@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'forgot_password_controller.dart';
+part of 'redirect_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$forgotPasswordControllerHash() =>
-    r'8f19cafb82e14f32af416302e4b9e1d5e18b8da8';
+String _$redirectControllerHash() =>
+    r'f8113339646f8d257ed6eeaf1f34f93f2ef11cc4';
 
-/// See also [ForgotPasswordController].
-@ProviderFor(ForgotPasswordController)
-final forgotPasswordControllerProvider =
-    AutoDisposeAsyncNotifierProvider<ForgotPasswordController, bool>.internal(
-      ForgotPasswordController.new,
-      name: r'forgotPasswordControllerProvider',
+/// See also [RedirectController].
+@ProviderFor(RedirectController)
+final redirectControllerProvider =
+    NotifierProvider<RedirectController, RedirectState>.internal(
+      RedirectController.new,
+      name: r'redirectControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$forgotPasswordControllerHash,
+          : _$redirectControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$ForgotPasswordController = AutoDisposeAsyncNotifier<bool>;
+typedef _$RedirectController = Notifier<RedirectState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
