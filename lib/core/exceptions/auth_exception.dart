@@ -33,6 +33,9 @@ class AuthException extends AppException {
       case 'auth/invalid-continue-uri':
       case 'auth/unauthorized-continue-uri':
         return AuthInvalidContinueUriException();
+      case 'expired-action-code':
+      case 'invalid-action-code':
+        return AuthInvalidActionCodeException();
 
       default:
         throw Exception();
@@ -150,4 +153,23 @@ class AuthInvalidContinueUriException extends AuthException {
   String title(L10n l10n) => l10n.auth_invalid_continue_uri_exception_title;
   @override
   String message(L10n l10n) => l10n.auth_invalid_continue_uri_exception_message;
+}
+
+class AuthInvalidActionCodeException extends AuthException {
+  AuthInvalidActionCodeException() : super._();
+
+  @override
+  String title(L10n l10n) => l10n.auth_invalid_action_code_exception_title;
+  @override
+  String message(L10n l10n) => l10n.auth_invalid_action_code_exception_message;
+
+  @override
+  List<Action> get actions => [
+    Action(
+      label: (L10n l10n) => l10n.common_go_top_button,
+      action: (context, ref) {
+        context.go(const TopPageRoute().location);
+      },
+    ),
+  ];
 }

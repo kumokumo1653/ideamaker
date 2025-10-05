@@ -1,10 +1,15 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:idea_maker/core/controllers/controllers.dart';
+import 'package:idea_maker/core/entities/firebase_mail_mode.dart';
+import 'package:idea_maker/core/exceptions/exceptions.dart';
+import 'package:idea_maker/core/widgets/widgets.dart';
 import 'package:idea_maker/routers/redirect_state.dart';
 import 'package:idea_maker/routers/router.dart';
-import 'package:idea_maker/utils/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'redirect_controller.g.dart';
@@ -36,7 +41,10 @@ class RedirectController extends _$RedirectController {
     return initialState;
   }
 
-  Future<String?> redirect(GoRouterState routerState) async {
+  Future<String?> redirect(
+    BuildContext context,
+    GoRouterState routerState,
+  ) async {
     final isGuestNavigableRoutes = [
       const TopPageRoute().location,
       const MindMapPageRoute().location,
@@ -52,9 +60,23 @@ class RedirectController extends _$RedirectController {
     if (state.launchStatus.hasError) {
       return const LoginPageRoute().location;
     }
-    // redirect for firebase continue url
-    logger.d(routerState.matchedLocation);
 
+    // firebase Continue url redirect handling
+    final mode = FirebaseMailMode.values.firstWhereOrNull(
+      (e) => e.name == Uri.base.queryParameters['mode'],
+    );
+    final oobCode = Uri.base.queryParameters['oobCode'];
+    if (mode != null && oobCode != null) {
+      return switch (mode) {
+        FirebaseMailMode.verifyEmail => _handleOnVerifyEmail(context, oobCode),
+
+        FirebaseMailMode.resetPassword => ResetPasswordPageRoute(
+          oobCode: oobCode,
+        ).location,
+        // TODO(ohike): Handle this case.
+        FirebaseMailMode.recoverEmail => throw UnimplementedError(),
+      };
+    }
     if (!state.userAuthenticated) {
       if (isGuestNavigableRoutes.contains(routerState.matchedLocation)) {
         return null;
@@ -62,6 +84,23 @@ class RedirectController extends _$RedirectController {
       return const TopPageRoute().location;
     }
 
+    return null;
+  }
+
+  String? _handleOnVerifyEmail(BuildContext context, String oobCode) {
+    try {
+      FirebaseAuth.instance.applyActionCode(oobCode);
+      // TODO(ohike): Show a snackbar
+    } on Exception catch (e, stackTrace) {
+      final exception = AuthException.getAuthException(e);
+      showDialog<void>(
+        context: context,
+        builder: (_) => ErrorDialog(
+          error: exception,
+          stackTrace: stackTrace,
+        ),
+      );
+    }
     return null;
   }
 }

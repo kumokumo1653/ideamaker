@@ -28,6 +28,8 @@
   "requires_recent_login_exception_action": "再認証する",
   "auth_invalid_continue_uri_exception_title" : "URLエラー",
   "auth_invalid_continue_uri_exception_message" : "不正なURLが指定されました。もう一度メールをご確認ください。",
+  "auth_invalid_action_code_exception_title" : "コードエラー",
+  "auth_invalid_action_code_exception_message" : "不正なコードが指定されました。もう一度メール送信をお試しください。",
   "unexpected_exception_title": "予期せぬエラーが発生しました",
   "unexpected_exception_message": "何度か試しても状況変わらない場合は問い合わせてください",
   "top_description": "アイディアメーカーはマインドマップをベースにアイディアを形にするお手伝いするサービスです。\nAIの力を使いながらフラッシュアイディアを具体的なプランを持たせましょう。",
@@ -96,5 +98,10 @@
   "re_authenticate_description": "続行するには現在のパスワードを入力してください",
   "re_authenticate_password_label": "現在のパスワード",
   "re_authenticate_button": "認証する",
-  "re_authenticate_cancel": "キャンセル"
+  "re_authenticate_cancel": "キャンセル",
+  "reset_password_title": "パスワード再設定",
+  "reset_password_description": "新しいパスワードを入力してください",
+  "reset_password_new_password": "新しいパスワード",
+  "reset_password_confirm_password": "新しいパスワード（確認）",
+  "reset_password_button": "パスワードを更新"
 }

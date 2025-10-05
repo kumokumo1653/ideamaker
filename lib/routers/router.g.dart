@@ -45,14 +45,30 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 
       factory: _$ForgotPasswordPageRoute._fromState,
     ),
+    GoRouteData.$route(
+      path: '/reset-password',
+
+      factory: _$ResetPasswordPageRoute._fromState,
+    ),
   ],
 );
 
 mixin _$TopPageRoute on GoRouteData {
-  static TopPageRoute _fromState(GoRouterState state) => const TopPageRoute();
+  static TopPageRoute _fromState(GoRouterState state) => TopPageRoute(
+    mode: state.uri.queryParameters['mode'],
+    oodCode: state.uri.queryParameters['ood-code'],
+  );
+
+  TopPageRoute get _self => this as TopPageRoute;
 
   @override
-  String get location => GoRouteData.$location('/');
+  String get location => GoRouteData.$location(
+    '/',
+    queryParams: {
+      if (_self.mode != null) 'mode': _self.mode,
+      if (_self.oodCode != null) 'ood-code': _self.oodCode,
+    },
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -240,6 +256,32 @@ mixin _$ForgotPasswordPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+mixin _$ResetPasswordPageRoute on GoRouteData {
+  static ResetPasswordPageRoute _fromState(GoRouterState state) =>
+      ResetPasswordPageRoute(oobCode: state.uri.queryParameters['oob-code']!);
+
+  ResetPasswordPageRoute get _self => this as ResetPasswordPageRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/reset-password',
+    queryParams: {'oob-code': _self.oobCode},
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $loadingPageRoute => GoRouteData.$route(
   path: '/loading',
 
@@ -271,7 +313,7 @@ mixin _$LoadingPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'9f7a57a49ab3d03ca823264ed4a2fb0c18c1b662';
+String _$routerHash() => r'58a82a0be5211bfd9d5c4df8d9d0cbfbcec8800f';
 
 /// See also [router].
 @ProviderFor(router)

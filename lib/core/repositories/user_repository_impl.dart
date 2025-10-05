@@ -153,4 +153,20 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> sendPasswordResetEmail(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
+
+  @override
+  Future<void> resetPassword(
+    String oobCode,
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    if (newPassword != confirmPassword) {
+      throw PasswordMismatchException();
+    }
+    await FirebaseAuth.instance.verifyPasswordResetCode(oobCode);
+    await FirebaseAuth.instance.confirmPasswordReset(
+      code: oobCode,
+      newPassword: newPassword,
+    );
+  }
 }

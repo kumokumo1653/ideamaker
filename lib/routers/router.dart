@@ -21,7 +21,7 @@ GoRouter router(Ref ref) {
     ),
     routes: $appRoutes,
     redirect: (context, state) =>
-        ref.read(redirectControllerProvider.notifier).redirect(state),
+        ref.read(redirectControllerProvider.notifier).redirect(context, state),
   );
 }
 
@@ -36,11 +36,14 @@ GoRouter router(Ref ref) {
     TypedGoRoute<ChangePasswordPageRoute>(path: '/change-password'),
     TypedGoRoute<ReAuthenticatePageRoute>(path: '/re-authenticate'),
     TypedGoRoute<ForgotPasswordPageRoute>(path: '/forgot-password'),
+    TypedGoRoute<ResetPasswordPageRoute>(path: '/reset-password'),
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
-  const TopPageRoute();
+  const TopPageRoute({this.mode, this.oodCode});
 
+  final String? mode;
+  final String? oodCode;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TopPage();
@@ -94,6 +97,16 @@ class ForgotPasswordPageRoute extends GoRouteData
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ForgotPasswordPage();
+  }
+}
+
+class ResetPasswordPageRoute extends GoRouteData with _$ResetPasswordPageRoute {
+  const ResetPasswordPageRoute({required this.oobCode});
+  final String oobCode;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ResetPasswordPage(oobCode: oobCode);
   }
 }
 

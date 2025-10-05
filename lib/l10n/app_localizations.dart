@@ -261,6 +261,18 @@ abstract class L10n {
   /// **'不正なURLが指定されました。もう一度メールをご確認ください。'**
   String get auth_invalid_continue_uri_exception_message;
 
+  /// No description provided for @auth_invalid_action_code_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'コードエラー'**
+  String get auth_invalid_action_code_exception_title;
+
+  /// No description provided for @auth_invalid_action_code_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'不正なコードが指定されました。もう一度メール送信をお試しください。'**
+  String get auth_invalid_action_code_exception_message;
+
   /// No description provided for @unexpected_exception_title.
   ///
   /// In ja, this message translates to:
@@ -674,6 +686,36 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'キャンセル'**
   String get re_authenticate_cancel;
+
+  /// No description provided for @reset_password_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワード再設定'**
+  String get reset_password_title;
+
+  /// No description provided for @reset_password_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワードを入力してください'**
+  String get reset_password_description;
+
+  /// No description provided for @reset_password_new_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワード'**
+  String get reset_password_new_password;
+
+  /// No description provided for @reset_password_confirm_password.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワード（確認）'**
+  String get reset_password_confirm_password;
+
+  /// No description provided for @reset_password_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードを更新'**
+  String get reset_password_button;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

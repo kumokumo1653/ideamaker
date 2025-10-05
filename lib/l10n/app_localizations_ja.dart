@@ -98,6 +98,13 @@ class L10nJa extends L10n {
       '不正なURLが指定されました。もう一度メールをご確認ください。';
 
   @override
+  String get auth_invalid_action_code_exception_title => 'コードエラー';
+
+  @override
+  String get auth_invalid_action_code_exception_message =>
+      '不正なコードが指定されました。もう一度メール送信をお試しください。';
+
+  @override
   String get unexpected_exception_title => '予期せぬエラーが発生しました';
 
   @override
@@ -314,4 +321,19 @@ class L10nJa extends L10n {
 
   @override
   String get re_authenticate_cancel => 'キャンセル';
+
+  @override
+  String get reset_password_title => 'パスワード再設定';
+
+  @override
+  String get reset_password_description => '新しいパスワードを入力してください';
+
+  @override
+  String get reset_password_new_password => '新しいパスワード';
+
+  @override
+  String get reset_password_confirm_password => '新しいパスワード（確認）';
+
+  @override
+  String get reset_password_button => 'パスワードを更新';
 }

@@ -20,4 +20,10 @@ abstract interface class UserRepository {
   Future<UserStatus> reAuthenticateWithPassword(String password);
 
   Future<void> sendPasswordResetEmail(String email);
+
+  Future<void> resetPassword(
+    String oobCode,
+    String newPassword,
+    String confirmPassword,
+  );
 }
