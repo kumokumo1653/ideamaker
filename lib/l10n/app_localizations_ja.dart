@@ -336,4 +336,13 @@ class L10nJa extends L10n {
 
   @override
   String get reset_password_button => 'パスワードを更新';
+
+  @override
+  String get reset_password_success => 'パスワードが正常に更新されました';
+
+  @override
+  String get reset_password_success_description => '新しいパスワードでログインしてください';
+
+  @override
+  String get reset_password_go_to_login => 'ログインページへ';
 }

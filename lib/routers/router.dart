@@ -40,10 +40,10 @@ GoRouter router(Ref ref) {
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
-  const TopPageRoute({this.mode, this.oodCode});
+  const TopPageRoute({this.mode, this.oobCode});
 
   final String? mode;
-  final String? oodCode;
+  final String? oobCode;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TopPage();

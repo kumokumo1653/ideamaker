@@ -103,5 +103,8 @@
   "reset_password_description": "新しいパスワードを入力してください",
   "reset_password_new_password": "新しいパスワード",
   "reset_password_confirm_password": "新しいパスワード（確認）",
-  "reset_password_button": "パスワードを更新"
+  "reset_password_button": "パスワードを更新",
+  "reset_password_success": "パスワードが正常に更新されました",
+  "reset_password_success_description": "新しいパスワードでログインしてください",
+  "reset_password_go_to_login": "ログインページへ"
 }

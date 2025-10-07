@@ -716,6 +716,24 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'パスワードを更新'**
   String get reset_password_button;
+
+  /// No description provided for @reset_password_success.
+  ///
+  /// In ja, this message translates to:
+  /// **'パスワードが正常に更新されました'**
+  String get reset_password_success;
+
+  /// No description provided for @reset_password_success_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'新しいパスワードでログインしてください'**
+  String get reset_password_success_description;
+
+  /// No description provided for @reset_password_go_to_login.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインページへ'**
+  String get reset_password_go_to_login;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

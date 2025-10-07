@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:idea_maker/core/controllers/reset_password_controller.dart';
 import 'package:idea_maker/core/widgets/async_widget.dart';
+import 'package:idea_maker/l10n/app_localizations.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
+import 'package:idea_maker/routers/router.dart';
 
 /// Password reset page for setting new password after receiving reset email
 class ResetPasswordPage extends HookConsumerWidget {
@@ -22,6 +25,14 @@ class ResetPasswordPage extends HookConsumerWidget {
       resetPasswordControllerProvider.notifier,
     );
     final resetPasswordAsync = ref.watch(resetPasswordControllerProvider);
+
+    // Listen for successful password reset
+    ref.listen(resetPasswordControllerProvider, (_, result) {
+      final isSuccess = result.valueOrNull ?? false;
+      if (isSuccess) {
+        _showSuccessDialog(context, l10n);
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -143,6 +154,31 @@ class ResetPasswordPage extends HookConsumerWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// Show success dialog and navigate to login page
+  void _showSuccessDialog(BuildContext context, L10n l10n) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        icon: const Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 48,
+        ),
+        title: Text(l10n.reset_password_success),
+        content: Text(l10n.reset_password_success_description),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.go(const LoginPageRoute().location);
+            },
+            child: Text(l10n.reset_password_go_to_login),
+          ),
+        ],
       ),
     );
   }

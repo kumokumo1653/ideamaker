@@ -56,7 +56,7 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 mixin _$TopPageRoute on GoRouteData {
   static TopPageRoute _fromState(GoRouterState state) => TopPageRoute(
     mode: state.uri.queryParameters['mode'],
-    oodCode: state.uri.queryParameters['ood-code'],
+    oobCode: state.uri.queryParameters['oob-code'],
   );
 
   TopPageRoute get _self => this as TopPageRoute;
@@ -66,7 +66,7 @@ mixin _$TopPageRoute on GoRouteData {
     '/',
     queryParams: {
       if (_self.mode != null) 'mode': _self.mode,
-      if (_self.oodCode != null) 'ood-code': _self.oodCode,
+      if (_self.oobCode != null) 'oob-code': _self.oobCode,
     },
   );
 
