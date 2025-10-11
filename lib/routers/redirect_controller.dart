@@ -20,7 +20,8 @@ class RedirectController extends _$RedirectController {
   RedirectState build() {
     const initialState = RedirectState.from(
       launchStatus: AsyncValue<void>.data(null),
-      userAuthenticated: false,
+      userLoggedIn: false,
+      emailVerified: false,
     );
     _controller = StreamController<RedirectState>.broadcast();
     _controller.add(initialState);
@@ -28,7 +29,8 @@ class RedirectController extends _$RedirectController {
     ref.listen(userStatusControllerProvider, (previous, next) {
       final newState = RedirectState.from(
         launchStatus: const AsyncValue<void>.data(null),
-        userAuthenticated: next.value != null && next.value!.emailVerified,
+        userLoggedIn: next.hasValue && next.value != null,
+        emailVerified: next.value?.emailVerified ?? false,
       );
       _controller.add(newState);
       state = newState;
@@ -56,15 +58,28 @@ class RedirectController extends _$RedirectController {
     }
 
     if (state.launchStatus.hasError) {
-      return const LoginPageRoute().location;
+      return const TopPageRoute().location;
     }
 
-    if (!state.userAuthenticated) {
+    if (!state.userLoggedIn) {
       if (isGuestNavigableRoutes.any(
         (target) => RegExp(target).hasMatch(routerState.matchedLocation),
       )) {
         return null;
       }
+      return const TopPageRoute().location;
+    } else if (!state.emailVerified) {
+      if (routerState.matchedLocation ==
+          const EmailVerificationPageRoute().location) {
+        return null;
+      }
+      return const EmailVerificationPageRoute().location;
+    }
+
+    // User is logged in and email is verified
+    if (routerState.matchedLocation == const LoginPageRoute().location ||
+        routerState.matchedLocation ==
+            const EmailVerificationPageRoute().location) {
       return const TopPageRoute().location;
     }
 

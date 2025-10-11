@@ -6,7 +6,11 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$topPageRoute, $loadingPageRoute];
+List<RouteBase> get $appRoutes => [
+  $topPageRoute,
+  $emailVerificationSuccessPageRoute,
+  $loadingPageRoute,
+];
 
 RouteBase get $topPageRoute => GoRouteData.$route(
   path: '/',
@@ -54,21 +58,10 @@ RouteBase get $topPageRoute => GoRouteData.$route(
 );
 
 mixin _$TopPageRoute on GoRouteData {
-  static TopPageRoute _fromState(GoRouterState state) => TopPageRoute(
-    mode: state.uri.queryParameters['mode'],
-    oobCode: state.uri.queryParameters['oob-code'],
-  );
-
-  TopPageRoute get _self => this as TopPageRoute;
+  static TopPageRoute _fromState(GoRouterState state) => const TopPageRoute();
 
   @override
-  String get location => GoRouteData.$location(
-    '/',
-    queryParams: {
-      if (_self.mode != null) 'mode': _self.mode,
-      if (_self.oobCode != null) 'oob-code': _self.oobCode,
-    },
-  );
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -282,6 +275,33 @@ mixin _$ResetPasswordPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $emailVerificationSuccessPageRoute => GoRouteData.$route(
+  path: '/email-verification-success',
+
+  factory: _$EmailVerificationSuccessPageRoute._fromState,
+);
+
+mixin _$EmailVerificationSuccessPageRoute on GoRouteData {
+  static EmailVerificationSuccessPageRoute _fromState(GoRouterState state) =>
+      const EmailVerificationSuccessPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/email-verification-success');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $loadingPageRoute => GoRouteData.$route(
   path: '/loading',
 
@@ -313,7 +333,24 @@ mixin _$LoadingPageRoute on GoRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'58a82a0be5211bfd9d5c4df8d9d0cbfbcec8800f';
+String _$routeObserverHash() => r'bfc0cacc67b05d9267fb1421c23f8a75f817fa99';
+
+/// See also [routeObserver].
+@ProviderFor(routeObserver)
+final routeObserverProvider = AutoDisposeProvider<RouteObserver>.internal(
+  routeObserver,
+  name: r'routeObserverProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$routeObserverHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RouteObserverRef = AutoDisposeProviderRef<RouteObserver>;
+String _$routerHash() => r'e8781e7cd01b1b2440b6839794094dc4aaef4f07';
 
 /// See also [router].
 @ProviderFor(router)

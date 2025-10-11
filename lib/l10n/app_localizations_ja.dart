@@ -247,6 +247,13 @@ class L10nJa extends L10n {
   String get email_change_account_button => '別のアカウントでログインする';
 
   @override
+  String get email_verification_sent_description =>
+      'メール認証が完了していません。次の画面からメール認証を行ってください。';
+
+  @override
+  String get email_verification_navigate_button => 'メール認証に進む';
+
+  @override
   String get my_page_title => 'マイページ';
 
   @override
@@ -345,4 +352,17 @@ class L10nJa extends L10n {
 
   @override
   String get reset_password_go_to_login => 'ログインページへ';
+
+  @override
+  String get email_verification_success_title => 'メール認証完了';
+
+  @override
+  String get email_verification_success_message => 'メール認証が正常に完了しました。';
+
+  @override
+  String get email_verification_success_description =>
+      'これでアカウントの設定が完了し、すべての機能をご利用いただけます。';
+
+  @override
+  String get email_verification_success_button => 'ログインする';
 }

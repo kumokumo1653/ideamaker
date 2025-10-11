@@ -12,6 +12,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'router.g.dart';
 
 @riverpod
+RouteObserver routeObserver(Ref ref) {
+  return RouteObserver();
+}
+
+@riverpod
 GoRouter router(Ref ref) {
   return GoRouter(
     debugLogDiagnostics: true,
@@ -22,6 +27,7 @@ GoRouter router(Ref ref) {
     routes: $appRoutes,
     redirect: (context, state) =>
         ref.read(redirectControllerProvider.notifier).redirect(context, state),
+    observers: [ref.watch(routeObserverProvider)],
   );
 }
 
@@ -40,23 +46,11 @@ GoRouter router(Ref ref) {
   ],
 )
 class TopPageRoute extends GoRouteData with _$TopPageRoute {
-  const TopPageRoute({this.mode, this.oobCode});
+  const TopPageRoute();
 
-  final String? mode;
-  final String? oobCode;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TopPage();
-  }
-}
-
-@TypedGoRoute<LoadingPageRoute>(path: '/loading')
-class LoadingPageRoute extends GoRouteData with _$LoadingPageRoute {
-  const LoadingPageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const LoadingPage();
   }
 }
 
@@ -146,5 +140,28 @@ class ReAuthenticatePageRoute extends GoRouteData
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ReAuthenticatePage();
+  }
+}
+
+@TypedGoRoute<EmailVerificationSuccessPageRoute>(
+  path: '/email-verification-success',
+)
+class EmailVerificationSuccessPageRoute extends GoRouteData
+    with _$EmailVerificationSuccessPageRoute {
+  const EmailVerificationSuccessPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EmailVerificationSuccessPage();
+  }
+}
+
+@TypedGoRoute<LoadingPageRoute>(path: '/loading')
+class LoadingPageRoute extends GoRouteData with _$LoadingPageRoute {
+  const LoadingPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoadingPage();
   }
 }

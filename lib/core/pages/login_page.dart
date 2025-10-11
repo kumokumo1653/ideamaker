@@ -51,14 +51,7 @@ class LoginPage extends HookConsumerWidget {
     final passwordController = useTextEditingController();
     final isLoading = loginResultAsync.isLoading;
     final viewMode = useState(ViewMode.login);
-
-    // Navigate to appropriate page when authentication state changes
-    ref.listen(userStatusControllerProvider, (_, user) {
-      final userStatus = user.value;
-      if (userStatus != null) {
-        context.go(const TopPageRoute().location);
-      }
-    });
+    final isPasswordVisible = useState(false);
 
     return Scaffold(
       appBar: AppBar(
@@ -109,12 +102,23 @@ class LoginPage extends HookConsumerWidget {
                       TextFormField(
                         controller: passwordController,
                         enabled: !isLoading,
-                        obscureText: true,
+                        obscureText: !isPasswordVisible.value,
                         decoration: InputDecoration(
                           labelText: l10n.login_text_field_password,
                           hintText: l10n.login_text_field_password,
                           border: const OutlineInputBorder(),
                           prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              isPasswordVisible.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onPressed: () {
+                              isPasswordVisible.value =
+                                  !isPasswordVisible.value;
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(height: 16),

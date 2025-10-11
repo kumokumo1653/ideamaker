@@ -89,6 +89,9 @@ class EmailVerificationPage extends HookConsumerWidget {
                   height: 48,
                   child: OutlinedButton(
                     onPressed: () async {
+                      await ref
+                          .read(userStatusControllerProvider.notifier)
+                          .logout();
                       if (context.mounted) {
                         context.go(const LoginPageRoute().location);
                       }

@@ -7,7 +7,7 @@ part of 'redirect_controller.dart';
 // **************************************************************************
 
 String _$redirectControllerHash() =>
-    r'04857c9e9447a36bd07bf0d7dcf44130f6fd02fd';
+    r'11608ac52dc0c01a4d676709c5ddce5daa5c8cbb';
 
 /// See also [RedirectController].
 @ProviderFor(RedirectController)

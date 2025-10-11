@@ -7,6 +7,7 @@ part 'redirect_state.freezed.dart';
 abstract class RedirectState with _$RedirectState {
   const factory RedirectState.from({
     required AsyncValue<void> launchStatus,
-    required bool userAuthenticated,
+    required bool userLoggedIn,
+    required bool emailVerified,
   }) = _RedirectState;
 }

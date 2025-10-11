@@ -537,6 +537,18 @@ abstract class L10n {
   /// **'別のアカウントでログインする'**
   String get email_change_account_button;
 
+  /// No description provided for @email_verification_sent_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'メール認証が完了していません。次の画面からメール認証を行ってください。'**
+  String get email_verification_sent_description;
+
+  /// No description provided for @email_verification_navigate_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'メール認証に進む'**
+  String get email_verification_navigate_button;
+
   /// No description provided for @my_page_title.
   ///
   /// In ja, this message translates to:
@@ -734,6 +746,30 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'ログインページへ'**
   String get reset_password_go_to_login;
+
+  /// No description provided for @email_verification_success_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'メール認証完了'**
+  String get email_verification_success_title;
+
+  /// No description provided for @email_verification_success_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'メール認証が正常に完了しました。'**
+  String get email_verification_success_message;
+
+  /// No description provided for @email_verification_success_description.
+  ///
+  /// In ja, this message translates to:
+  /// **'これでアカウントの設定が完了し、すべての機能をご利用いただけます。'**
+  String get email_verification_success_description;
+
+  /// No description provided for @email_verification_success_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'ログインする'**
+  String get email_verification_success_button;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

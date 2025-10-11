@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RedirectState {
 
- AsyncValue<void> get launchStatus; bool get userAuthenticated;
+ AsyncValue<void> get launchStatus; bool get userLoggedIn; bool get emailVerified;
 /// Create a copy of RedirectState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $RedirectStateCopyWith<RedirectState> get copyWith => _$RedirectStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RedirectState&&(identical(other.launchStatus, launchStatus) || other.launchStatus == launchStatus)&&(identical(other.userAuthenticated, userAuthenticated) || other.userAuthenticated == userAuthenticated));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RedirectState&&(identical(other.launchStatus, launchStatus) || other.launchStatus == launchStatus)&&(identical(other.userLoggedIn, userLoggedIn) || other.userLoggedIn == userLoggedIn)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,launchStatus,userAuthenticated);
+int get hashCode => Object.hash(runtimeType,launchStatus,userLoggedIn,emailVerified);
 
 @override
 String toString() {
-  return 'RedirectState(launchStatus: $launchStatus, userAuthenticated: $userAuthenticated)';
+  return 'RedirectState(launchStatus: $launchStatus, userLoggedIn: $userLoggedIn, emailVerified: $emailVerified)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $RedirectStateCopyWith<$Res>  {
   factory $RedirectStateCopyWith(RedirectState value, $Res Function(RedirectState) _then) = _$RedirectStateCopyWithImpl;
 @useResult
 $Res call({
- AsyncValue<void> launchStatus, bool userAuthenticated
+ AsyncValue<void> launchStatus, bool userLoggedIn, bool emailVerified
 });
 
 
@@ -63,10 +63,11 @@ class _$RedirectStateCopyWithImpl<$Res>
 
 /// Create a copy of RedirectState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? launchStatus = null,Object? userAuthenticated = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? launchStatus = null,Object? userLoggedIn = null,Object? emailVerified = null,}) {
   return _then(_self.copyWith(
 launchStatus: null == launchStatus ? _self.launchStatus : launchStatus // ignore: cast_nullable_to_non_nullable
-as AsyncValue<void>,userAuthenticated: null == userAuthenticated ? _self.userAuthenticated : userAuthenticated // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>,userLoggedIn: null == userLoggedIn ? _self.userLoggedIn : userLoggedIn // ignore: cast_nullable_to_non_nullable
+as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -78,11 +79,12 @@ as bool,
 
 
 class _RedirectState implements RedirectState {
-  const _RedirectState({required this.launchStatus, required this.userAuthenticated});
+  const _RedirectState({required this.launchStatus, required this.userLoggedIn, required this.emailVerified});
   
 
 @override final  AsyncValue<void> launchStatus;
-@override final  bool userAuthenticated;
+@override final  bool userLoggedIn;
+@override final  bool emailVerified;
 
 /// Create a copy of RedirectState
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$RedirectStateCopyWith<_RedirectState> get copyWith => __$RedirectStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RedirectState&&(identical(other.launchStatus, launchStatus) || other.launchStatus == launchStatus)&&(identical(other.userAuthenticated, userAuthenticated) || other.userAuthenticated == userAuthenticated));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RedirectState&&(identical(other.launchStatus, launchStatus) || other.launchStatus == launchStatus)&&(identical(other.userLoggedIn, userLoggedIn) || other.userLoggedIn == userLoggedIn)&&(identical(other.emailVerified, emailVerified) || other.emailVerified == emailVerified));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,launchStatus,userAuthenticated);
+int get hashCode => Object.hash(runtimeType,launchStatus,userLoggedIn,emailVerified);
 
 @override
 String toString() {
-  return 'RedirectState.from(launchStatus: $launchStatus, userAuthenticated: $userAuthenticated)';
+  return 'RedirectState.from(launchStatus: $launchStatus, userLoggedIn: $userLoggedIn, emailVerified: $emailVerified)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$RedirectStateCopyWith<$Res> implements $RedirectStateCopy
   factory _$RedirectStateCopyWith(_RedirectState value, $Res Function(_RedirectState) _then) = __$RedirectStateCopyWithImpl;
 @override @useResult
 $Res call({
- AsyncValue<void> launchStatus, bool userAuthenticated
+ AsyncValue<void> launchStatus, bool userLoggedIn, bool emailVerified
 });
 
 
@@ -131,10 +133,11 @@ class __$RedirectStateCopyWithImpl<$Res>
 
 /// Create a copy of RedirectState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? launchStatus = null,Object? userAuthenticated = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? launchStatus = null,Object? userLoggedIn = null,Object? emailVerified = null,}) {
   return _then(_RedirectState(
 launchStatus: null == launchStatus ? _self.launchStatus : launchStatus // ignore: cast_nullable_to_non_nullable
-as AsyncValue<void>,userAuthenticated: null == userAuthenticated ? _self.userAuthenticated : userAuthenticated // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>,userLoggedIn: null == userLoggedIn ? _self.userLoggedIn : userLoggedIn // ignore: cast_nullable_to_non_nullable
+as bool,emailVerified: null == emailVerified ? _self.emailVerified : emailVerified // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

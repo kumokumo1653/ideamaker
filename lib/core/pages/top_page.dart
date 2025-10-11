@@ -11,6 +11,7 @@ import 'package:idea_maker/core/widgets/error_dialog.dart';
 import 'package:idea_maker/gen/assets.gen.dart';
 import 'package:idea_maker/l10n/l10n_provider.dart';
 import 'package:idea_maker/routers/router.dart';
+import 'package:idea_maker/utils/utils.dart';
 
 class TopPage extends HookConsumerWidget {
   const TopPage({super.key});
@@ -23,7 +24,7 @@ class TopPage extends HookConsumerWidget {
     final userStatus = ref.watch(userStatusControllerProvider);
     final isMember = ref.watch(userStatusControllerProvider.notifier).isMember;
 
-    useFirebaseContinueUrl(context);
+    useFirebaseContinueUrl(context, ref);
 
     return AsyncWidget(
       userStatus,
@@ -32,48 +33,45 @@ class TopPage extends HookConsumerWidget {
           backgroundColor: theme.colorScheme.inversePrimary,
           title: Text(l10n.app_title),
           actions: [
-            if (isMember) ...[
-              // Show email verification warning if not verified
-              if (userStatus?.emailVerified == false) ...[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: TextButton.icon(
-                    onPressed: () =>
-                        const EmailVerificationPageRoute().go(context),
-                    icon: Icon(
-                      Icons.warning,
-                      color: theme.colorScheme.error,
-                      size: 16,
-                    ),
-                    label: Text(
-                      l10n.email_not_verified,
-                      style: TextStyle(color: theme.colorScheme.error),
-                    ),
+            if (userStatus?.emailVerified == false) ...[
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: TextButton.icon(
+                  onPressed: () =>
+                      const EmailVerificationPageRoute().go(context),
+                  icon: Icon(
+                    Icons.warning,
+                    color: theme.colorScheme.error,
+                    size: 16,
+                  ),
+                  label: Text(
+                    l10n.email_not_verified,
+                    style: TextStyle(color: theme.colorScheme.error),
                   ),
                 ),
-              ] else ...[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Center(
-                    child: Text(
-                      userStatus?.displayName ?? l10n.user_status_noName,
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  ),
-                ),
-              ],
-              IconButton(
-                icon: const Icon(Icons.account_circle),
-                onPressed: () => const MyPageRoute().go(context),
               ),
-            ] else ...[
+            ],
+            if (userStatus == null) ...[
               TextButton.icon(
                 onPressed: () => context.go(
                   const LoginPageRoute().location,
-                  extra: 'from TopPage',
                 ),
                 icon: const Icon(Icons.login),
                 label: Text(l10n.login_title),
+              ),
+            ] else ...[
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Center(
+                  child: Text(
+                    userStatus.displayName ?? l10n.user_status_noName,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.account_circle),
+                onPressed: () => const MyPageRoute().go(context),
               ),
             ],
           ],
@@ -116,8 +114,9 @@ class TopPage extends HookConsumerWidget {
   }
 }
 
-void useFirebaseContinueUrl(BuildContext context) {
+Future<void> useFirebaseContinueUrl(BuildContext context, WidgetRef ref) async {
   final fragmentedUri = Uri.parse(Uri.base.fragment);
+  logger.d('Fragmented URI: $fragmentedUri');
   final mode = FirebaseMailMode.values.firstWhereOrNull(
     (e) => e.name == fragmentedUri.queryParameters['mode'],
   );
@@ -126,17 +125,21 @@ void useFirebaseContinueUrl(BuildContext context) {
     switch (mode) {
       case FirebaseMailMode.verifyEmail:
         try {
-          FirebaseAuth.instance.applyActionCode(oobCode);
-          // TODO(ohike): Show a snackbar
+          await FirebaseAuth.instance.applyActionCode(oobCode);
+          if (context.mounted) {
+            context.go(const EmailVerificationSuccessPageRoute().location);
+          }
         } on Exception catch (e, stackTrace) {
           final exception = AuthException.getAuthException(e);
-          showDialog<void>(
-            context: context,
-            builder: (_) => ErrorDialog(
-              error: exception,
-              stackTrace: stackTrace,
-            ),
-          );
+          if (context.mounted) {
+            await showDialog<void>(
+              context: context,
+              builder: (_) => ErrorDialog(
+                error: exception,
+                stackTrace: stackTrace,
+              ),
+            );
+          }
         }
       case FirebaseMailMode.resetPassword:
         ResetPasswordPageRoute(

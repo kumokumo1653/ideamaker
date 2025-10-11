@@ -74,6 +74,8 @@
   "email_verification_back": "戻る",
   "email_not_verified": "メールアドレスが認証されていません",
   "email_change_account_button": "別のアカウントでログインする",
+  "email_verification_sent_description" : "メール認証が完了していません。次の画面からメール認証を行ってください。",
+  "email_verification_navigate_button" : "メール認証に進む",
   "my_page_title": "マイページ",
   "my_page_account_settings": "アカウント設定",
   "my_page_change_password": "パスワードを変更する",
@@ -106,5 +108,9 @@
   "reset_password_button": "パスワードを更新",
   "reset_password_success": "パスワードが正常に更新されました",
   "reset_password_success_description": "新しいパスワードでログインしてください",
-  "reset_password_go_to_login": "ログインページへ"
+  "reset_password_go_to_login": "ログインページへ",
+  "email_verification_success_title": "メール認証完了",
+  "email_verification_success_message": "メール認証が正常に完了しました。",
+  "email_verification_success_description": "これでアカウントの設定が完了し、すべての機能をご利用いただけます。",
+  "email_verification_success_button": "ログインする"
 }
