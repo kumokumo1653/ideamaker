@@ -73,7 +73,7 @@ class ErrorDialogPresenter extends HookConsumerWidget {
     final isErrorDialogShown = useState(false);
 
     final error = asyncValues.firstWhereOrNull(
-      (asyncValue) => asyncValue.hasError,
+      (asyncValue) => !asyncValue.isLoading && asyncValue.hasError,
     );
 
     useEffect(() {
