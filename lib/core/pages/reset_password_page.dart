@@ -160,13 +160,14 @@ class ResetPasswordPage extends HookConsumerWidget {
 
   /// Show success dialog and navigate to login page
   void _showSuccessDialog(BuildContext context, L10n l10n) {
+    final theme = Theme.of(context);
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        icon: const Icon(
+        icon: Icon(
           Icons.check_circle,
-          color: Colors.green,
+          color: theme.colorScheme.tertiary,
           size: 48,
         ),
         title: Text(l10n.reset_password_success),

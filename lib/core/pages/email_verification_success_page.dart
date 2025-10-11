@@ -26,10 +26,10 @@ class EmailVerificationSuccessPage extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Success icon
-            const Icon(
+            Icon(
               Icons.check_circle,
               size: 100,
-              color: Colors.green,
+              color: theme.colorScheme.tertiary,
             ),
             const SizedBox(height: 32),
 
@@ -48,7 +48,7 @@ class EmailVerificationSuccessPage extends HookConsumerWidget {
             Text(
               l10n.email_verification_success_message,
               style: theme.textTheme.titleMedium?.copyWith(
-                color: Colors.green.shade700,
+                color: theme.colorScheme.tertiary,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
