@@ -9,6 +9,7 @@ class MindMapNode extends HookConsumerWidget {
     required this.node,
     required this.onChangedTitle,
     required this.onTapAddChild,
+    this.onTapAssistAI,
     this.onTapRemove,
     this.hasActions = false,
     this.onTapAddSibling,
@@ -21,6 +22,7 @@ class MindMapNode extends HookConsumerWidget {
   final VoidCallback onTapAddChild;
   final VoidCallback? onTapAddSibling;
   final VoidCallback? onTapRemove;
+  final VoidCallback? onTapAssistAI;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -62,6 +64,12 @@ class MindMapNode extends HookConsumerWidget {
                 }
               : null,
           onCloseOverlay: handleCloseOverlay,
+          onTapAssistAI: onTapAssistAI != null
+              ? () {
+                  onTapAssistAI!();
+                  handleCloseOverlay();
+                }
+              : null,
         ),
       );
       Overlay.of(context).insert(overlayEntry.value!);
@@ -104,8 +112,9 @@ class _MindMapActionOverlay extends HookConsumerWidget {
     required this.left,
     required this.top,
     required this.onTapAddChild,
-    required this.onTapRemove,
     required this.onCloseOverlay,
+    this.onTapAssistAI,
+    this.onTapRemove,
     this.onTapAddSibling,
   });
 
@@ -115,6 +124,7 @@ class _MindMapActionOverlay extends HookConsumerWidget {
   final VoidCallback? onTapAddSibling;
   final VoidCallback? onTapRemove;
   final VoidCallback onCloseOverlay;
+  final VoidCallback? onTapAssistAI;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
@@ -155,6 +165,13 @@ class _MindMapActionOverlay extends HookConsumerWidget {
                       title: Text(l10n.mind_map_overlay_remove_button),
                       onTap: onTapRemove,
                       leading: const Icon(Icons.remove_circle),
+                    ),
+                  ],
+                  if (onTapAssistAI != null) ...[
+                    ListTile(
+                      title: Text(l10n.mind_map_overlay_assist_button),
+                      onTap: onTapAssistAI,
+                      leading: const Icon(Icons.assistant),
                     ),
                   ],
                 ],

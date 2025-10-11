@@ -273,6 +273,18 @@ abstract class L10n {
   /// **'不正なコードが指定されました。もう一度メール送信をお試しください。'**
   String get auth_invalid_action_code_exception_message;
 
+  /// No description provided for @output_invalid_exception_title.
+  ///
+  /// In ja, this message translates to:
+  /// **'出力エラー'**
+  String get output_invalid_exception_title;
+
+  /// No description provided for @output_invalid_exception_message.
+  ///
+  /// In ja, this message translates to:
+  /// **'生成AIの出力を読み込めませんでした。再度お試しください。'**
+  String get output_invalid_exception_message;
+
   /// No description provided for @unexpected_exception_title.
   ///
   /// In ja, this message translates to:
@@ -320,6 +332,12 @@ abstract class L10n {
   /// In ja, this message translates to:
   /// **'このノードを削除する'**
   String get mind_map_overlay_remove_button;
+
+  /// No description provided for @mind_map_overlay_assist_button.
+  ///
+  /// In ja, this message translates to:
+  /// **'AIのアシストを使う'**
+  String get mind_map_overlay_assist_button;
 
   /// No description provided for @mind_map_list_title.
   ///

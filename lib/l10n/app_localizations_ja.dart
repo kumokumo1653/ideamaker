@@ -105,6 +105,13 @@ class L10nJa extends L10n {
       '不正なコードが指定されました。もう一度メール送信をお試しください。';
 
   @override
+  String get output_invalid_exception_title => '出力エラー';
+
+  @override
+  String get output_invalid_exception_message =>
+      '生成AIの出力を読み込めませんでした。再度お試しください。';
+
+  @override
   String get unexpected_exception_title => '予期せぬエラーが発生しました';
 
   @override
@@ -128,6 +135,9 @@ class L10nJa extends L10n {
 
   @override
   String get mind_map_overlay_remove_button => 'このノードを削除する';
+
+  @override
+  String get mind_map_overlay_assist_button => 'AIのアシストを使う';
 
   @override
   String get mind_map_list_title => 'マインドマップ一覧';
