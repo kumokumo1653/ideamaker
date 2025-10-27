@@ -67,6 +67,7 @@ class MindMapPage extends HookConsumerWidget {
       (node) => node.id == rootNode.parentId,
     );
     return Tree(
+      key: Key(rootNode.id),
       node: MindMapNode(
         node: rootNode,
         onChangedTitle: (title) =>
