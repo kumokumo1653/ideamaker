@@ -81,7 +81,7 @@ class MindMapPage extends HookConsumerWidget {
         onTapAssistAI: rootNode.title.isNotEmpty
             ? () => mindMapController.assistAI(rootNode.id)
             : null,
-        hasActions: rootNode.childrenId.isEmpty,
+        hasActions: true,
       ),
       branchColor: theme.colorScheme.primary,
       leaves: rootNode.childrenId.map((childId) {
